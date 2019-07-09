@@ -3,6 +3,8 @@ import eel, json, sys, glob, os
 TRANSLATION_JSON_PATH = "./examples/*.json"
 PROJECT_NAME = "My Translate"
 
+# After build, the current directory will be root
+# It won't allow to create file, so use home instead
 CACHE_PATH = os.path.expanduser("~") + "/.gui-i18n-cache"
 
 @eel.expose
