@@ -110,9 +110,9 @@ async function applyAll() {
 	try {
 		let paths = Object.keys(localeInputs)
 		let values = paths.map(path => localeInputs[path].node.children[1].children[0].value)
-		await new Promise(eel.apply(paths, key, values))
+		let result = await new Promise(eel.apply(paths, key, values))
 		checkAvailable(key)
-		alertFeedback('Updated ' + key, true)
+		alertFeedback(result, true)
 	} catch (e) {
 		alertFeedback('Something went wrong', false)
 	}
@@ -122,9 +122,9 @@ async function applyEdited() {
 	try	{
 		let paths = Object.keys(localeInputs).filter(path => localeInputs[path].value)
 		let values = paths.map(path => localeInputs[path].value)
-		await new Promise(eel.apply(paths, key, values))
+		let result = await new Promise(eel.apply(paths, key, values))
 		checkAvailable(key)
-		alertFeedback('Updated ' + key, true)
+		alertFeedback(result, true)
 	} catch (e) {
 		alertFeedback('Something went wrong', false)
 	}

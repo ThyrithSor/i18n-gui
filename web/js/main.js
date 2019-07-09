@@ -87,7 +87,9 @@ function parseConfig(fileContent) {
     return configs
 }
 async function loadConfig(configs) {
+    console.log("load config")
     let result = await new Promise(eel.load_config(configs))
+    console.log("result", result)
     if (result === true) {
         location.replace("/workspace.html")
     } else {
@@ -138,6 +140,7 @@ async function bindCacheUI(configCache) {
 }
 async function loadCaches() {
     let configCache = await new Promise(eel.cache_config())
+    console.log("load cache", configCache)
     bindCacheUI(configCache)
 }
 window.onload = () => {
