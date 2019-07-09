@@ -37,9 +37,13 @@ async function bindUI() {
 	}
 }
 
-async function checkAvailable(value) {
+function keyInputHandler(value) {
 	key = value
-	let statuses = await new Promise(eel.check_key_status(key))
+	checkAvailable(key)
+}
+
+async function checkAvailable(value) {
+	let statuses = await new Promise(eel.check_key_status(value))
 	for (path in statuses) {
 		let label = localeInputs[path].node.children[0].children[1]
 		label.innerHTML = statuses[path].symbol
@@ -66,7 +70,7 @@ async function checkAvailable(value) {
 					suggestButton.addEventListener("click", (path => 
 						e => {
 							let textarea = localeInputs[path].node.children[1].children[0]
-							let lastWord = key.split('.')[key.split('.').length - 1]
+							let lastWord = value.split('.')[value.split('.').length - 1]
 							let suggestion = lastWord
 								.replace(/(_+.)/g, matched => {
 									return matched.replace(/_+/, ' ').toLowerCase()
@@ -164,6 +168,16 @@ async function setProjectName() {
 	projectNameNode.innerHTML = projectName
 }
 
+Number.prototype.mod = function(n) {
+    return ((this%n)+n)%n;
+};
+
+let suggestionChoice = -1
+let shouldRequestSuggest = true
+let suggestions = []
+let inputKey = ''
+let lastChoiceSuggestion = null
+
 window.onload = () => {
 	setProjectName()
 	bindUI()
@@ -171,13 +185,40 @@ window.onload = () => {
 	$("#key-input").keydown(async function (e) {
 		if (e.key === "Tab") {
 			e.preventDefault()
-			let inputKey = $(this).val()
-			let inputKeyChain = inputKey.split(".")
-			let suggestions = await new Promise(eel.get_suggestions(inputKey))
-			if (suggestions.length === 1) {
-				$(this).val(inputKeyChain.map((key, index) => index === inputKeyChain.length - 1 ? suggestions[0] : key).join("."))
+			if (shouldRequestSuggest) {
+				inputKey = $(this).val()
+				suggestions = await new Promise(eel.get_suggestions(inputKey))
+				shouldRequestSuggest = false
 			}
-			console.log(suggestions)
+			let inputKeyChain = inputKey.split(".")
+			if (suggestions.length > 0) {
+				if (e.shiftKey) {
+					if (suggestionChoice < 0) {
+						suggestionChoice = suggestions.length - 1
+					} else {
+						suggestionChoice = (suggestionChoice - 1).mod(suggestions.length)
+					}
+				} else {
+					if (suggestionChoice < 0) {
+						suggestionChoice = 0
+					} else {
+						suggestionChoice = (suggestionChoice + 1).mod(suggestions.length)
+					}
+				}
+				lastChoiceSuggestion = inputKeyChain.map((key, index) => index === inputKeyChain.length - 1 ? suggestions[suggestionChoice] : key).join(".")
+				$(this).val(lastChoiceSuggestion)
+				checkAvailable(lastChoiceSuggestion)
+			}
+		} else if (e.key !== "Shift") {
+			suggestionChoice = -1
+			shouldRequestSuggest = true
+			lastChoiceSuggestion = null
+		}
+	})
+	$("#key-input").blur(function (e) {
+		if (lastChoiceSuggestion != null) {
+			keyInputHandler(lastChoiceSuggestion)
+			lastChoiceSuggestion = null
 		}
 	})
 }

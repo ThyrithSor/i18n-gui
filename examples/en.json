@@ -1,6 +1,8 @@
 {
     "button": {
-        "greet": "Welcome"
+        "greet": "Welcome",
+        "greeter": "greeter",
+        "ok": "Okay"
     },
     "label": {
         "cancel": "Cancel",

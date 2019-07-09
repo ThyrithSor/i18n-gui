@@ -181,7 +181,7 @@ def get_suggestions(key):
 		countMatch = 0
 		for i in range(0, len(keyChain)):
 			if (i == len(keyChain) - 1):
-				checkKey = list(filter(lambda x: x.startswith(keyChain[i]), dataPointer.keys()))
+				checkKey = list(filter(lambda x: x.lower().startswith(keyChain[i].lower()), dataPointer.keys()))
 				if (len(checkKey) > 0):
 					suggestions.extend(checkKey)
 			else:
