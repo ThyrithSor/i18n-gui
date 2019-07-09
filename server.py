@@ -1,7 +1,7 @@
 TRANSLATION_JSON_PATH = "./examples/*.json"
 PROJECT_NAME = "My Translate"
 
-CACHE_PATH = "./cache.json"
+CACHE_PATH = "./web/cache.json"
 
 import eel, json, sys, glob, os
 
