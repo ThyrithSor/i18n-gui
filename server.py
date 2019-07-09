@@ -1,7 +1,7 @@
 TRANSLATION_JSON_PATH = "./examples/*.json"
 PROJECT_NAME = "My Translate"
 
-CACHE_PATH = "./web/cache.json"
+CACHE_PATH = ".gui-i18n-cache"
 
 import eel, json, sys, glob, os
 
@@ -129,11 +129,14 @@ def check_key_status(textpath):
 
 @eel.expose
 def cache_config():
-	with open(CACHE_PATH) as cache_json_file:
-		try:
-			return json.load(cache_json_file)
-		except Exception as e:
-			return []
+	try:
+		with open(CACHE_PATH) as cache_json_file:
+			try:
+				return json.load(cache_json_file)
+			except Exception as e:
+				return []
+	except Exception as e:
+		return []
 
 @eel.expose
 def remove_cache(path_to_remove):
