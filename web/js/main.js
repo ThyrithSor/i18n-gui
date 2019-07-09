@@ -99,35 +99,46 @@ async function receiveFile(file) {
     let configs = parseConfig(fileContent)
     await loadConfig(configs)
 }
-async function loadCaches() {
+async function bindCacheUI(configCache) {
     let cacheConfigNode = $("#cache-config")
-    let configCache = await new Promise(eel.cache_config())
+    cacheConfigNode.html("")
     if (configCache.length > 0) {
         let title = $(`<h5>Recent Projects</h5>`)
         let list = $(`<ul class="list-group mb-3"></div>`)
         list.append(configCache.map(config => {
             let listItem = $(`<li class="list-group-item list-group-item-action">
-                <div>${config.PROJECT_NAME}</div>
+                <div><strong>${config.PROJECT_NAME}</strong></div>
                 <div class='text-truncate text-lightgrey'>${config.TRANSLATION_JSON_PATH}</div>
             </li>`)
             let closeButton = $(`<button type="button" class="close" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>`)
+
+            // Action when click on list item
             listItem.click((config => e => {
                 loadConfig(config)
             })(config))
+
+            // Remove config
             closeButton.click((config => async e => {
                 e.preventDefault()
                 e.stopPropagation()
-                await new Promise(eel.remove_cache(config.TRANSLATION_JSON_PATH))
-                location.reload()
+                let updatedCache = await new Promise(eel.remove_cache(config.TRANSLATION_JSON_PATH))
+                
+                // Update UI list item
+                bindCacheUI(updatedCache)
             })(config))
+
             listItem.prepend(closeButton)
             return listItem
         }))
         cacheConfigNode.append(title)
         cacheConfigNode.append(list)
     }
+}
+async function loadCaches() {
+    let configCache = await new Promise(eel.cache_config())
+    bindCacheUI(configCache)
 }
 window.onload = () => {
     let dropzone = $("div#dropzone").dropzone({

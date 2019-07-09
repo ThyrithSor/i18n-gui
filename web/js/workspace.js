@@ -155,7 +155,6 @@ function clearValues() {
 }
 
 function backHistory() {
-	// window.history.back()
 	location.replace('/main.html')
 }
 
@@ -169,4 +168,16 @@ window.onload = () => {
 	setProjectName()
 	bindUI()
 	checkAvailable(key)
+	$("#key-input").keydown(async function (e) {
+		if (e.key === "Tab") {
+			e.preventDefault()
+			let inputKey = $(this).val()
+			let inputKeyChain = inputKey.split(".")
+			let suggestions = await new Promise(eel.get_suggestions(inputKey))
+			if (suggestions.length === 1) {
+				$(this).val(inputKeyChain.map((key, index) => index === inputKeyChain.length - 1 ? suggestions[0] : key).join("."))
+			}
+			console.log(suggestions)
+		}
+	})
 }

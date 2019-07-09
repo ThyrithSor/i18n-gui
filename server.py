@@ -142,6 +142,7 @@ def remove_cache(path_to_remove):
 	f = open(CACHE_PATH, "w+")
 	f.write(json.dumps(new_configs))
 	f.close()
+	return new_configs
 
 @eel.expose
 def load_config(configs):
@@ -164,6 +165,33 @@ def load_config(configs):
 		f.close()
 		return True
 	return "Invalid config file"
+
+@eel.expose
+def get_suggestions(key):
+	paths = get_locale_path()
+	keyChain = key.split(".")
+	suggestions = []
+	for path in paths:
+		with open(path) as json_file:
+			body = json_file.read()
+			data = try_parse_json(body)
+		if data is None:
+			continue
+		dataPointer = data
+		countMatch = 0
+		for i in range(0, len(keyChain)):
+			if (i == len(keyChain) - 1):
+				checkKey = list(filter(lambda x: x.startswith(keyChain[i]), dataPointer.keys()))
+				if (len(checkKey) > 0):
+					suggestions.extend(checkKey)
+			else:
+				if keyChain[i] not in dataPointer:
+					break
+				else:
+					dataPointer = data[keyChain[i]]
+					countMatch = countMatch + 1
+
+	return list(set(suggestions))
 
 @eel.expose
 def get_project_name():
