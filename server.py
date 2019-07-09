@@ -1,24 +1,31 @@
 TRANSLATION_JSON_PATH = "./examples/*.json"
 PROJECT_NAME = "My Translate"
 
+CACHE_PATH = "./cache.json"
+
 import eel, json, sys, glob, os
-# from tkinter import filedialog, Tk
 
 @eel.expose
 def get_locale_path():
 	paths = glob.glob(TRANSLATION_JSON_PATH)
 	return paths
 
+# Clever parse JSON
 def try_parse_json(jsonText):
 	try:
+		# Try parse json by ownself
 		return json.loads(jsonText)
 	except Exception as e:
+		# Ask for JS help
 		jsonText = eel.fixJson(jsonText)()
 		if jsonText is None:
+			# JS also cannot solve
 			return None
 		else:
+			# JS did it
 			return json.loads(jsonText)
 
+# Check the status of the key
 def key_status(keys, dictionary):
 	if len(keys) > 0:
 		if keys[0].strip():
@@ -64,6 +71,7 @@ def key_status(keys, dictionary):
 			'symbol': '✅'
 		}
 
+# Recursively update dictionary
 def set_value(keys, dictionary, value):
 	if (len(keys) == 1):
 		dictionary[keys[0]] = value
@@ -72,15 +80,12 @@ def set_value(keys, dictionary, value):
 			dictionary[keys[0]] = {}
 		set_value(keys[1:], dictionary[keys[0]], value)
 
+# Attempt to add a key-value to JSON file at path
+# Return the updated dictionary
 def add_to(keys: str, value: str, path: str):
 	with open(path) as json_file:
 		body = json_file.read()
 		data = try_parse_json(body)
-		# try:
-		# 	data = json.load(json_file)
-		# except Exception as e:
-		# 	# Need json help
-		# 	print(json_file)
 
 		if data is None:
 			return None
@@ -121,6 +126,23 @@ def check_key_status(textpath):
 		statuses[path] = status
 	return statuses
 
+
+@eel.expose
+def cache_config():
+	with open(CACHE_PATH) as cache_json_file:
+		try:
+			return json.load(cache_json_file)
+		except Exception as e:
+			return []
+
+@eel.expose
+def remove_cache(path_to_remove):
+	old_configs = cache_config()
+	new_configs = [cfg for cfg in old_configs if cfg["TRANSLATION_JSON_PATH"] != path_to_remove]
+	f = open(CACHE_PATH, "w+")
+	f.write(json.dumps(new_configs))
+	f.close()
+
 @eel.expose
 def load_config(configs):
 	global PROJECT_NAME
@@ -131,9 +153,17 @@ def load_config(configs):
 		TRANSLATION_JSON_PATH = configs["TRANSLATION_JSON_PATH"]
 		paths = glob.glob(TRANSLATION_JSON_PATH)
 		if len(paths) == 0:
-			return False
+			return "Path does not exist"
+		# Cache Opened Project
+		old_configs = cache_config()
+
+		new_configs = [cfg for cfg in old_configs if cfg["TRANSLATION_JSON_PATH"] != configs["TRANSLATION_JSON_PATH"]]
+		new_configs.insert(0, configs)
+		f = open(CACHE_PATH, "w+")
+		f.write(json.dumps(new_configs))
+		f.close()
 		return True
-	return False
+	return "Invalid config file"
 
 @eel.expose
 def get_project_name():

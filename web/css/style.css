@@ -24,3 +24,11 @@
 .dz-drag-hover {
 	background-color: #dee4ff;
 }
+
+.text-grey {
+	color: grey;
+}
+
+.text-lightgrey {
+	color: lightgrey;
+}

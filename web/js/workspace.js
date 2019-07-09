@@ -1,8 +1,3 @@
-eel.expose(my_javascript_function);
-function my_javascript_function(a, b) {
-  alert(a + b)
-}
-
 eel.expose(fixJson);
 function fixJson(maybeValidJson) {
 	try {
@@ -62,7 +57,6 @@ async function checkAvailable(value) {
 		 *  4: Invalid JSON file
 		 */
 		let textarea = localeInputs[path].node.children[1].children[0]
-		console.log(path)
 		textarea.disabled = false
 		switch (statuses[path].code) {
 			case 1:
@@ -124,7 +118,6 @@ async function applyEdited() {
 	try	{
 		let paths = Object.keys(localeInputs).filter(path => localeInputs[path].value)
 		let values = paths.map(path => localeInputs[path].value)
-		console.log(paths)
 		await new Promise(eel.apply(paths, key, values))
 		checkAvailable(key)
 		alertFeedback('Updated ' + key, true)
