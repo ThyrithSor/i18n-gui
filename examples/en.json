@@ -1,0 +1,9 @@
+{
+    "button": {
+        "greet": "Welcome"
+    },
+    "label": {
+        "cancel": "Cancel",
+        "okay": "Okay"
+    }
+}

@@ -1,3 +1,26 @@
 .hidden {
 	display: none;
 }
+
+.drop-zone {
+	background-color: lightgrey;
+	border-radius: 20px;
+	width: 100%;
+	height: 200px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.drop-zone:hover {
+	cursor: pointer;
+}
+
+.drop-zone > div {
+	color: gray;
+	font-size: 1.5rem;
+}
+
+.dz-drag-hover {
+	background-color: #dee4ff;
+}

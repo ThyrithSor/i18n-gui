@@ -3,6 +3,16 @@ function my_javascript_function(a, b) {
   alert(a + b)
 }
 
+eel.expose(fixJson);
+function fixJson(maybeValidJson) {
+	try {
+		let result = (new Function('return JSON.stringify(' + maybeValidJson + ')'))()
+		return result
+	} catch (e) {
+		return null
+	}
+}
+
 // localeInputs:
 //		path:
 //			node:
@@ -40,17 +50,60 @@ async function checkAvailable(value) {
 		label.innerHTML = statuses[path].symbol
 		label.setAttribute("title", statuses[path].text);
 
-		let editButton = localeInputs[path].node.children[2].children[0]
-		if (statuses[path].code === 2) {
-			editButton.style.display = "inline"
-			editButton.addEventListener("click", (path => 
-				e => {
-					let textarea = localeInputs[path].node.children[1].children[0]
-					textarea.value = statuses[path].data
+		for (let i = 0; i < localeInputs[path].node.children[2].children.length; i++) {
+			localeInputs[path].node.children[2].children[i].style.display = "none"
+		}
+		
+		/**
+		 *  0: Invalid
+		 *  1: Valid
+		 *  2: Exist
+		 *  3: Parent
+		 *  4: Invalid JSON file
+		 */
+		let textarea = localeInputs[path].node.children[1].children[0]
+		console.log(path)
+		textarea.disabled = false
+		switch (statuses[path].code) {
+			case 1:
+				{
+					let suggestButton = localeInputs[path].node.children[2].children[1]
+					suggestButton.style.display = "inline"
+					suggestButton.addEventListener("click", (path => 
+						e => {
+							let textarea = localeInputs[path].node.children[1].children[0]
+							let lastWord = key.split('.')[key.split('.').length - 1]
+							let suggestion = lastWord
+								.replace(/(_+.)/g, matched => {
+									return matched.replace(/_+/, ' ').toLowerCase()
+								})
+								.replace(/[A-Z]/g, matched => {
+									return ' ' + matched.toLowerCase()
+								})
+							textarea.value = suggestion.trim()
+							localeInputs[path].value = textarea.value
+						}
+					)(path))
+					break
 				}
-			)(path))
-		} else {
-			editButton.style.display = "none"
+			case 2:
+				{
+					let editButton = localeInputs[path].node.children[2].children[0]
+					editButton.style.display = "inline"
+					editButton.addEventListener("click", (path => 
+						e => {
+							let textarea = localeInputs[path].node.children[1].children[0]
+							textarea.value = statuses[path].data
+							// localeInputs[path].value = textarea.value
+						}
+					)(path))
+					break
+				}
+			case 4:
+				{
+					textarea.disabled = true
+					break
+				}
 		}
 	}
 }
@@ -58,7 +111,7 @@ async function checkAvailable(value) {
 async function applyAll() {
 	try {
 		let paths = Object.keys(localeInputs)
-		let values = paths.map(path => localeInputs[path].value)
+		let values = paths.map(path => localeInputs[path].node.children[1].children[0].value)
 		await new Promise(eel.apply(paths, key, values))
 		checkAvailable(key)
 		alertFeedback('Updated ' + key, true)
@@ -108,10 +161,19 @@ function clearValues() {
 	})
 }
 
-function exitProgram() {
-	close()
-	new Promise(eel.exit_program())
+function backHistory() {
+	// window.history.back()
+	location.replace('/main.html')
 }
 
-bindUI()
-checkAvailable(key)
+async function setProjectName() {
+	let projectNameNode = document.getElementById('project-name')
+	let projectName = await new Promise(eel.get_project_name())
+	projectNameNode.innerHTML = projectName
+}
+
+window.onload = () => {
+	setProjectName()
+	bindUI()
+	checkAvailable(key)
+}

@@ -1,65 +1,43 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>Translate</title>
-	<link rel="stylesheet" type="text/css" href="vendor/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="css/style.css">
-	<script type="text/javascript" src="/eel.js"></script>
-	<script type="text/javascript" src="js/script.js"></script>
-</head>
-<body>
-	<div id="alert" style="display: none;" class="alert alert-success" role="alert">
-		This is a success alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
-	</div>
-	<h2 class="m-3">Translate</h2>
-	<hr>
-	<div class="px-3">
-		<div class="row">
-			<div class="col-3">
-				Translation Key : 
-			</div>
-			<div class="col-8">
-				<input oninput="checkAvailable(this.value)" class="form-control" placeholder="button.example.confirm"></input>
-			</div>
-		</div>
-		<hr>
-		<div class="row">
-			<div id="inputs" class="col-12">
-				<!-- Input will be appended here -->
-			</div>
-		</div>
-		<hr>
-		<div class="row">
-			<div class="col-12 text-right">
-				<button onclick="applyAll()" class="btn btn-success">
-					Apply All
-				</button>
-				<button onclick="applyEdited()" class="btn btn-primary">
-					Apply Edited
-				</button>
-				<button onclick="clearValues()" class="btn btn-warning">
-					Clear
-				</button>
-				<button onclick="exitProgram()" class="btn btn-danger">
-					Exit
-				</button>
-			</div>
-		</div>
-	</div>
-	<div id="input-sample" class="hidden">
-		<div class="row mb-3">
-			<div class="col-2 font-weight-bold">
-				<strong>Label</strong>
-				<span class="status"></span>
-				<span> : </span>
-			</div>
-			<div class="col-8">
-				<textarea class="form-control" type="text" placeholder="Your translation..."></textarea>
-			</div>
-			<div class="col-2">
-				<button style="display: none;" class="btn btn-primary">Edit</button>
-			</div>
-		</div>
-	</div>
-</body>
+    <head>
+        <title>
+            Translate
+        </title>
+        <link href="vendor/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+            <link href="css/style.css" rel="stylesheet" type="text/css">
+                <script src="/eel.js" type="text/javascript">
+                </script>
+                <script src="js/jquery.js" type="text/javascript">
+                </script>
+                <script src="js/dropzone.js" type="text/javascript">
+                </script>
+                <script src="js/main.js" type="text/javascript">
+                </script>
+            </link>
+        </link>
+    </head>
+    <body>
+        <h2 class="m-3" id="project-name">
+            Translate
+        </h2>
+        <hr>
+            <div class="px-3">
+                <div class="row">
+                    <div class="col-12">
+                        <div id="dropzone" class="drop-zone">
+                            <div>
+                                Drop or Click to Add <code>config.translate</code> Here
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 mt-5">
+                        <button class="btn btn-danger" onclick="exitProgram()">
+                            Exit
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </hr>
+    </body>
 </html>
