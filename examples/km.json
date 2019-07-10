@@ -2,8 +2,10 @@
     "Hell": "",
     "alone_button": "ប៊ូតុងតែឯង",
     "button": {
-        "algorithm_is_not_okay_but_i_know_you": "",
-        "edit": "កែប្រែ"
+        "algorithm_is_not_okay_but_i_know_you": "ក្បួនដោះស្រាយគឺមិនអីទេប៉ុន្តែខ្ញុំដឹងថាអ្នក",
+        "edit": "កែប្រែ",
+        "newMembership": "សមាជិកថ្មី",
+        "uploadNewPicture": "ផ្ទុករូបភាពថ្មីឡើង"
     },
     "coupon": {
         "button": {

@@ -106,10 +106,10 @@ async function checkAvailable(value) {
 	try {
 		let statuses = await EelPromise(eel.check_key_status(value))
 		for (path in statuses) {
-			let label = localeInputs[path].node.children[0].children[0].children[1]
-			localeInputs[path].node.children[0].children[1].innerHTML = statuses[path].text
-			label.innerHTML = statuses[path].symbol
-			label.setAttribute("title", statuses[path].text);
+			let status = $(localeInputs[path].node).find('.status')
+			$(localeInputs[path].node).find('.description').html(statuses[path].text)
+			status.html(statuses[path].symbol)
+			status.prop("title", statuses[path].text);
 
 			$(localeInputs[path].node).find('.activity-buttons > button').css("display", "none")
 			
