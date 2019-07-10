@@ -5,12 +5,20 @@
 var localeInputs = {}
 var alertHandler
 var key = ''
+var currentStatus = {}
 
 String.prototype.capitalize = function () {
 	if (this.length > 0) {
 		return this[0].toUpperCase() + this.substring(1)
 	}
 	return this
+}
+
+function copyKey() {
+	let keyNode = document.getElementById("key-input")
+	keyNode.select()
+	document.execCommand("copy")
+	alertFeedback("Copied : " + keyNode.value , "success")
 }
 
 async function EelPromise(task) {
@@ -105,6 +113,7 @@ function generateTranslateFromKey(keyTranslate) {
 async function checkAvailable(value) {
 	try {
 		let statuses = await EelPromise(eel.check_key_status(value))
+		currentStatus = statuses
 		for (path in statuses) {
 			let status = $(localeInputs[path].node).find('.status')
 			$(localeInputs[path].node).find('.description').html(statuses[path].text)
@@ -180,11 +189,22 @@ async function checkAvailable(value) {
 
 async function applyAll() {
 	try {
-		let paths = Object.keys(localeInputs)
-		let values = paths.map(path => $(localeInputs[path].node).find('.translation-text > textarea').val())
-		let result = await EelPromise(eel.apply(paths, key, values))
-		checkAvailable(key)
-		alertFeedback(result, 'success')
+		let isValidAll = Object.keys(currentStatus).filter(keyPath => currentStatus[keyPath].code !== 1).length === 0
+
+		let userConfirm = true
+		if (!isValidAll) {
+			userConfirm = confirm("The currently seems to exist already, Are you sure to write anyway?")
+		}
+
+		if (userConfirm) {
+			let paths = Object.keys(localeInputs)
+			let values = paths.map(path => $(localeInputs[path].node).find('.translation-text > textarea').val())
+			let result = await EelPromise(eel.apply(paths, key, values))
+			checkAvailable(key)
+			alertFeedback(result, 'success')
+		} else {
+			alertFeedback("Action cancelled", 'info')
+		}
 	} catch (exception) {
 		alertFeedback(exception, 'danger')
 	}
@@ -193,14 +213,26 @@ async function applyAll() {
 async function applyFilled() {
 	try	{
 		let paths = Object.keys(localeInputs).filter(path => $(localeInputs[path].node).find('.translation-text > textarea').val())
-		if (paths.length === 0) {
-			alertFeedback("Nothing to apply", 'info')
-			return
+
+		let isValidAll = paths.filter(keyPath => currentStatus[keyPath].code !== 1).length === 0
+
+		let userConfirm = true
+		if (!isValidAll) {
+			userConfirm = confirm("The currently seems to exist already, Are you sure to write anyway?")
 		}
-		let values = paths.map(path => $(localeInputs[path].node).find('.translation-text > textarea').val()).filter(value => value)
-		let result = await EelPromise(eel.apply(paths, key, values))
-		checkAvailable(key)
-		alertFeedback(result, 'success')
+
+		if (userConfirm) {
+			if (paths.length === 0) {
+				alertFeedback("Nothing to apply", 'info')
+				return
+			}
+			let values = paths.map(path => $(localeInputs[path].node).find('.translation-text > textarea').val()).filter(value => value)
+			let result = await EelPromise(eel.apply(paths, key, values))
+			checkAvailable(key)
+			alertFeedback(result, 'success')
+		} else {
+			alertFeedback("Action cancelled", 'info')
+		}
 	} catch (exception) {
 		alertFeedback(exception, 'danger')
 	}
