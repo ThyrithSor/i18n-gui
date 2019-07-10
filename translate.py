@@ -1,16 +1,20 @@
-import eel, json, sys, glob, os
+import eel
+from sys import exit 
+from os import path
+from glob import glob
+from json import loads, load, dumps
 
 TRANSLATION_JSON_PATH = "./examples/*.json"
 PROJECT_NAME = "My Translate"
 
 # After build, the current directory will be root
 # It won't allow to create file, so use home instead
-CACHE_PATH = os.path.expanduser("~") + "/.gui-i18n-cache"
+CACHE_PATH = path.expanduser("~") + "/.gui-i18n-cache"
 
 @eel.expose
 def get_locale_path():
 	try:
-		paths = glob.glob(TRANSLATION_JSON_PATH)
+		paths = glob(TRANSLATION_JSON_PATH)
 		return paths
 	except Exception as e:
 		return {
@@ -21,7 +25,7 @@ def get_locale_path():
 def try_parse_json(jsonText):
 	try:
 		# Try parse json by ownself
-		return json.loads(jsonText)
+		return loads(jsonText)
 	except Exception as e:
 		# Ask for JS help
 		jsonText = eel.fixJson(jsonText)()
@@ -30,7 +34,7 @@ def try_parse_json(jsonText):
 			return None
 		else:
 			# JS did it
-			return json.loads(jsonText)
+			return loads(jsonText)
 
 # Check the status of the key
 def key_status(keys, dictionary):
@@ -124,7 +128,7 @@ def apply(paths, key, values):
 			if result is None:
 				print("Skip " + paths[i] + " because it is invalid JSON file.")
 				continue
-			res = json.dumps(result, sort_keys=True, indent=4, ensure_ascii=False)
+			res = dumps(result, sort_keys=True, indent=4, ensure_ascii=False)
 			f = open(paths[i], "wb")
 			f.write(res.encode('utf-8'))
 			f.close()
@@ -173,7 +177,7 @@ def cache_config():
 	try:
 		with open(CACHE_PATH, "r") as cache_json_file:
 			try:
-				return json.load(cache_json_file)
+				return load(cache_json_file)
 			except Exception as e:
 				return []
 	except Exception as e:
@@ -185,7 +189,7 @@ def remove_cache(path_to_remove):
 		old_configs = cache_config()
 		new_configs = [cfg for cfg in old_configs if cfg["TRANSLATION_JSON_PATH"] != path_to_remove]
 		with open(CACHE_PATH, "w") as f:
-			f.write(json.dumps(new_configs))
+			f.write(dumps(new_configs))
 		return new_configs
 	except Exception as e:
 		return {
@@ -201,7 +205,7 @@ def load_config(configs):
 			PROJECT_NAME = configs["PROJECT_NAME"]
 		if ("TRANSLATION_JSON_PATH" in configs):
 			TRANSLATION_JSON_PATH = configs["TRANSLATION_JSON_PATH"]
-			paths = glob.glob(TRANSLATION_JSON_PATH)
+			paths = glob(TRANSLATION_JSON_PATH)
 			if len(paths) == 0:
 				return "Path does not exist"
 			# Cache Opened Project
@@ -262,7 +266,7 @@ def get_project_name():
 @eel.expose
 def exit_program():
 	print("GOOD BYE!!!")
-	sys.exit()
+	exit()
 
 eel.init('web')
 
