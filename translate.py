@@ -1,4 +1,5 @@
 import eel
+from googletrans import Translator
 from sys import exit 
 from os import path
 from glob import glob
@@ -10,6 +11,16 @@ PROJECT_NAME = "My Translate"
 # After build, the current directory will be root
 # It won't allow to create file, so use home instead
 CACHE_PATH = path.expanduser("~") + "/.gui-i18n-cache"
+
+translator = Translator()
+
+@eel.expose
+def suggestion_translate(word, src, dest):
+	try:
+		result = translator.translate(word, src=src, dest=dest)
+		return result.text
+	except Exception as e:
+		return word
 
 @eel.expose
 def get_locale_path():

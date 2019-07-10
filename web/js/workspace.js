@@ -35,6 +35,11 @@ function alertFeedback(message, type) {
 	}, 2000)
 }
 
+function getLanguageFromPath(path) {
+	let localeFileName = path.split('/')
+	return localeFileName[localeFileName.length - 1].split('.')[0].toUpperCase()
+}
+
 eel.expose(fixJson);
 function fixJson(maybeValidJson) {
 	try {
@@ -52,8 +57,8 @@ async function bindUI() {
 		let sample = document.getElementById('input-sample').children[0]
 		for (path of paths) {
 			((path) =>{
-				let localeFileName = path.split('/')
-				sample.children[0].children[0].children[0].innerHTML = localeFileName[localeFileName.length - 1].split('.')[0].toUpperCase()
+				
+				sample.children[0].children[0].children[0].innerHTML = getLanguageFromPath(path)
 				let inputNode = sample.cloneNode(true)
 				localeInputs[path] = {
 					node: inputNode,
@@ -70,8 +75,11 @@ async function bindUI() {
 	}
 }
 
-function keyInputHandler(value) {
-	key = value
+function keyInputHandler(event) {
+	event.preventDefault()
+	event.stopPropagation()
+	key = event.target.value.replace(/\ +/g, '_')
+	event.target.value = key
 	checkAvailable(key)
 }
 
@@ -102,8 +110,9 @@ async function checkAvailable(value) {
 					{
 						let suggestButton = localeInputs[path].node.children[2].children[1]
 						suggestButton.style.display = "inline"
-						suggestButton.addEventListener("click", (path => 
-							e => {
+						$(suggestButton).off()
+						$(suggestButton).click((path => 
+							async e => {
 								let textarea = localeInputs[path].node.children[1].children[0]
 								let lastWord = value.split('.')[value.split('.').length - 1]
 								let suggestion = lastWord
@@ -113,7 +122,14 @@ async function checkAvailable(value) {
 									.replace(/[A-Z]/g, matched => {
 										return ' ' + matched.toLowerCase()
 									})
-								textarea.value = suggestion.trim()
+								generated = suggestion.trim()
+								console.log("translate", generated)
+								console.log("from", 'en')
+								console.log("to", getLanguageFromPath(path).toLowerCase())
+
+								let requestSuggestTranslate = await EelPromise(eel.suggestion_translate(generated, 'en', getLanguageFromPath(path).toLowerCase()))
+
+								textarea.value = requestSuggestTranslate
 								localeInputs[path].value = textarea.value
 							}
 						)(path))
@@ -123,7 +139,8 @@ async function checkAvailable(value) {
 					{
 						let editButton = localeInputs[path].node.children[2].children[0]
 						editButton.style.display = "inline"
-						editButton.addEventListener("click", (path => 
+						$(editButton).off()
+						$(editButton).click((path => 
 							e => {
 								let textarea = localeInputs[path].node.children[1].children[0]
 								textarea.value = statuses[path].data
@@ -289,7 +306,8 @@ window.onload = () => {
 	})
 	$("#key-input").blur(function (e) {
 		if (lastChoiceSuggestion != null) {
-			keyInputHandler(lastChoiceSuggestion)
+			key = lastChoiceSuggestion
+			checkAvailable(lastChoiceSuggestion)
 			lastChoiceSuggestion = null
 		}
 	})
