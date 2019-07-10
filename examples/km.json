@@ -5,6 +5,9 @@
     "button": {
         "algorithm_is_not_okay_but_i_know_you": "ក្បួនដោះស្រាយគឺមិនអីទេប៉ុន្តែខ្ញុំដឹងថាអ្នក",
         "edit": "កែប្រែ",
+        "new": {
+            "tableCategory": "ប្រភេទតារាង"
+        },
         "newMembership": "សមាជិកថ្មី",
         "uploadNewPicture": "ផ្ទុករូបភាពថ្មីឡើង"
     },

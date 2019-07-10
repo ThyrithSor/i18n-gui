@@ -1,5 +1,5 @@
 .gui-i18n-cache
-dist/
+#dist/
 build/
 __pycache__/
 translate.spec
