@@ -131,20 +131,16 @@ async function checkAvailable(value) {
 
 								let requestSuggestTranslate
 								if (getLanguageFromPath(path).toLowerCase() === baseLanguage.toLowerCase()) {
-									console.log("Just use generated")
 									requestSuggestTranslate = generateTranslateFromKey(value)
 								} else {
 									let baseLanguageModelKey = Object.keys(localeInputs).find(modelKey => getLanguageFromPath(modelKey).toLowerCase() === baseLanguage.toLowerCase())
 									if (baseLanguageModelKey !== undefined) {
 										if (localeInputs[baseLanguageModelKey].value.trim() !== "") {
-											console.log("Use phrase " + localeInputs[baseLanguageModelKey].value)
 											requestSuggestTranslate = await EelPromise(eel.suggestion_translate(localeInputs[baseLanguageModelKey].value, baseLanguage, getLanguageFromPath(path).toLowerCase()))
 										} else {
-											console.log("use generated phrase")
 											requestSuggestTranslate = await EelPromise(eel.suggestion_translate(generateTranslateFromKey(value), baseLanguage, getLanguageFromPath(path).toLowerCase()))
 										}
 									} else {
-										console.log("cannot find model")
 										requestSuggestTranslate = await EelPromise(eel.suggestion_translate(generateTranslateFromKey(value), baseLanguage, getLanguageFromPath(path).toLowerCase()))
 									}
 								}

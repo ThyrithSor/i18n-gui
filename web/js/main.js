@@ -96,9 +96,7 @@ function parseConfig(fileContent) {
 }
 async function loadConfig(configs) {
     try {
-        console.log("load config")
         let result = await EelPromise(eel.load_config(configs))
-        console.log("result", result)
         if (result === true) {
             location.replace("/workspace.html")
         } else {
@@ -153,7 +151,6 @@ async function bindCacheUI(configCache) {
 async function loadCaches() {
     try {
         let configCache = await EelPromise(eel.cache_config())
-        console.log("load cache", configCache)
         bindCacheUI(configCache)
     } catch (exception) {
         alertFeedback(exception, false)
