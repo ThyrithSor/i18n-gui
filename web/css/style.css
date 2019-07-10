@@ -32,3 +32,7 @@
 .text-lightgrey {
 	color: lightgrey;
 }
+
+.cursor-pointer:hover {
+	cursor: pointer;
+}

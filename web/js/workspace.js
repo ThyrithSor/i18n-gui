@@ -206,25 +206,39 @@ let observableState = {
 		this.suggestionList = listOfSuggestions
 		let suggestionNode = $("#suggestion-container")
 		suggestionNode.html("")
-		this.suggestionList.forEach(suggestion => {
-			suggestionNode.append($(`<div class="badge badge-light mx-2">${suggestion}</div>`))
+		this.suggestionList.forEach((suggestion, index) => {
+			let suggestionBadge = $(`<div class="badge badge-light cursor-pointer mx-1">${suggestion}</div>`)
+			suggestionBadge.click((index => e => {
+				this.suggestionChoice = index
+				$("#key-input").focus()
+			})(index))
+			suggestionNode.append(suggestionBadge)
 		})
 	},
 	get suggestionChoice() {
 		return this.choice
 	},
 	set suggestionChoice(choiceNumber) {
-		if (choiceNumber !== -1) {
-			let suggestionNodes = $("#suggestion-container > div")
-			for (let i = 0; i < suggestionNodes.length; i++) {
-				if (i === choiceNumber) {
-					$(suggestionNodes[i]).attr("class", "badge badge-info mx-2")
-				} else {
-					$(suggestionNodes[i]).attr("class", "badge badge-light mx-2")
+		if (this.choice !== choiceNumber) {
+			this.choice = choiceNumber
+			if (choiceNumber !== -1) {
+				let suggestionNodes = $("#suggestion-container > div")
+				for (let i = 0; i < suggestionNodes.length; i++) {
+					if (i === choiceNumber) {
+						$(suggestionNodes[i]).attr("class", "badge badge-info cursor-pointer mx-1")
+					} else {
+						$(suggestionNodes[i]).attr("class", "badge badge-light cursor-pointer mx-1")
+					}
 				}
+				let keyInput = $("#key-input")
+				let inputKeyChain = keyInput.val().split(".")
+
+				lastChoiceSuggestion = inputKeyChain.map((key, index) => index === inputKeyChain.length - 1 ? this.suggestions[this.suggestionChoice] : key).join(".")
+				keyInput.val(lastChoiceSuggestion)
+
+				checkAvailable(lastChoiceSuggestion)
 			}
 		}
-		this.choice = choiceNumber
 	}
 }
 
@@ -241,7 +255,7 @@ window.onload = () => {
 					observableState.suggestions = await EelPromise(eel.get_suggestions(inputKey))
 					shouldRequestSuggest = false
 				}
-				let inputKeyChain = inputKey.split(".")
+				// let inputKeyChain = inputKey.split(".")
 				if (observableState.suggestions.length > 0) {
 					if (e.shiftKey) {
 						if (observableState.suggestionChoice < 0) {
@@ -256,9 +270,6 @@ window.onload = () => {
 							observableState.suggestionChoice = (observableState.suggestionChoice + 1).mod(observableState.suggestions.length)
 						}
 					}
-					lastChoiceSuggestion = inputKeyChain.map((key, index) => index === inputKeyChain.length - 1 ? observableState.suggestions[observableState.suggestionChoice] : key).join(".")
-					$(this).val(lastChoiceSuggestion)
-					checkAvailable(lastChoiceSuggestion)
 				}
 			} catch (exception) {
 				alertFeedback(exception)
