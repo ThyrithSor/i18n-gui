@@ -53,7 +53,7 @@ async function bindUI() {
 		for (path of paths) {
 			((path) =>{
 				let localeFileName = path.split('/')
-				sample.children[0].children[0].innerHTML = localeFileName[localeFileName.length - 1].split('.')[0].toUpperCase()
+				sample.children[0].children[0].children[0].innerHTML = localeFileName[localeFileName.length - 1].split('.')[0].toUpperCase()
 				let inputNode = sample.cloneNode(true)
 				localeInputs[path] = {
 					node: inputNode,
@@ -79,7 +79,8 @@ async function checkAvailable(value) {
 	try {
 		let statuses = await EelPromise(eel.check_key_status(value))
 		for (path in statuses) {
-			let label = localeInputs[path].node.children[0].children[1]
+			let label = localeInputs[path].node.children[0].children[0].children[1]
+			localeInputs[path].node.children[0].children[1].innerHTML = statuses[path].text
 			label.innerHTML = statuses[path].symbol
 			label.setAttribute("title", statuses[path].text);
 
