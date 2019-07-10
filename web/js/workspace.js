@@ -131,17 +131,24 @@ async function checkAvailable(value) {
 
 								let requestSuggestTranslate
 								if (getLanguageFromPath(path).toLowerCase() === baseLanguage.toLowerCase()) {
-									requestSuggestTranslate = generateTranslateFromKey(value)
+									if (baseLanguage.toLowerCase() === 'en') {
+										requestSuggestTranslate = generateTranslateFromKey(value)
+									} else {
+										requestSuggestTranslate = await EelPromise(eel.suggestion_translate(generateTranslateFromKey(value), 'en', getLanguageFromPath(path).toLowerCase()))
+									}
 								} else {
 									let baseLanguageModelKey = Object.keys(localeInputs).find(modelKey => getLanguageFromPath(modelKey).toLowerCase() === baseLanguage.toLowerCase())
 									if (baseLanguageModelKey !== undefined) {
+										console.log("Translate other base on base key")
 										if (localeInputs[baseLanguageModelKey].value.trim() !== "") {
 											requestSuggestTranslate = await EelPromise(eel.suggestion_translate(localeInputs[baseLanguageModelKey].value, baseLanguage, getLanguageFromPath(path).toLowerCase()))
 										} else {
-											requestSuggestTranslate = await EelPromise(eel.suggestion_translate(generateTranslateFromKey(value), baseLanguage, getLanguageFromPath(path).toLowerCase()))
+											console.log("Translate other because base key not set")
+											requestSuggestTranslate = await EelPromise(eel.suggestion_translate(generateTranslateFromKey(value), 'en', getLanguageFromPath(path).toLowerCase()))
 										}
 									} else {
-										requestSuggestTranslate = await EelPromise(eel.suggestion_translate(generateTranslateFromKey(value), baseLanguage, getLanguageFromPath(path).toLowerCase()))
+										console.log("Translate other by generate")
+										requestSuggestTranslate = await EelPromise(eel.suggestion_translate(generateTranslateFromKey(value), 'en', getLanguageFromPath(path).toLowerCase()))
 									}
 								}
 

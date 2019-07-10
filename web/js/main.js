@@ -62,10 +62,21 @@ function getContent(file) {
 function saveConfig() {
     let projectName = $("#project-name-input").val()
     let localePath = $("#locale-path-input").val()
+    let baseLanguage = $("#base-language-input").val()
+    let codeMapping = $("#code-mapping-input").val()
     let configs = [
         ["PROJECT_NAME", projectName],
         ["TRANSLATION_JSON_PATH", localePath]
     ]
+
+    if (baseLanguage) {
+        configs.push(["BASE_LANGUAGE", baseLanguage])
+    }
+
+    if (codeMapping) {
+        configs.push(["LOCALE_CODE_MAPPING", codeMapping])
+    }
+
     platform = window.navigator.platform
     windowsPlatforms = ['Win32', 'Win64', 'Windows', 'WinCE']
     let configOutput = configs.map(config => config.join("=")).join("\n")
@@ -75,6 +86,8 @@ function saveConfig() {
     download(CONFIG_FILE_NAME, configOutput)
     $("#project-name-input").val("")
     $("#locale-path-input").val("")
+    $("#base-language-input").val("")
+    $("#code-mapping-input").val("")
     $('#generateConfigModal').modal('hide')
     return false
 }
