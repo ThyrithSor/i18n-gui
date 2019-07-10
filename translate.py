@@ -160,7 +160,7 @@ def apply(paths, key, values):
 			f = open(paths[i], "wb")
 			f.write(res.encode('utf-8'))
 			f.close()
-		return "Updated " + key
+		return 'Updated key "' + key + '"'
 	except Exception as e:
 		return {
 			'error': str(e)
