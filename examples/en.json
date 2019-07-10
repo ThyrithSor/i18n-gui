@@ -16,6 +16,7 @@
         "confirm": "Confirm",
         "delete": "Delete",
         "edit": "Edit",
+        "i_am_siyen": "I am siyen",
         "login": "Login",
         "manageTable": "Manage table",
         "manageTableCategory": "Manage table category",
@@ -35,7 +36,7 @@
         "ok": "Ok",
         "prev": "Prev",
         "print": "Print",
-        "resetRassword": "Reset password",
+        "resetRassword": "Reset rassword",
         "rotateLeft": "Rotate left",
         "rotateRight": "Rotate right",
         "save": "Save",
@@ -723,52 +724,7 @@
             "startDate": "Start date"
         }
     },
-    "recent_sell": {
-        "btn": {
-            "listingRecentSell": "Listing recent sell"
-        },
-        "label": {
-            "amountDueDollar": "Amount due dollar",
-            "amountDueRiel": "Amount due riel",
-            "amountPaidDollar": "Amount paid dollar",
-            "amountPaidRiel": "Amount paid riel",
-            "amountTotalDollar": "Amount total dollar",
-            "amountTotalRiel": "Amount total riel",
-            "authorizer": "Authorizer",
-            "cashier": "Cashier",
-            "customer": "Customer",
-            "date": "Date",
-            "discount": "Discount",
-            "orderNumber": "Order number",
-            "status": "Status",
-            "subTotal": "Sub total",
-            "tableNumber": "Table number",
-            "tax": "Tax",
-            "tel": "Tel"
-        },
-        "listingRecentSell": "Listing recent sell",
-        "owe": {
-            "label": {
-                "amountOweDollar": "Amount owe dollar",
-                "amountOweRiel": "Amount owe riel"
-            }
-        },
-        "showRecentSell": "Show recent sell",
-        "table": {
-            "action": "Action",
-            "amount": "Amount",
-            "amountTotalDollar": "Amount total dollar",
-            "amountTotalRiel": "Amount total riel",
-            "cashier": "Cashier",
-            "date": "Date",
-            "discount": "Discount",
-            "no": "No",
-            "paymentOption": "Payment option",
-            "productName": "Product name",
-            "salePrice": "Sale price",
-            "servedQuantity": "Served quantity"
-        }
-    },
+    "recent_sell": "Recent sell",
     "report": {
         "label": {
             "chart": "Chart",

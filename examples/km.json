@@ -9,6 +9,7 @@
             "tableCategory": "ប្រភេទតារាង"
         },
         "newMembership": "សមាជិកថ្មី",
+        "resetRassword": "កំណត់ពាក្យសម្ងាត់ឡើងវិញ",
         "uploadNewPicture": "ផ្ទុករូបភាពថ្មីឡើង"
     },
     "coupon": {
@@ -689,52 +690,7 @@
             "startDate": "ចាប់ផ្ដើមនៅថ្ងៃ"
         }
     },
-    "recent_sell": {
-        "btn": {
-            "listingRecentSell": "បញ្ជីការលក់ថ្មីៗ"
-        },
-        "label": {
-            "amountDueDollar": "ចំនួនទឹកប្រាក់អាប់​ (ដុល្លារ)",
-            "amountDueRiel": "ចំនួនទឹកប្រាក់អាប់ (រៀល)",
-            "amountPaidDollar": "ចំនួនទឹកប្រាក់បានបង់​ (ដុល្លារ)",
-            "amountPaidRiel": "ចំនួនទឹកប្រាក់បានបង់ (រៀល)",
-            "amountTotalDollar": "ចំនួនទឹកប្រាក់សរុប​(ដុល្លារ)",
-            "amountTotalRiel": "ចំនួនទឹកប្រាក់សរុប​ (រៀល)",
-            "authorizer": "អ្នកអនុញ្ញាត",
-            "cashier": "អ្នកគិតលុយ",
-            "customer": "អតិថិជន",
-            "date": "កាលបរិច្ឆេទ",
-            "discount": "ការបញ្ចុះតម្លៃ",
-            "orderNumber": "លេខបញ្ជាទិញ",
-            "status": "ស្ថានភាពទូទៅ",
-            "subTotal": "Sub total",
-            "tableNumber": "លេខតុ",
-            "tax": "ពន្ធ",
-            "tel": "លេខទូរស័ព្ទ"
-        },
-        "listingRecentSell": "បញ្ជីការលក់ថ្មីៗ",
-        "owe": {
-            "label": {
-                "amountOweDollar": "ចំនួនទឹកប្រាក់ជំពាក់​ (ដុល្លារ)",
-                "amountOweRiel": "ចំនួនទឹកប្រាក់ជំពាក់​ (រៀល)"
-            }
-        },
-        "showRecentSell": "បង្ហាញការលក់ថ្មីៗ",
-        "table": {
-            "action": "ប្រតិបត្តិការ",
-            "amount": "ចំនួន",
-            "amountTotalDollar": "ចំនួនទឹកប្រាក់ដែលត្រូវបង់​ (ដុល្លារ)",
-            "amountTotalRiel": "ចំនួនទឹកប្រាក់ដែលត្រូវបង់​ (រៀល)",
-            "cashier": "អ្នកគិតលុយ",
-            "date": "កាលបរិច្ឆេទ",
-            "discount": "បញ្ចុះតម្លៃ",
-            "no": "លេខរៀង",
-            "paymentOption": "ជម្រើសការទូទាត់",
-            "productName": "ឈ្មោះ​ផលិតផល",
-            "salePrice": "តម្លៃលក់",
-            "servedQuantity": "បរិមាណ"
-        }
-    },
+    "recent_sell": "លក់ថ្មីៗ",
     "report": {
         "label": {
             "chart": "ក្រាប",
