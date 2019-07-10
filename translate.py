@@ -1,4 +1,5 @@
 import eel
+from googletrans import Translator
 from sys import exit 
 from os import path
 from glob import glob
@@ -6,10 +7,37 @@ from json import loads, load, dumps
 
 TRANSLATION_JSON_PATH = "./examples/*.json"
 PROJECT_NAME = "My Translate"
+BASE_LANGUAGE = "en"
+LOCALE_CODE_MAPPING = "" # format kh=km,eng=en
 
 # After build, the current directory will be root
 # It won't allow to create file, so use home instead
 CACHE_PATH = path.expanduser("~") + "/.gui-i18n-cache"
+
+translator = Translator()
+
+def get_locale_code_mapping():
+	mapper = {}
+	separate = list(map(lambda mapping: mapping.strip().split('='), LOCALE_CODE_MAPPING.split(',')))
+	filtered = list(filter(lambda mapping: len(mapping) == 2, separate))
+	for filt in filtered:
+		mapper[filt[0].lower()] = filt[1]
+	return mapper
+
+def correct_locale_code(locale_code_by_path):
+	mapping = get_locale_code_mapping()
+	if locale_code_by_path.lower() in mapping:
+		return mapping[locale_code_by_path].lower()
+	else:
+		return locale_code_by_path.lower()
+
+@eel.expose
+def suggestion_translate(word, src, dest):
+	try:
+		result = translator.translate(word, src=src, dest=dest)
+		return result.text
+	except Exception as e:
+		return word
 
 @eel.expose
 def get_locale_path():
@@ -46,7 +74,7 @@ def key_status(keys, dictionary):
 						if (len(keys) == 1):
 							return {
 								'code': 3,
-								'text': keys[0] + ' is already a parent',
+								'text': 'Key "' + keys[0] + '" is already a parent',
 								'symbol': u'⚠️❌',
 								'data': dictionary[keys[0]]
 							}
@@ -62,7 +90,7 @@ def key_status(keys, dictionary):
 						else:
 							return {
 								'code': 3,
-								'text': keys[0] + ' is already a string',
+								'text': 'Key "' + keys[0] + '" is already a string',
 								'symbol': u'⚠️❌',
 								'data': dictionary[keys[0]]
 							}
@@ -73,13 +101,13 @@ def key_status(keys, dictionary):
 			else:
 				return {
 					'code': 0,
-					'text': 'Invalid',
+					'text': 'Invalid Key',
 					'symbol': u'❌'
 				}
 		else:
 			return {
 				'code': 1,
-				'text': 'Valid',
+				'text': 'Valid Key',
 				'symbol': u'✅'
 			}
 	except Exception as e:
@@ -161,9 +189,8 @@ def check_key_status(textpath):
 			except Exception as e:
 				statuses[path] = {
 					'code': 5,
-					'text': 'Throw Exception',
-					'symbol': u'💔',
-					'data': str(e)
+					'text': str(e),
+					'symbol': u'💔'
 				}
 			
 		return statuses
@@ -201,6 +228,12 @@ def load_config(configs):
 	try:
 		global PROJECT_NAME
 		global TRANSLATION_JSON_PATH
+		global BASE_LANGUAGE
+		global LOCALE_CODE_MAPPING
+		if ("BASE_LANGUAGE" in configs):
+			BASE_LANGUAGE = configs["BASE_LANGUAGE"]
+		if ("LOCALE_CODE_MAPPING" in configs):
+			LOCALE_CODE_MAPPING = configs["LOCALE_CODE_MAPPING"]
 		if ("PROJECT_NAME" in configs):
 			PROJECT_NAME = configs["PROJECT_NAME"]
 		if ("TRANSLATION_JSON_PATH" in configs):
@@ -262,6 +295,10 @@ def get_suggestions(key):
 		return {
 			'error': 'error with ' + str(e)
 		}
+
+@eel.expose
+def get_base_language():
+	return BASE_LANGUAGE
 
 @eel.expose
 def get_project_name():

@@ -36,3 +36,15 @@
 .cursor-pointer:hover {
 	cursor: pointer;
 }
+
+.very-small {
+	font-size: 0.7rem;
+}
+
+.crop-text-2 {
+  -webkit-line-clamp: 2;
+  overflow : hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+}

@@ -84,7 +84,7 @@ function submitConfigForm() {
 }
 
 function parseConfig(fileContent) {
-    let configs = fileContent.split(/\r?\n/g).filter(config => config.trim() !== '' && !config.trim().startsWith("#")).map(config => config.split("=")).filter(config => config.length >= 2).reduce((cfg1, cfg2) => {
+    let configs = fileContent.split(/\r?\n/g).map(line => line.split("#")[0]).filter(config => config.trim() !== '' && !config.trim().startsWith("#")).map(config => config.split("=")).filter(config => config.length >= 2).reduce((cfg1, cfg2) => {
         if (!cfg1.config) {
             cfg1.config = {}
             cfg1.config[cfg1[0].trim()] = cfg1.slice(1).join("=").trim()
@@ -96,9 +96,7 @@ function parseConfig(fileContent) {
 }
 async function loadConfig(configs) {
     try {
-        console.log("load config")
         let result = await EelPromise(eel.load_config(configs))
-        console.log("result", result)
         if (result === true) {
             location.replace("/workspace.html")
         } else {
@@ -153,7 +151,6 @@ async function bindCacheUI(configCache) {
 async function loadCaches() {
     try {
         let configCache = await EelPromise(eel.cache_config())
-        console.log("load cache", configCache)
         bindCacheUI(configCache)
     } catch (exception) {
         alertFeedback(exception, false)
