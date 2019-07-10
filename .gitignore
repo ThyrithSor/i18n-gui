@@ -1,0 +1,5 @@
+.gui-i18n-cache
+dist/
+build/
+__pycache__/
+server.spec

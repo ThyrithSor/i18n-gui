@@ -9,8 +9,13 @@ CACHE_PATH = os.path.expanduser("~") + "/.gui-i18n-cache"
 
 @eel.expose
 def get_locale_path():
-	paths = glob.glob(TRANSLATION_JSON_PATH)
-	return paths
+	try:
+		paths = glob.glob(TRANSLATION_JSON_PATH)
+		return paths
+	except Exception as e:
+		return {
+			"error": str(e)
+		}
 
 # Clever parse JSON
 def try_parse_json(jsonText):
@@ -29,114 +34,139 @@ def try_parse_json(jsonText):
 
 # Check the status of the key
 def key_status(keys, dictionary):
-	if len(keys) > 0:
-		if keys[0].strip():
-			if keys[0] in dictionary:
-				if isinstance(dictionary[keys[0]], dict):
-					if (len(keys) == 1):
-						return {
-							'code': 3,
-							'text': keys[0] + ' is already a parent',
-							'symbol': u'⚠️❌',
-							'data': dictionary[keys[0]]
-						}
-					return key_status(keys[1:], dictionary[keys[0]])
-				else:
-					if (len(keys) == 1):
-						return {
-							'code': 2,
-							'text': 'Exist',
-							'symbol': u'⚠️',
-							'data': dictionary[keys[0]]
-						}
+	try:
+		if len(keys) > 0:
+			if keys[0].strip():
+				if keys[0] in dictionary:
+					if isinstance(dictionary[keys[0]], dict):
+						if (len(keys) == 1):
+							return {
+								'code': 3,
+								'text': keys[0] + ' is already a parent',
+								'symbol': u'⚠️❌',
+								'data': dictionary[keys[0]]
+							}
+						return key_status(keys[1:], dictionary[keys[0]])
 					else:
-						return {
-							'code': 3,
-							'text': keys[0] + ' is already a string',
-							'symbol': u'⚠️❌',
-							'data': dictionary[keys[0]]
-						}
+						if (len(keys) == 1):
+							return {
+								'code': 2,
+								'text': 'Exist',
+								'symbol': u'⚠️',
+								'data': dictionary[keys[0]]
+							}
+						else:
+							return {
+								'code': 3,
+								'text': keys[0] + ' is already a string',
+								'symbol': u'⚠️❌',
+								'data': dictionary[keys[0]]
+							}
 
+				else:
+					dictionary[keys[0]] = {}
+					return key_status(keys[1:], dictionary[keys[0]])
 			else:
-				dictionary[keys[0]] = {}
-				return key_status(keys[1:], dictionary[keys[0]])
+				return {
+					'code': 0,
+					'text': 'Invalid',
+					'symbol': u'❌'
+				}
 		else:
 			return {
-				'code': 0,
-				'text': 'Invalid',
-				'symbol': u'❌'
+				'code': 1,
+				'text': 'Valid',
+				'symbol': u'✅'
 			}
-	else:
+	except Exception as e:
 		return {
-			'code': 1,
-			'text': 'Valid',
-			'symbol': u'✅'
+			'error': str(e)
 		}
 
 # Recursively update dictionary
 def set_value(keys, dictionary, value):
-	if (len(keys) == 1):
-		dictionary[keys[0]] = value
-	else:
-		if keys[0] not in dictionary or isinstance(dictionary[keys[0]], str):
-			dictionary[keys[0]] = {}
-		set_value(keys[1:], dictionary[keys[0]], value)
+	try:
+		if (len(keys) == 1):
+			dictionary[keys[0]] = value
+		else:
+			if keys[0] not in dictionary or isinstance(dictionary[keys[0]], str):
+				dictionary[keys[0]] = {}
+			set_value(keys[1:], dictionary[keys[0]], value)
+	except Exception as e:
+		return {
+			'error': str(e)
+		}
 
 # Attempt to add a key-value to JSON file at path
 # Return the updated dictionary
 def add_to(keys: str, value: str, path: str):
-	with open(path, 'rb') as json_file:
-		body = json_file.read().decode('utf-8')
-		data = try_parse_json(body)
+	try:
+		with open(path, 'rb') as json_file:
+			body = json_file.read().decode('utf-8')
+			data = try_parse_json(body)
 
-		if data is None:
-			return None
+			if data is None:
+				return None
 
-		keys = keys.split('.')
-		set_value(keys, data, value)
-		return data
+			keys = keys.split('.')
+			set_value(keys, data, value)
+			return data
+	except Exception as e:
+		return {
+			'error': str(e)
+		}
 
 @eel.expose
 def apply(paths, key, values):
-	for i in range(0, len(paths)):
-		result = add_to(key, values[i], paths[i])
-		if result is None:
-			print("Skip " + paths[i] + " because it is invalid JSON file.")
-			continue
-		res = json.dumps(result, sort_keys=True, indent=4, ensure_ascii=False)
-		f = open(paths[i], "wb")
-		f.write(res.encode('utf-8'))
-		f.close()
-	return "Updated " + key
+	try:
+		for i in range(0, len(paths)):
+			result = add_to(key, values[i], paths[i])
+			if result is None:
+				print("Skip " + paths[i] + " because it is invalid JSON file.")
+				continue
+			res = json.dumps(result, sort_keys=True, indent=4, ensure_ascii=False)
+			f = open(paths[i], "wb")
+			f.write(res.encode('utf-8'))
+			f.close()
+		return "Updated " + key
+	except Exception as e:
+		return {
+			'error': str(e)
+		}
 
 @eel.expose
 def check_key_status(textpath):
-	statuses = {}
-	paths = get_locale_path()
-	for path in paths:
-		try:
-			with open(path, 'rb') as json_file:
-				body = json_file.read().decode('utf-8')
-				data = try_parse_json(body)
-			if data is None:
+	try:
+		statuses = {}
+		paths = get_locale_path()
+		for path in paths:
+			try:
+				with open(path, 'rb') as json_file:
+					body = json_file.read().decode('utf-8')
+					data = try_parse_json(body)
+				if data is None:
+					statuses[path] = {
+						'code': 4,
+						'text': 'Not valid json',
+						'symbol': u'👻'
+					}
+					continue
+				keys = textpath.split('.')
+				status = key_status(keys, data)
+				statuses[path] = status
+			except Exception as e:
 				statuses[path] = {
-					'code': 4,
-					'text': 'Not valid json',
-					'symbol': u'👻'
+					'code': 5,
+					'text': 'Throw Exception',
+					'symbol': u'💔',
+					'data': str(e)
 				}
-				continue
-			keys = textpath.split('.')
-			status = key_status(keys, data)
-			statuses[path] = status
-		except Exception as e:
-			statuses[path] = {
-				'code': 5,
-				'text': 'Throw Exception',
-				'symbol': u'💔',
-				'data': str(e)
-			}
-		
-	return statuses
+			
+		return statuses
+	except Exception as e:
+		return {
+			'error': str(e)
+		}
 
 @eel.expose
 def cache_config():
@@ -151,11 +181,16 @@ def cache_config():
 
 @eel.expose
 def remove_cache(path_to_remove):
-	old_configs = cache_config()
-	new_configs = [cfg for cfg in old_configs if cfg["TRANSLATION_JSON_PATH"] != path_to_remove]
-	with open(CACHE_PATH, "w") as f:
-		f.write(json.dumps(new_configs))
-	return new_configs
+	try:
+		old_configs = cache_config()
+		new_configs = [cfg for cfg in old_configs if cfg["TRANSLATION_JSON_PATH"] != path_to_remove]
+		with open(CACHE_PATH, "w") as f:
+			f.write(json.dumps(new_configs))
+		return new_configs
+	except Exception as e:
+		return {
+			'error': str(e)
+		}
 
 @eel.expose
 def load_config(configs):
@@ -184,34 +219,41 @@ def load_config(configs):
 			return True
 		return "Invalid config file"
 	except Exception as e:
-		return str(e)
+		return {
+			'error': str(e)
+		}
 
 @eel.expose
 def get_suggestions(key):
-	paths = get_locale_path()
-	keyChain = key.split(".")
-	suggestions = []
-	for path in paths:
-		with open(path, 'rb') as json_file:
-			body = json_file.read().decode('utf-8')
-			data = try_parse_json(body)
-		if data is None:
-			continue
-		dataPointer = data
-		countMatch = 0
-		for i in range(0, len(keyChain)):
-			if (i == len(keyChain) - 1):
-				checkKey = list(filter(lambda x: x.lower().startswith(keyChain[i].lower()), dataPointer.keys()))
-				if (len(checkKey) > 0):
-					suggestions.extend(checkKey)
-			else:
-				if keyChain[i] not in dataPointer:
-					break
+	try:
+		paths = get_locale_path()
+		keyChain = key.split(".")
+		suggestions = []
+		for path in paths:
+			with open(path, 'rb') as json_file:
+				body = json_file.read().decode('utf-8')
+				data = try_parse_json(body)
+			if data is None:
+				continue
+			dataPointer = data
+			countMatch = 0
+			for i in range(0, len(keyChain)):
+				if (i == len(keyChain) - 1):
+					checkKey = list(filter(lambda x: x.lower().startswith(keyChain[i].lower()), dataPointer.keys()))
+					if (len(checkKey) > 0):
+						suggestions.extend(checkKey)
 				else:
-					dataPointer = data[keyChain[i]]
-					countMatch = countMatch + 1
+					if keyChain[i] not in dataPointer:
+						break
+					else:
+						dataPointer = data[keyChain[i]]
+						countMatch = countMatch + 1
 
-	return list(set(suggestions))
+		return list(set(suggestions))
+	except Exception as e:
+		return {
+			'error': str(e)
+		}
 
 @eel.expose
 def get_project_name():

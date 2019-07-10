@@ -1,8 +1,11 @@
 const CONFIG_FILE_NAME = 'config.translate'
 
-function exitProgram() {
-    close()
-    new Promise(eel.exit_program())
+async function EelPromise(task) {
+    let result = await new Promise(task)
+    if (result.error !== undefined) {
+        throw result.error
+    }
+    return result
 }
 
 function alertFeedback(message, isSuccess) {
@@ -23,6 +26,21 @@ function alertFeedback(message, isSuccess) {
     }, 2000)
 }
 
+function download(fileName, text) {
+    let element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+    element.setAttribute('download', fileName);
+    element.style.display = 'none';
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
+}
+
+function exitProgram() {
+    close()
+    new Promise(eel.exit_program())
+}
+
 function getContent(file) {
     return new Promise(function(resolve, reject) {
         let reader = new FileReader();
@@ -39,16 +57,6 @@ function getContent(file) {
         }.bind(this);
         reader.readAsText(file);
     })
-}
-
-function download(fileName, text) {
-    let element = document.createElement('a');
-    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-    element.setAttribute('download', fileName);
-    element.style.display = 'none';
-    document.body.appendChild(element);
-    element.click();
-    document.body.removeChild(element);
 }
 
 function saveConfig() {
@@ -87,13 +95,17 @@ function parseConfig(fileContent) {
     return configs
 }
 async function loadConfig(configs) {
-    console.log("load config")
-    let result = await new Promise(eel.load_config(configs))
-    console.log("result", result)
-    if (result === true) {
-        location.replace("/workspace.html")
-    } else {
-        alertFeedback(result, false)
+    try {
+        console.log("load config")
+        let result = await EelPromise(eel.load_config(configs))
+        console.log("result", result)
+        if (result === true) {
+            location.replace("/workspace.html")
+        } else {
+            alertFeedback(result, false)
+        }
+    } catch (exception) {
+        alertFeedback(exception, false)
     }
 }
 async function receiveFile(file) {
@@ -115,22 +127,22 @@ async function bindCacheUI(configCache) {
             let closeButton = $(`<button type="button" class="close" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>`)
-
             // Action when click on list item
             listItem.click((config => e => {
                 loadConfig(config)
             })(config))
-
             // Remove config
             closeButton.click((config => async e => {
-                e.preventDefault()
-                e.stopPropagation()
-                let updatedCache = await new Promise(eel.remove_cache(config.TRANSLATION_JSON_PATH))
-                
-                // Update UI list item
-                bindCacheUI(updatedCache)
+                try {
+                    e.preventDefault()
+                    e.stopPropagation()
+                    let updatedCache = await EelPromise(eel.remove_cache(config.TRANSLATION_JSON_PATH))
+                    // Update UI list item
+                    bindCacheUI(updatedCache)
+                } catch (exception) {
+                    alertFeedback(exception, false)
+                }
             })(config))
-
             listItem.prepend(closeButton)
             return listItem
         }))
@@ -139,9 +151,13 @@ async function bindCacheUI(configCache) {
     }
 }
 async function loadCaches() {
-    let configCache = await new Promise(eel.cache_config())
-    console.log("load cache", configCache)
-    bindCacheUI(configCache)
+    try {
+        let configCache = await EelPromise(eel.cache_config())
+        console.log("load cache", configCache)
+        bindCacheUI(configCache)
+    } catch (exception) {
+        alertFeedback(exception, false)
+    }
 }
 window.onload = () => {
     let dropzone = $("div#dropzone").dropzone({

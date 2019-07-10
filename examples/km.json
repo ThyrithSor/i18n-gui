@@ -7,5 +7,8 @@
     "label": {
         "cancel": "បិទទៅ",
         "okay": "យល់ព្រម!!!"
+    },
+    "sentence": {
+        "insertCard": "សូមដាក់កាត។"
     }
 }
