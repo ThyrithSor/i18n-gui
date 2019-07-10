@@ -46,7 +46,7 @@ def key_status(keys, dictionary):
 						if (len(keys) == 1):
 							return {
 								'code': 3,
-								'text': keys[0] + ' is already a parent',
+								'text': 'Key "' + keys[0] + '" is already a parent',
 								'symbol': u'⚠️❌',
 								'data': dictionary[keys[0]]
 							}
@@ -62,7 +62,7 @@ def key_status(keys, dictionary):
 						else:
 							return {
 								'code': 3,
-								'text': keys[0] + ' is already a string',
+								'text': 'Key "' + keys[0] + '" is already a string',
 								'symbol': u'⚠️❌',
 								'data': dictionary[keys[0]]
 							}
@@ -73,13 +73,13 @@ def key_status(keys, dictionary):
 			else:
 				return {
 					'code': 0,
-					'text': 'Invalid',
+					'text': 'Invalid Key',
 					'symbol': u'❌'
 				}
 		else:
 			return {
 				'code': 1,
-				'text': 'Valid',
+				'text': 'Valid Key',
 				'symbol': u'✅'
 			}
 	except Exception as e:
@@ -161,9 +161,8 @@ def check_key_status(textpath):
 			except Exception as e:
 				statuses[path] = {
 					'code': 5,
-					'text': 'Throw Exception',
-					'symbol': u'💔',
-					'data': str(e)
+					'text': str(e),
+					'symbol': u'💔'
 				}
 			
 		return statuses

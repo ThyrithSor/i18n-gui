@@ -14,14 +14,14 @@ async function EelPromise(task) {
     return result
 }
 
-function alertFeedback(message, isSuccess) {
+function alertFeedback(message, type) {
 	let alertNode = document.getElementById('alert')
 	alertNode.innerHTML = message
 
-	if (isSuccess) {
-		alertNode.setAttribute('class', 'alert alert-success')
+	if (['success', 'danger', 'info', 'warning'].includes(type)) {
+		alertNode.setAttribute('class', 'alert alert-' + type)
 	} else {
-		alertNode.setAttribute('class', 'alert alert-danger')
+		alertNode.setAttribute('class', 'alert alert-info')
 	}
 
 	if (alertNode.style.display !== 'none') {
@@ -66,7 +66,7 @@ async function bindUI() {
 			})(path)
 		}
 	} catch (exception) {
-		alertFeedback(exception)
+		alertFeedback(exception, 'danger')
 	}
 }
 
@@ -140,7 +140,7 @@ async function checkAvailable(value) {
 			}
 		}
 	} catch (exception) {
-		alertFeedback(exception)
+		alertFeedback(exception, 'danger')
 	}
 }
 
@@ -150,21 +150,25 @@ async function applyAll() {
 		let values = paths.map(path => localeInputs[path].node.children[1].children[0].value)
 		let result = await EelPromise(eel.apply(paths, key, values))
 		checkAvailable(key)
-		alertFeedback(result, true)
+		alertFeedback(result, 'success')
 	} catch (exception) {
-		alertFeedback(exception, false)
+		alertFeedback(exception, 'danger')
 	}
 }
 
-async function applyEdited() {
+async function applyFilled() {
 	try	{
-		let paths = Object.keys(localeInputs).filter(path => localeInputs[path].value)
-		let values = paths.map(path => localeInputs[path].value)
+		let paths = Object.keys(localeInputs).filter(path => localeInputs[path].node.children[1].children[0].value)
+		if (paths.length === 0) {
+			alertFeedback("Nothing to apply", 'info')
+			return
+		}
+		let values = paths.map(path => localeInputs[path].node.children[1].children[0].value).filter(value => value)
 		let result = await EelPromise(eel.apply(paths, key, values))
 		checkAvailable(key)
-		alertFeedback(result, true)
+		alertFeedback(result, 'success')
 	} catch (exception) {
-		alertFeedback(exception, false)
+		alertFeedback(exception, 'danger')
 	}
 }
 
@@ -172,6 +176,7 @@ function clearValues() {
 	Object.keys(localeInputs).forEach(path => {
 		let textarea = localeInputs[path].node.children[1].children[0]
 		textarea.value = ""
+		localeInputs[path].value = ""
 	})
 }
 
@@ -185,7 +190,7 @@ async function setProjectName() {
 		let projectName = await EelPromise(eel.get_project_name())
 		projectNameNode.innerHTML = projectName
 	} catch (exception) {
-		alertFeedback(exception)
+		alertFeedback(exception, 'danger')
 	}
 }
 
@@ -273,7 +278,7 @@ window.onload = () => {
 					}
 				}
 			} catch (exception) {
-				alertFeedback(exception)
+				alertFeedback(exception, 'danger')
 			}
 		} else if (e.key !== "Shift") {
 			observableState.suggestions = []
