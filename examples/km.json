@@ -1,14 +1,1032 @@
 {
+  "message": {
+    "new": "{model}បានបង្កើតបានជោគជ័យ",
+    "edit": "{model}បានកែប្រែបានជោគជ័យ",
+    "update": "{model}បានកែប្រែបានជោគជ័យ",
+    "delete": "{model}បានលុបដោយជោគជ័យ",
+    "success": "ជោគជ័យ",
+    "error": "មានកំហុស"
+  },
+  "model": {
+    "tax": "ពន្ធ",
+    "paymentOption": "ជម្រើសទូទាត់",
+    "exchangeRate": "អាត្រាប្តូរប្រាក់",
+    "currency": "រូបិយប័ណ្ណ",
+    "coupon": "គូប៉ុង",
+    "shop": "ភោជនីយដ្ឋាន",
+    "user": "អ្នក​ប្រើប្រាស់",
+    "table": "តុ",
+    "menu": "ម៉ឺនុយ",
+    "tableCategory": "ប្រភេទនៃតុ",
+    "warehouse": "ឃ្លាំងទំនិញ",
+    "unit": "ឯកតា",
+    "tag": "ស្លាក",
+    "category": "ប្រភេទ",
+    "material": "សម្ភារៈប្រើប្រាស់",
+    "ingredient": "គ្រឿងផ្សំ",
+    "grocery": "គ្រឿងទេស",
+    "drink": "ភេសជ្ជៈ",
+    "food": "អាហារ"
+  },
+  "swal": {
+    "delete": {
+      "title": "លុប!",
+      "desc": "{model}ត្រូវបានលុប។"
+    },
+    "confirm_delete": {
+      "title": "តើ​អ្នក​ប្រាកដ​ឬ​អត់?",
+      "desc": "អ្នកនឹងមិនអាចត្រឡប់វាវិញបានទេ!",
+      "button": {
+        "yes": "បាទ / ចាសលុបវា",
+        "no": "មិនយល់ព្រម"
+      }
+    }
+  },
+  "resetPassword": {
+    "title": "ផ្លាស់ប្តូរពាក្យសម្ងាត់របស់អ្នក",
+    "intro": "ពាក្យសម្ងាត់បច្ចុប្បន្នជាលំនាំដើម។ សូមប្ដូរពាក្យសម្ងាត់នេះទៅជាតម្លៃសុវត្ថិភាពជាង"
+  },
+  "button": {
+    "newTable": "បង្កើតតុ",
+    "addFood": "បន្ថែមមុខម្ហូប",
+    "addMoreProduct": "Add more product",
+    "back": "ត្រឡប់ក្រោយ",
+    "backToList": "Back to list",
+    "cancel": "បោះបង់",
+    "chooseImage": "ជ្រើសរើសរូបភាព",
+    "close": "បិទ",
+    "complete": "រួចរាល់ហើយ",
+    "confirm": "យល់ព្រម",
+    "delete": "លុប",
+    "edit": "កែប្រែ",
+    "login": "ចូលក្នុងប្រព័ន្ធ",
+    "manageTable": "ការគ្រប់គ្រងតុ",
+    "manageTableCategory": "ការគ្រប់គ្រងប្រភេទតុ",
+    "new": {
+      "customer": "អតិថិជន",
+      "table": "តុ",
+      "tableCategory": "ប្រភេទនៃតុ"
+    },
+    "newExchange": "បង្កើតអាត្រាប្តូរប្រាក់",
+    "newMembership": "បង្កើតប័ណ្ណសមាជិក",
+    "newMenu": "បង្កើតមុឺនុយថ្មី",
+    "newPaymentOption": "បង្កើតប្រភេទការបង់ប្រាក់",
+    "newPromotion": "បង្កើតកម្មវិធីបញ្ចុះតម្លៃ",
+    "newTax": "បង្កើតពន្ធ",
+    "next": "បន្ទាប់",
+    "ok": "យល់ព្រម",
+    "prev": "មុន",
+    "print": "បោះពុម្ភផ្សាយ",
+    "resetRassword": "កំណត់ពាក្យសម្ងាត់ថ្មី",
+    "rotateLeft": "បង្វិលទៅឆ្វេង",
+    "rotateRight": "បង្វិលទៅស្តាំ",
+    "save": "រក្សាទុក",
+    "saved": "បានរក្សាទុក",
+    "signUp": "ចុះឈ្មោះ",
+    "submit": "បញ្ជូន",
+    "update": "កែប្រែ",
+    "uploadNewPicture": "ផ្លាស់ប្តូររូបភាព"
+  },
+  "coupon": {
     "button": {
-        "greet": "ស្វាគមន៍អ្នក😋!",
-        "greeter": "ស្វាគមន៍អ្ន",
-        "ok": "ព្រមហើយ"
+      "back": "ត្រឡប់ក្រោយ",
+      "newCoupon": "បង្កើតគូប៉ុង"
+    },
+    "fields": {
+      "amount": "ចំនួន",
+      "currency": "រូបិយប័ណ្ណ",
+      "expireDate": "កាលបរិច្ឆេទផុតកំណត់",
+      "selectDate": "ជ្រើសរើសកាលបរិច្ឆេទ"
     },
     "label": {
-        "cancel": "បិទទៅ",
-        "okay": "យល់ព្រម!!!"
+      "coupon": "គូប៉ុង",
+      "editCoupon": "កែប្រែគូប៉ុង",
+      "newCoupon": "បង្កើតគូប៉ុង",
+      "showCoupon": "បង្ហាញព័ត៌មានគូប៉ុង"
     },
-    "sentence": {
-        "insertCard": "សូមដាក់កាត។"
+    "strings": {
+      "listingCoupons": "គូប៉ុងទាំងអស់"
+    },
+    "table": {
+      "actions": "ប្រតិបត្តិការ",
+      "amount": "ចំនួន",
+      "createdAt": "កាលបរិច្ឆេទបង្កើត",
+      "currency": "រួបិយប័ណ្ណ",
+      "expireDate": "កាលបរិច្ឆេទផុតកំណត់"
     }
+  },
+  "currency": {
+    "button": {
+      "newCurrency": "បង្កើតរូបិយប័ណ្ណ"
+    },
+    "fields": {
+      "label": {
+        "code": "កូដ",
+        "nameEn": "ឈ្មោះជាភាសាអង់គ្លេស",
+        "nameKh": "ឈ្មោះជាភាសាខ្មែរ",
+        "symbol": "និមិត្តសញ្ញា"
+      },
+      "placeholder": {
+        "code": "កូដ",
+        "nameEn": "ឈ្មោះជាភាសាអង់គ្លេស",
+        "nameKh": "ឈ្មោះជាភាសាខ្មែរ",
+        "symbol": "និមិត្តសញ្ញា"
+      }
+    },
+    "label": {
+      "currency": "រូបិយប័ណ្ណ",
+      "editCurrency": "កែប្រែរូបិយប័ណ្ឌ",
+      "listingCurrency": "រូបិយប័ណ្ណទាំងអស់",
+      "newCurrency": "បង្កើតរូបិយប័ណ្ណ",
+      "showCurrency": "បង្ហាញព័ត៌មានរូបិយប័ណ្ណ"
+    },
+    "table": {
+      "actions": "ប្រតិបត្តិការ",
+      "code": "កូដ",
+      "createdAt": "កាលបរិច្ឆេទបង្កើត",
+      "nameEn": "ឈ្មោះជាភាសាអង់គ្លេស",
+      "nameKh": "ឈ្មោះជាភាសាខ្មែរ",
+      "symbol": "និមិត្តសញ្ញា"
+    }
+  },
+  "dirnks": {
+    "fields": {
+      "label": {
+        "inventory": "ឃ្លាំងទំនិញ"
+      }
+    }
+  },
+  "drinks": {
+    "button": {
+      "newDrink": "បង្កើតភេសជ្ជៈ"
+    },
+    "fields": {
+      "label": {
+        "category": "ប្រភេទ",
+        "currency": "រួបិយប័ណ្ណ",
+        "importedPrice": "តម្លៃនាំចូល",
+        "name": "ឈ្មោះ",
+        "salePrice": "តម្លៃលក់",
+        "tag": "ស្លាក"
+      },
+      "placeholder": {
+        "category": "ប្រភេទ",
+        "currency": "រួបិយប័ណ្ណ",
+        "importedPrice": "តម្លៃនាំចូល",
+        "name": "ឈ្មោះ",
+        "tag": "ស្លាក"
+      }
+    },
+    "label": {
+      "adjustStock": "បន្ថែមចំនួនចូលក្នុងឃ្លាំងទំនិញ",
+      "newDrink": "បង្កើតភេសជ្ជៈ",
+      "reduceStock": "ដកចេញពីក្នុងឃ្លាំងទំនិញ",
+      "stockDetail": "ព័ត៌មានអំពីឃ្លាំងទំនិញ"
+    },
+    "table": {
+      "action": "ប្រតិបត្តិការ",
+      "createdAt": "កាលបរិច្ឆេទបង្កើត",
+      "image": "Image",
+      "name": "ឈ្មោះ",
+      "productCategory": "ប្រភេទទំនិញ",
+      "productStock": "ទំនិញដែលមានក្នុងឃ្លាំងទំនិញ",
+      "productType": "ប្រភេទនៃទំនិញ"
+    }
+  },
+  "fields": {
+    "chooseUnit": {
+      "label": "ស្លាក​សញ្ញា"
+    },
+    "label": {
+      "active": "សកម្ម",
+      "address": "អាសយដ្ឋាន",
+      "amount": "ចំនួន",
+      "amountInStock": "ចំនួនដែលមានក្នុងឃ្លាំងទំនិញ",
+      "amountPercentage": "ចំនួនគិតជាភាគរយ",
+      "category": "ប្រភេទ",
+      "chooseIcon": "ជ្រើសរើសរូបតំណាង",
+      "code": "កូដ",
+      "currency": "រួបិយប័ណ្ណ",
+      "description": "ពិពណ៌នា",
+      "end": "កាលបរិច្ឆេទបញ្ជប់",
+      "endTime": "ពេលវេលាបញ្ចប់",
+      "expiredDate": "​​កាលបរិច្ឆេទ​ផុត​កំណត់",
+      "fax": "ទូរសារ",
+      "firstName": "គោត្តនាម",
+      "gender": "ភេទ",
+      "icon": "តំណាង",
+      "image": "រូបភាព",
+      "importedPrice": "តម្លៃនាំចូល",
+      "inactive": "អសកម្ម",
+      "lastName": "នាមខ្លួន",
+      "membership": "សមាជិក",
+      "name": "ឈ្មោះ",
+      "nbChairs": "ចំនួនកៅអី",
+      "parent": "ទិន្នន័យមេ",
+      "productType": "ប្រភេទនៃទំនិញ",
+      "restaurantName": "ឈ្មោះភោជនីយដ្ឋាន",
+      "salePrice": "តម្លៃលក់",
+      "start": "កាលបរិច្ឆេទផ្តើម",
+      "startTime": "ពេលវេលាចាប់ផ្តើម",
+      "tableCategory": "ប្រភេទនៃតុ",
+      "tag": "ស្លាក",
+      "tel": "លេខទូរស័ព្ទ",
+      "unit": "ឯកតា",
+      "url": "គេហទំព័រ",
+      "username": "ឈ្មោះប្រើប្រាស់",
+      "valueRiel": "តម្លៃជាប្រាក់រៀល",
+      "variant": "រជនៃប្រភេទ",
+      "website": "គេហទំព័រ"
+    },
+    "name": {
+      "label": "ស្លាក​សញ្ញា",
+      "placeholder": "បញ្ជូលឈ្មោះរបស់ស្លាកសញ្ញា"
+    },
+    "parent": {
+      "label": "ស្លាក​សញ្ញា"
+    },
+    "password": {
+      "placeholder": "បញ្ជូលពាក្យសម្ងាត់"
+    },
+    "placeholder": {
+      "address": "អាសយដ្ឋាន",
+      "amount": "ចំនួន",
+      "amountInStock": "ចំនួនដែលមានក្នុងឃ្លាំងទំនិញ",
+      "amountPercentage": "ចំនួនភាគរយ",
+      "category": "ប្រភេទ",
+      "chooseCurrency": "ជ្រើសរើសរូបិយប័ណ្ណ",
+      "chooseUnit": "ជ្រើសរើសឯកតា",
+      "code": "កូដ",
+      "confirmPassword": "បញ្ជាក់ពាក្យសម្ងាត់",
+      "currency": "រួបិយប័ណ្ណ",
+      "description": "ពិពណ៌នា",
+      "email": "អ៊ីម៉ែល",
+      "expiredDate": "​​កាលបរិច្ឆេទ​ផុត​កំណត់",
+      "fax": "ទូរសារ",
+      "firstName": "គោត្តនាម",
+      "gender": "ភេទ",
+      "importedPrice": "តម្លៃនាំចូល",
+      "membership": "សមាជិក",
+      "name": "ឈ្មោះ",
+      "nbChairs": "ចំនួនកៅអី",
+      "password": "ពាក្យសម្ងាត់",
+      "restaurantName": "ឈ្មោះភោជនីយដ្ឋាន",
+      "salePrice": "តម្លៃលក់",
+      "search": "ស្វែងរក",
+      "searchOrAddATag": "ស្វែងរកឬបន្ថែមស្លាក",
+      "tag": "ស្លាក",
+      "tel": "លេខទូរស័ព្ទ",
+      "unit": "ឯកតា",
+      "url": "គេហទំព័រ",
+      "valueRiel": "តម្លៃជាប្រាក់រៀល",
+      "website": "គេហទំព័រ"
+    },
+    "productName": "ឈ្មោះ​ផលិតផល",
+    "table_category": {
+      "label": "ស្លាក​សញ្ញា"
+    },
+    "username": {
+      "placeholder": "បញ្ជូលឈ្មោះអ្នកប្រើប្រាស់"
+    }
+  },
+  "food": {
+    "button": {
+      "newFood": "បង្កើតអាហារថ្មី",
+      "newProductTag": "បង្កើតស្លាក",
+      "newProductUnit": "បង្កើតឯកតាផលិតផលថ្មី",
+      "newType": "បង្កើតប្រភេទថ្មី",
+      "newWarehouse": "បង្កើតឃ្លាំងទំនិញថ្មី",
+      "printProductBarcode": "ព្រីន barcode"
+    },
+    "table": {
+      "action": "ប្រតិបត្តិការ",
+      "createdAt": "កាលបរិច្ឆេទបង្កើត",
+      "description": "ពិពណ៌នា",
+      "image": "Image",
+      "name": "ឈ្មោះ",
+      "productCategory": "ប្រភេទទំនិញ",
+      "productStock": "ទំនិញដែលមានក្នុងឃ្លាំងទំនិញ",
+      "productType": "ប្រភេទនៃទំនិញ"
+    }
+  },
+  "grocery": {
+    "button": {
+      "newGrocery": "New grocery"
+    },
+    "label": {
+      "edit": "កែប្រែ",
+      "listingGrocery": "បញ្ជីគ្រឿងទេស",
+      "show": "បង្ហាញ"
+    },
+    "strings": {
+      "listingGrocery": "បញ្ជីគ្រឿងទេស"
+    },
+    "table": {
+      "action": "ប្រតិបត្តិការ",
+      "amount": "ចំនួន",
+      "createdAt": "កាលបរិច្ឆេទបង្កើត",
+      "name": "ឈ្មោះ",
+      "price": "តម្លៃ",
+      "productImage": "រូបភាពទំនិញ"
+    }
+  },
+  "ingredient": {
+    "button": {
+      "newIngredient": "បង្កើតគ្រឿងផ្សំថ្មី"
+    },
+    "label": {
+      "editIngredient": "កែសម្រួលគ្រឿងផ្សំ",
+      "newIngredient": "បង្កើតគ្រឿងផ្សំថ្មី",
+      "showIngredient": "បង្ហាញព័ត៌មានគ្រឿងផ្សំ"
+    },
+    "strings": {
+      "listingIngredient": "បញ្ជីគ្រឿងផ្សំ"
+    },
+    "table": {
+      "action": "ប្រតិបត្តិការ",
+      "amount": "ចំនួន",
+      "createdAt": "កាលបរិច្ឆេទបង្កើត",
+      "name": "ឈ្មោះ",
+      "price": "តម្លៃ",
+      "productImage": "រូបភាពទំនិញ"
+    }
+  },
+  "inventories": {
+    "button": {
+      "category": {
+        "newCategory": "ប្រភេទថ្មី"
+      }
+    },
+    "category": {
+      "table": {
+        "action": "ប្រតិបត្តិការ",
+        "createdAt": "កាលបរិច្ឆេទបង្កើត",
+        "icon": "តំណាង",
+        "name": "ឈ្មោះ",
+        "productType": "ប្រភេទនៃទំនិញ"
+      }
+    },
+    "strings": {
+      "category": {
+        "listingCategory": "បញ្ជីប្រភេទទំនិញ"
+      }
+    }
+  },
+  "inventory": {
+    "label": {
+      "category": "ប្រភេទទំនិញ",
+      "drink": "ភេសជ្ជៈ",
+      "food": "អាហារ",
+      "grocery": "គ្រឿងទេស",
+      "ingredient": "គ្រឿងផ្សំ",
+      "inventory": "ឃ្លាំងទំនិញ",
+      "inventoryHistory": "ប្រវត្តិសារពើភ័ណ្ឌ",
+      "material": "សម្ភារៈប្រើប្រាស់",
+      "noImages": "គ្មានរូបភាព",
+      "tag": "ស្លាក",
+      "type": "ប្រភេទ",
+      "unit": "ឯកតា",
+      "warehouse": "ឃ្លាំងទំនិញ"
+    },
+    "strings": {
+      "product": "ផលិតផល",
+      "productManagement": "កន្លែងគ្រប់គ្រងផលិតផល"
+    },
+    "table": {
+      "adjustedBy": "បានកែសម្រួលដោយ",
+      "adjustmentType": "ការកែសម្រួល ​(ដកចេញ​​ ឬ ​ដាក់ចូល)",
+      "amount": "ចំនួន",
+      "amountInStock": "ចំនួនដែលមានក្នុងឃ្លាំងទំនិញ",
+      "date": "កាលបរិច្ឆេទ",
+      "price": "តម្លៃ"
+    }
+  },
+  "label": {
+    "menu": "ម៉ឺនុយ",
+    "table": "បញ្ជីតុ",
+    "inventory": "សារពើភ័ណ្ឌ",
+    "UnitPrice": " តម្លៃ​ឯកតា",
+    "addNewFood": "បន្ថែមអាហារថ្មី",
+    "all": "ទាំងអស់",
+    "allProduct": "All product",
+    "amountDue": "ចំនួនទឹកប្រាក់អាប់",
+    "amountOwe": "ចំនួនទឹកប្រាក់ដែលនៅខ្វះ",
+    "amountTotal": "ចំនួនទឹកប្រាក់សរុប",
+    "authorizedBy": "អ្នក​អនុញ្ញាត​",
+    "by": "ដោយ",
+    "cashier": "អ្នកគិតលុយ",
+    "contactUs": "ទំនាក់ទំនង​មក​ពួក​យើង",
+    "couponCode": "លេខកូដប័ណ្ណ",
+    "customFood": "ម្ហូបខាងក្រៅ",
+    "customer": "អតិថិជន",
+    "customerName": "ឈ្មោះ​អតិថិជន",
+    "discount": "បញ្ចុះតម្លៃ​ %",
+    "editCustomer": "កែសម្រួលព័ត៌មានរបស់អតិថិជន",
+    "editExchange": "កែសម្រួលអត្រាប្តូរប្រាក់",
+    "editMembership": "កែសម្រួលប័ណ្ណសមាជិក",
+    "editMenu": "កែសម្រួលម៉ឺនុយ",
+    "editPaymentOption": "កែសម្រួលជម្រើសបង់ប្រាក់",
+    "editPromotion": "កែសម្រួលកម្មវិធីបញ្ចុះតម្លៃ",
+    "editTable": "កែសម្រួលតុ",
+    "editTableCategory": "កែសម្រួលប្រភេទតុ",
+    "editTax": "កែសម្រួលពន្ធ",
+    "enterCustomProductName": "បញ្ចូលឈ្មោះម្ហូបខាងក្រៅ",
+    "exchange": "អត្រាប្តូរប្រាក់",
+    "exchangeRate": "អត្រា​ប្តូ​រ​ប្រាក់",
+    "failedPaymentWithCoupon": "ការទូទាត់បរាជ័យជាមួយគូប៉ុង",
+    "gender": "ភេទ",
+    "inventoryTransaction": "លំហូរនៃទំនិញ",
+    "isAvailable": "នៅមាន",
+    "item": "ធាតុ",
+    "items": "ធាតុ",
+    "listOrder": "បញ្ជីការកុម៉្មង់",
+    "listingTableCategories": "បញ្ជីប្រភេទតុ",
+    "logout": "ចាកចេញ",
+    "newCustomer": "អតិថិជន​ថ្មី",
+    "newExchange": "អត្រាប្តូរប្រាក់ថ្មី",
+    "newMembership": "សមាជិកថ្មី",
+    "newMenu": "ម៉ឺនុយថ្មី",
+    "newPaymentOption": "ជម្រើសទូទាត់ថ្មី",
+    "newPromotion": "កម្មវិធីបញ្ចុះតម្លៃថ្មី",
+    "newTable": "តុថ្មី",
+    "newTableCategory": "ប្រភេទតុថ្មី",
+    "newTax": "ពន្ធថ្មី",
+    "no": "លេខរៀង",
+    "noRecords": "មិនមានទិន្នន័យ",
+    "number": "លេខ",
+    "order": "បញ្ជាទិញ",
+    "payment": "ការទូទាត់",
+    "paymentAmount": "ចំនួនទឹកប្រាក់ទូទាត់",
+    "paymentOption": "ជម្រើស​ការ​ទូទាត់",
+    "poweredBy": "តម្លើងកម្មវិធីដោយ",
+    "price": "តម្លៃ",
+    "priceIsRequired": "សូមបញ្ចូលតម្លៃ",
+    "proceed": "បន្ត",
+    "product": {
+      "category": {
+        "newCategory": "ប្រភេទថ្មី"
+      },
+      "label": {
+        "newWarehouse": "ឃ្លាំងទំនិញថ្មី"
+      },
+      "tag": {
+        "editTag": "កែសម្រួលស្លាក",
+        "newTag": "ស្លាកថ្មី",
+        "showTag": "បង្ហាញស្លាក"
+      },
+      "type": {
+        "editType": "កែសម្រួលប្រភេទ",
+        "newType": "ប្រភេទថ្មី",
+        "showType": "បង្ហាញព័ត៌មាននៃប្រភេទ"
+      },
+      "unit": {
+        "editUnit": "កែសម្រួលឯកតា",
+        "newUnit": "ឯកតាថ្មី",
+        "showUnit": "បង្ហាញឯកតា"
+      }
+    },
+    "productAdded": "ផលិតផលបានបន្ថែម",
+    "profile": "ព័ត៌មានផ្ទាល់ខ្លួន",
+    "promotion": "កម្មវិធីបញ្ចុះតម្លៃ",
+    "qty": "បរិមាណ",
+    "quantity": "បរិមាណ",
+    "readyToCompletePayment": "រួចរាល់ដើម្បីបញ្ចប់ការទូទាត់",
+    "report": "របាយការណ៍",
+    "restaurant": "ភោជនីយដ្ឋាន",
+    "searchItemName": "ស្វែងរកតាមរយៈឈ្មោះទំនិញ",
+    "selectAll": "ជ្រើសរើស​ទាំងអស់",
+    "selectCustomerGender": "ជ្រើសរើសភេទរបស់អតិថិជន",
+    "served": "បានទទួល",
+    "setting": "ការកំណត់",
+    "settings": "ការកំណត់",
+    "showCustomer": "បង្ហាញអតិថិជន",
+    "showExchange": "បង្ហាញអត្រាប្តូរប្រាក់",
+    "showMembership": "បង្ហាញសមាជិក",
+    "showMenu": "បង្ហាញម៉ឺនុយ",
+    "showPaymentOption": "បង្ហាញជម្រើសបង់ប្រាក់",
+    "showPromotion": "បង្ហាញកម្មវិធីបញ្ចុះតម្លៃ",
+    "showTable": "បង្ហាញតុ",
+    "showTableCategory": "បង្ហាញប្រភេទតុ",
+    "showTax": "បង្ហាញពន្ធ",
+    "subTotal": "ថ្លៃសរុប",
+    "tables": "តុទាំងអស់",
+    "takeAway": "ខ្ចប់​",
+    "tax": "ពន្ធ",
+    "telephone": "ទូរស័ព្ទ"
+  },
+  "material": {
+    "button": {
+      "newMaterial": "បង្កើតសម្ភារៈប្រើប្រាស់"
+    },
+    "label": {
+      "edit": "កែប្រែ",
+      "newMaterial": "បង្កើតសម្ភារៈប្រើប្រាស់",
+      "show": "បង្ហាញ"
+    },
+    "strings": {
+      "listingMaterials": "បញ្ជីសម្ភារៈប្រើប្រាស់"
+    },
+    "table": {
+      "action": "ប្រតិបត្តិការ",
+      "amount": "ចំនួន",
+      "createdAt": "កាលបរិច្ឆេទបង្កើត",
+      "name": "ឈ្មោះ",
+      "price": "តម្លៃ",
+      "productImage": "រូបភាពទំនិញ"
+    }
+  },
+  "menu": {
+    "inventories": {
+      "products": {
+        "category": "ប្រភេទ",
+        "drink": "ភេសជ្ជៈ",
+        "food": "អាហារ",
+        "grocery": "គ្រឿងទេស",
+        "ingredient": "គ្រឿងផ្សំ",
+        "material": "សម្ភារៈប្រើប្រាស់",
+        "tag": "ស្លាក",
+        "unit": "ឯកតា",
+        "warehouse": "ឃ្លាំងទំនិញ"
+      }
+    },
+    "settings": {
+      "coupon": "គូប៉ុង",
+      "currency": "រួបិយប័ណ្ណ",
+      "exchange": "អត្រាប្តូរប្រាក់",
+      "paymentOption": "ជម្រើសទូទាត់",
+      "promotion": "កម្មវិធីបញ្ចុះតម្លៃ",
+      "restaurant": "ភោជនីយដ្ឋាន",
+      "tax": "ពន្ធ",
+      "user": "អ្នក​ប្រើប្រាស់"
+    }
+  },
+  "month": {
+    "label": {
+      "apr": "មេសា",
+      "aug": "សីហា",
+      "dec": "ធ្នូ",
+      "feb": "កុម្ភៈ",
+      "jan": "មករា",
+      "jul": "កក្កដា",
+      "jun": "មិថុនា",
+      "mar": "មីនា",
+      "may": "ឧសភា",
+      "nov": "វិច្ឆិកា",
+      "oct": "តុលា",
+      "sept": "កញ្ញា"
+    }
+  },
+  "order": {
+    "button": {
+      "checkout": "គិតលុយ",
+      "open": "បើក",
+      "takeAway": "ខ្ចប់"
+    },
+    "form": {
+      "placeholder": {
+        "search": "ស្វែងរក..."
+      }
+    },
+    "label": {
+      "newOrder": "ការ​កុ​ម្ម៉​ង់​ថ្មី"
+    },
+    "product": {
+      "item": "ទំនិញ",
+      "name": "ឈ្មោះ",
+      "quantity": "បរិមាណ"
+    },
+    "table": {
+      "action": "ប្រតិបត្តិការ",
+      "firstOrder": "ការកុម្ម៉ង់លើកទី១",
+      "id": "លេខការកុម្ម៉ង់",
+      "lastOrder": "ការកុម្ម៉ង់ចុងក្រោយ",
+      "orderBy": "អ្នកទទួលកុម្ម៉ង់",
+      "tables": "តុទាំងអស់"
+    }
+  },
+  "product": {
+    "buttons": {
+      "addAnotherOption": "បន្ថែមជម្រើសផ្សេង",
+      "addVariant": "បន្ថែមលក្ខណៈរបស់ទំនិញ"
+    },
+    "fields": {
+      "amount": {
+        "label": "ចំនួន",
+        "placeholder": "សូមបញ្ចូលចំនួនទំនិញ"
+      },
+      "amount_in_stock": {
+        "label": "ចំនូនដែលមានក្នុងឃ្លាំងទំញ",
+        "placeholder": "សូមបញ្ចូលចំនូនដែលមានក្នុងឃ្លាំងទំញ"
+      },
+      "expired_date": {
+        "label": "កាលបរិច្ឆេទផុតកំណត់"
+      },
+      "imported_date": {
+        "label": "តម្លៃនាំចូល"
+      },
+      "label": {
+        "amount": "ចំនួន",
+        "amountInStock": "ចំនួនដែលមានក្នុងឃ្លាំងទំនិញ",
+        "chooseUnit": "ជ្រើសរើសឯកតា",
+        "currency": "រួបិយប័ណ្ណ",
+        "expiredDate": "​​កាលបរិច្ឆេទ​ផុត​កំណត់",
+        "importedDate": "កាលបរិច្ឆេទដែលបាននាំចូល",
+        "importedPrice": "តម្លៃនាំចូល",
+        "name": "ឈ្មោះ",
+        "optionName": "ឈ្មោះជម្រើស",
+        "productCategory": "ប្រភេទទំនិញ",
+        "productTags": "ស្លាកផលិតផល",
+        "productType": "ប្រភេទនៃទំនិញ",
+        "productUnit": "ឯកតាផលិតផល",
+        "salePrice": "តម្លៃលក់",
+        "stockAlertLevel": "កម្រិតបញ្ជាក់ចំនួនទំនិញជិតអស់",
+        "trackInventory": "តាមដានសារពើភ័ណ្ឌ",
+        "unit": "ឯកតា",
+        "variant": "រជនៃប្រភេទ",
+        "warehouse": "ឃ្លាំងទំនិញ"
+      },
+      "placeholder": {
+        "amount": "សូមបញ្ចូលចំនួន",
+        "amountInStock": "សូមបញ្ចូលចំនួនដែលមានក្នុងឃ្លាំងទំនិញ",
+        "chooseProductVariant": "សូមជ្រើសរើសលក្ខណៈរបស់ទំនិញ",
+        "chooseWarehouse": "សូមជ្រើសរើសឃ្លាំងទំនិញ",
+        "currency": "សូមបញ្ចូលរួបិយប័ណ្ណ",
+        "expiredDate": "សូមបញ្ចូល​​កាលបរិច្ឆេទ​ផុត​កំណត់",
+        "importedPrice": "សូមបញ្ចូលតម្លៃនាំចូល",
+        "name": "សូមបញ្ចូលឈ្មោះ",
+        "productCategory": "សូមជ្រើសរើសប្រភេទទំនិញ",
+        "productTags": "សូមជ្រើសរើសស្លាកផលិតផល",
+        "productType": "ប្រភេទនៃទំនិញ",
+        "productUnit": "សូមជ្រើសរើសឯកតាផលិតផល",
+        "salePrice": "សូមបញ្ចូលតម្លៃលក់",
+        "searchOrAddATag": "ស្វែងរកឬបន្ថែមស្លាក",
+        "stockAlertLevel": "កម្រិតប្រុងប្រយ័ត្ននៃភាគហ៊ុន",
+        "unit": "សូមជ្រើសរើសឯកតា",
+        "warehouse": "សូមជ្រើសរើសឃ្លាំងទំនិញ"
+      },
+      "placeholderamount": "សូមបញ្ចូលចំនួន",
+      "unit": {
+        "chooseUnit": "សូមជ្រើសរើសឯកតា"
+      },
+      "variant": {
+        "label": "លក្ខណៈរបស់ទំនិញ"
+      },
+      "warehouse": {
+        "choose_warehouse": "សូមជ្រើសរើសឃ្លាំងទំនិញ",
+        "label": "ឃ្លាំងទំញ"
+      }
+    },
+    "label": {
+      "edit": "កែប្រែ",
+      "modifyVariant": "កែប្រែលក្ខណៈរបស់ទំនិញ",
+      "optionName": "ឈ្មោះជម្រើស",
+      "show": "បង្ហាញ",
+      "unit": "ឯកតា",
+      "variants": "លក្ខណៈរបស់ទំនិញ"
+    }
+  },
+  "profile": {
+    "field": {
+      "label": {
+        "email": "អ៊ីម៉ែល",
+        "firstName": "គោត្តនាម",
+        "lastName": "នាមខ្លួន",
+        "newPassword": "ពាក្យសម្ងាត់​ថ្មី",
+        "oldPassword": "ពាក្យសម្ងាត់​ចាស់",
+        "confirmationPassword": "ពាក្យសម្ងាត់បញ្ជាក់"
+      },
+      "placeholder": {
+        "email": "អ៊ីម៉ែល",
+        "firstName": "គោត្តនាម",
+        "lastName": "នាមខ្លួន",
+        "newPassword": "ពាក្យសម្ងាត់​ថ្មី",
+        "oldPassword": "ពាក្យសម្ងាត់​ចាស់",
+        "confirmationPassword": "ពាក្យសម្ងាត់បញ្ជាក់"
+      }
+    },
+    "label": {
+      "account": "គណនី",
+      "resetPassword": "កំណត់ពាក្យសម្ងាត់ឡើងវិញ"
+    },
+    "sidebar": {
+      "accountSettings": "ការកំណត់​គណនី",
+      "help": "ជំនួយ",
+      "overview": "ទិដ្ឋភាពទូទៅ",
+      "tasks": "ភារកិច្ច"
+    }
+  },
+  "promotion": {
+    "label": {
+      "amountCash": "ចំនួនបញ្ចុះគិតជាលុយ",
+      "amountPercentage": "ចំនួនបញ្ចុះគិតជាភាគរយ",
+      "description": "អំពីការបញ្ចុះតម្លៃ",
+      "endDate": "បញ្ចប់នៅថ្ងៃ",
+      "isPercentage": "ប្ដូរទៅជាភាគរយ",
+      "item": "ផលិតផល",
+      "items": "ផលិតផល",
+      "promotionAmount": "ចំនូនបញ្ចុះតម្លៃ",
+      "promotionDetail": "ព័ត៌មានលំអិតរបស់កម្មវិធីបញ្ចុះតម្លៃ",
+      "promotionName": "ឈ្មោះកម្មវិធីបញ្ចុះតម្លៃ",
+      "promotionProduct": "ចំនួនផលិតផល",
+      "startDate": "ចាប់ផ្ដើមនៅថ្ងៃ"
+    }
+  },
+  "recent_sell": {
+    "btn": {
+      "listingRecentSell": "បញ្ជីការលក់ថ្មីៗ"
+    },
+    "label": {
+      "amountDueDollar": "ចំនួនទឹកប្រាក់អាប់​ (ដុល្លារ)",
+      "amountDueRiel": "ចំនួនទឹកប្រាក់អាប់ (រៀល)",
+      "amountPaidDollar": "ចំនួនទឹកប្រាក់បានបង់​ (ដុល្លារ)",
+      "amountPaidRiel": "ចំនួនទឹកប្រាក់បានបង់ (រៀល)",
+      "amountTotalDollar": "ចំនួនទឹកប្រាក់សរុប​(ដុល្លារ)",
+      "amountTotalRiel": "ចំនួនទឹកប្រាក់សរុប​ (រៀល)",
+      "authorizer": "អ្នកអនុញ្ញាត",
+      "cashier": "អ្នកគិតលុយ",
+      "customer": "អតិថិជន",
+      "date": "កាលបរិច្ឆេទ",
+      "discount": "ការបញ្ចុះតម្លៃ",
+      "orderNumber": "លេខបញ្ជាទិញ",
+      "status": "ស្ថានភាពទូទៅ",
+      "subTotal": "Sub total",
+      "tableNumber": "លេខតុ",
+      "tax": "ពន្ធ",
+      "tel": "លេខទូរស័ព្ទ"
+    },
+    "listingRecentSell": "បញ្ជីការលក់ថ្មីៗ",
+    "owe": {
+      "label": {
+        "amountOweDollar": "ចំនួនទឹកប្រាក់ជំពាក់​ (ដុល្លារ)",
+        "amountOweRiel": "ចំនួនទឹកប្រាក់ជំពាក់​ (រៀល)"
+      }
+    },
+    "showRecentSell": "បង្ហាញការលក់ថ្មីៗ",
+    "table": {
+      "action": "ប្រតិបត្តិការ",
+      "amount": "ចំនួន",
+      "amountTotalDollar": "ចំនួនទឹកប្រាក់ដែលត្រូវបង់​ (ដុល្លារ)",
+      "amountTotalRiel": "ចំនួនទឹកប្រាក់ដែលត្រូវបង់​ (រៀល)",
+      "cashier": "អ្នកគិតលុយ",
+      "date": "កាលបរិច្ឆេទ",
+      "discount": "បញ្ចុះតម្លៃ",
+      "no": "លេខរៀង",
+      "paymentOption": "ជម្រើសការទូទាត់",
+      "productName": "ឈ្មោះ​ផលិតផល",
+      "salePrice": "តម្លៃលក់",
+      "servedQuantity": "បរិមាណ"
+    }
+  },
+  "report": {
+    "label": {
+      "chart": "ក្រាប",
+      "day": "ថ្ងៃ",
+      "income": "ចំណូល",
+      "month": "ខែ",
+      "productSale": "ការលក់ផលិតផល",
+      "reportMonthly": "របាយការណ៍ប្រចាំខែ",
+      "table": "តុ",
+      "week": "សប្តាហ៍"
+    },
+    "menu": {
+      "income": "ចំណូល",
+      "productSale": "ការលក់ផលិតផល",
+      "reportMonthly": "របាយការណ៍ប្រចាំខែ"
+    },
+    "strings": {
+      "incomeOutcomeMonthly": "ចំណូលចំណាយប្រចាំខែ",
+      "listingReportIncome": "របាយការណ៍ប្រាក់ចំណូល",
+      "listingReportMonthly": "របាយបញ្ជីប្រចាំខែ",
+      "listingReportProductSale": "របាយការណ៏ការលក់ផលិតផល",
+      "listingReportProductSaleDetail": "របាយការណ៏ការលក់ផលិតផលលម្អិត"
+    },
+    "table": {
+      "action": "ប្រតិបត្តិការ",
+      "amount": "ចំនួន",
+      "amountInStock": "ចំនួនដែលមានក្នុងឃ្លាំងទំនិញ",
+      "amountTotal": "ចំនួនទឹកដែលត្រូវបង់",
+      "amountTotalDollar": "ចំនួនទឹកដែលត្រូវបង់​ (ដុល្លារ)",
+      "amountTotalRiel": "ចំនួនទឹកដែលត្រូវបង់ (រៀល)",
+      "category": "ប្រភេទ",
+      "createdAt": "កាលបរិច្ឆេទបង្កើត",
+      "date": "កាលបរិច្ឆេទ",
+      "discount": "ការបញ្ចុះតម្លៃ",
+      "importedPrice": "តម្លៃនាំចូល",
+      "name": "ឈ្មោះ",
+      "no": "លេខរៀង",
+      "quantity": "បរិមាណ",
+      "salePrice": "តម្លៃលក់",
+      "transactionType": "ប្រភេទប្រតិបត្តិការ",
+      "type": "ប្រភេទ",
+      "unitPrice": "តម្លៃ​ឯកតា",
+      "variant": "រជនៃប្រភេទ",
+      "variantType": "ប្រភេទលក្ខណៈរបស់ទំនិញ"
+    }
+  },
+  "restaurant": {
+    "button": {
+      "choseLogo": "ជ្រើសរើសរូបសញ្ញា"
+    },
+    "history": {
+      "history": "ប្រវិត្តនៃការប្រែព័ត៌មាន",
+      "label": {
+        "detail": "សេចក្តីលំអិត"
+      },
+      "table": {
+        "action": "ប្រតិបត្តិការ",
+        "createdAt": "កាលបរិច្ឆេទបង្កើត",
+        "user": "អ្នកប្រើប្រាស់"
+      }
+    },
+    "label": {
+      "info": "ព័ត៌មាន",
+      "logo": "រូបសញ្ញា"
+    }
+  },
+  "stings": {
+    "usernameOrPasswordIsIncorrect!": "ឈ្មោះអ្នកប្រើប្រាស់ ឬពាក្យសម្ងាត់​មិនត្រឹមត្រូវទេ"
+  },
+  "string": {
+    "noProductVariants": "No product variants",
+    "selectMonth": "Select month",
+    "selectYear": "Select year",
+    "test": "តេស្ស"
+  },
+  "strings": {
+    "alreadyHaveAccount?": "អ្នកមានគណនីរួចហើយ? ចូល",
+    "configureYourApplication": "កំណត់ប្រព័ន្ធគ្រប់គ្រងទំនិញ",
+    "dashboard": {
+      "here": "ទីនេះ",
+      "level": "កម្រិត",
+      "optionalDescription": "ការពិពណ៌នា",
+      "pageHeader": "មិនបានប្រើប្រាស់",
+      "welcomeDashboard": "ផ្ទាំងគ្រប់គ្រងសូមស្វាគមន៍"
+    },
+    "drinks": {
+      "listingDrinks": "បញ្ជីភេសជ្ជៈ"
+    },
+    "forgotPassword": "ភ្លេច​ពាក្យសម្ងាត់​",
+    "listingCustomers": "បញ្ជីអតិថិជន",
+    "listingExchanges": "បញ្ជីអត្រា​ប្តូ​រ​ប្រាក់",
+    "listingMemberships": "បញ្ជីសមាជិក",
+    "listingMenus": "បញ្ជីម៉ឺនុយ",
+    "listingPaymentOptions": "បញ្ជីជម្រើសទូទាត់តាមលំដាប់",
+    "listingPromotions": "បញ្ជីផ្សព្វផ្សាយ",
+    "listingTables": "បញ្ជីតុ",
+    "listingTaxes": "បញ្ជីពន្ធ",
+    "noProduct": "គ្មានផលិតផល",
+    "noTables": "គ្មានតុ",
+    "notFound": "រកមិនឃើញ",
+    "pleaseFillOutInformationToCreateRestaurant": "សូមបំពេញបែបបទ ដើម្បីបង្កើតគណនីរបស់អ្នក",
+    "product": {
+      "listingFood": "បញ្ជីអាហារ",
+      "tag": {
+        "listingTags": "បញ្ជីស្លាក"
+      },
+      "type": {
+        "listingTypes": "បញ្ជីប្រភេទ"
+      },
+      "unit": {
+        "listingUnits": "បញ្ជីឯកតា"
+      },
+      "warehouse": {
+        "listingWarehouse": "បញ្ជីឃ្លាំងទំនិញ"
+      }
+    },
+    "rememberMe": "ចងចាំខ្ញុំ",
+    "rightReserved": "រក្សា​សិទ្ធិ​គ្រប់យ៉ាង",
+    "terms": "ល័ក្ខខ័ណ្ឌនៃការប្រើប្រាស់។ គោលការណ៍​ភាព​ឯកជន",
+    "thankYouForComing": "សូមអរគុណសម្រាប់ការអញ្ជីញមក។",
+    "toCreateAccountPleaseFillOutInformation": "សូមបំពេញបែបបទ ដើម្បីបង្កើតគណនីរបស់អ្នក",
+    "toastr": {
+      "create": {
+        "desc": "តម្រៀបលំដាប់កើន",
+        "title": "ចំនងជើង"
+      },
+      "update": {
+        "desc": "តម្រៀបលំដាប់កើន",
+        "title": "ចំនងជើង"
+      }
+    },
+    "welcomeBack": "ស្វា​គម​ន៏​ការ​ត្រ​លប់​មក​វិញ! ចូលទៅកាន់គណនីរបស់អ្នក"
+  },
+  "table": {
+    "customer": {
+      "actions": "ប្រតិបត្តិការ",
+      "address": "អាសយដ្ឋាន",
+      "gender": "ភេទ",
+      "membership": "សមាជិក",
+      "name": "ឈ្មោះ",
+      "tel": "លេខទូរស័ព្ទ"
+    },
+    "exchange": {
+      "actions": "ប្រតិបត្តិការ",
+      "createdAt": "កាលបរិច្ឆេទបង្កើត",
+      "currency": "រួបិយប័ណ្ណ",
+      "name": "ឈ្មោះ",
+      "status": "ស្ថានភាពទូទៅ",
+      "valueRiel": "តម្លៃជាប្រាក់រៀល"
+    },
+    "membership": {
+      "actions": "ប្រតិបត្តិការ",
+      "amountPercentage": "ចំនួនភាគរយ",
+      "createdAt": "កាលបរិច្ឆេទបង្កើត",
+      "created_at": "កាលបរិច្ឆេទចូលក្នុងប្រព័ន្ធ",
+      "name": "ឈ្មោះ",
+      "status": "ស្ថានភាពទូទៅ"
+    },
+    "menu": {
+      "actions": "ប្រតិបត្តិការ",
+      "active": "សកម្ម",
+      "availability": "ដែលមាននៅទំនេរ",
+      "category": "ប្រភេទ",
+      "createdAt": "កាលបរិច្ឆេទបង្កើត",
+      "icon": "តំណាង",
+      "image": "រូបភាព",
+      "name": "ឈ្មោះ",
+      "no": "លេខរៀង",
+      "price": "តម្លៃ"
+    },
+    "payment_option": {
+      "actions": "ប្រតិបត្តិការ",
+      "code": "កូដ",
+      "createdAt": "កាលបរិច្ឆេទបង្កើត",
+      "description": "ពិពណ៌នា",
+      "name": "ឈ្មោះ"
+    },
+    "product": {
+      "name": "ឈ្មោះ"
+    },
+    "promotion": {
+      "actions": "ប្រតិបត្តិការ",
+      "amountPercentage": "ចំនួនភាគរយ",
+      "createdAt": "កាលបរិច្ឆេទបង្កើត",
+      "end": "កាលបរិច្ឆេទបញ្ជប់",
+      "name": "ឈ្មោះ",
+      "start": "កាលបរិច្ឆេទផ្តើម",
+      "status": "ស្ថានភាពទូទៅ"
+    },
+    "table": {
+      "actions": "ប្រតិបត្តិការ",
+      "createdAt": "កាលបរិច្ឆេទបង្កើត",
+      "name": "ឈ្មោះ",
+      "nbChairs": "ចំនួនកៅអី"
+    },
+    "tableCategory": "ប្រភេទនៃតុ",
+    "table_category": {
+      "actions": "ប្រតិបត្តិការ",
+      "active": "សកម្ម",
+      "createdAt": "កាលបរិច្ឆេទបង្កើត",
+      "name": "ឈ្មោះ",
+      "parent": "ទិន្នន័យមេ"
+    },
+    "tax": {
+      "actions": "ប្រតិបត្តិការ",
+      "amountPercentage": "ចំនួនភាគរយ",
+      "createdAt": "កាលបរិច្ឆេទបង្កើត",
+      "name": "ឈ្មោះ",
+      "status": "ស្ថានភាពទូទៅ"
+    }
+  },
+  "user": {
+    "button": {
+      "newUser": "New user"
+    },
+    "editUser": "កែប្រែអ្នកប្រើប្រាស់",
+    "field": {
+      "label": {
+        "email": "អ៊ីម៉ែល",
+        "firstName": "គោត្តនាម",
+        "lastName": "នាមខ្លួន",
+        "password": "ពាក្យសម្ងាត់",
+        "passwordConfirmation": "បញ្ជាក់ពាក្យសម្ងាត់",
+        "roles": "តួនាទី"
+      },
+      "placeholder": {
+        "email": "សូមបញ្ចូលអ៊ីម៉ែល",
+        "firstName": "សូមបញ្ចូលគោត្តនាម",
+        "lastName": "សូមបញ្ចូលនាមខ្លួន",
+        "password": "សូមបញ្ចូលពាក្យសម្ងាត់",
+        "passwordConfirmation": "សូមបញ្ជាក់ពាក្យសម្ងាត់",
+        "roles": "សូមជ្រើសរើសតួនាទី"
+      }
+    },
+    "listingUsers": "បញ្ជីឈ្មោះអ្នកប្រើប្រាស់",
+    "newUser": "ការចុះឈ្មោះអ្នកប្រើប្រាស់ថ្មី",
+    "resetPassword": "កំណត់ពាក្យសម្ងាត់ឡើងវិញ",
+    "showUser": "បង្ហាញព័ត៌មានរបស់អ្នកប្រើប្រាស់",
+    "table": {
+      "actions": "ប្រតិបត្តិការ",
+      "createdAt": "កាលបរិច្ឆេទបង្កើត",
+      "email": "អ៊ីម៉ែល",
+      "name": "ឈ្មោះ",
+      "roles": "តួនាទី"
+    },
+    "users": "បញ្ជីអ្នកប្រើ"
+  },
+  "orders": {
+    "button": {
+      "eatHere": "បរិភោគនៅទីនេះ"
+    }
+  }
 }

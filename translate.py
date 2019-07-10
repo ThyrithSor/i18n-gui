@@ -242,23 +242,29 @@ def get_suggestions(key):
 			if data is None:
 				continue
 			dataPointer = data
+			print('dataPointer updated')
 			countMatch = 0
 			for i in range(0, len(keyChain)):
 				if (i == len(keyChain) - 1):
 					checkKey = list(filter(lambda x: x.lower().startswith(keyChain[i].lower()), dataPointer.keys()))
+					print('checkkey', checkKey)
 					if (len(checkKey) > 0):
 						suggestions.extend(checkKey)
 				else:
 					if keyChain[i] not in dataPointer:
 						break
 					else:
-						dataPointer = data[keyChain[i]]
+						print('try to dive to key ', keyChain[i])
+						dataPointer = dataPointer[keyChain[i]]
+						if type(dataPointer) is str:
+							break
+						print('dataPointer updated', dataPointer.keys())
 						countMatch = countMatch + 1
 
 		return list(set(suggestions))
 	except Exception as e:
 		return {
-			'error': str(e)
+			'error': 'error with ' + str(e)
 		}
 
 @eel.expose

@@ -1,14 +1,1031 @@
 {
+  "message": {
+    "new": "The {model} was created successfully",
+    "edit": "The {model} was edited successfully",
+    "update": "The {model} was updated successfully",
+    "delete": "The {model} was deleted successfully",
+    "success": "success",
+    "error": "error"
+  },
+  "model": {
+    "tax": "tax",
+    "paymentOption": "payment Option",
+    "exchangeRate": "exchange Rate",
+    "currency": "currency",
+    "coupon": "coupon",
+    "shop": "shop",
+    "user": "user",
+    "table": "table",
+    "tableCategory": "table category",
+    "menu": "menu",
+    "warehouse": "warehouse",
+    "unit": "unit",
+    "tag": "tag",
+    "category": "category",
+    "material": "material",
+    "ingredient": "ingredient",
+    "grocery": "grocery",
+    "drink": "drink",
+    "food": "food"
+  },
+  "swal": {
+    "delete": {
+      "title": "Deleted!",
+      "desc": "The {model} has been deleted."
+    },
+    "confirm_delete": {
+      "title": "Are you sure?",
+      "desc": "You won't be able to revert this!",
+      "button": {
+        "yes": "Yes, delete it",
+        "no": "No"
+      }
+    }
+  },
+  "resetPassword": {
+    "title": "Change Your Password",
+    "intro": "The current password is a default. Please change this password to a more secure value"
+  },
+  "button": {
+    "newTable": "New table",
+    "addFood": "Add food",
+    "addMoreProduct": "Add more product",
+    "back": "Back",
+    "backToList": "Back to list",
+    "cancel": "Cancel",
+    "chooseImage": "Choose image",
+    "close": "Close",
+    "complete": "Complete",
+    "confirm": "Confirm",
+    "delete": "Delete",
+    "edit": "Edit",
+    "login": "Login",
+    "manageTable": "Manage table",
+    "manageTableCategory": "Manage table category",
+    "new": {
+      "customer": "Customer",
+      "table": "Table",
+      "tableCategory": "Table category"
+    },
+    "newExchange": "New exchange",
+    "newMembership": "New membership",
+    "newMenu": "New menu",
+    "newPaymentOption": "New payment option",
+    "newPromotion": "New promotion",
+    "newTax": "New tax",
+    "next": "Next",
+    "ok": "Ok",
+    "prev": "Prev",
+    "print": "Print",
+    "resetRassword": "Reset password",
+    "rotateLeft": "Rotate left",
+    "rotateRight": "Rotate right",
+    "save": "Save",
+    "saved": "Saved",
+    "signUp": "Sign up",
+    "submit": "Submit",
+    "update": "Update",
+    "uploadNewPicture": "Upload new picture"
+  },
+  "coupon": {
     "button": {
-        "greet": "Welcome",
-        "greeter": "greeter",
-        "ok": "Okay"
+      "back": "Back",
+      "newCoupon": "New coupon"
+    },
+    "fields": {
+      "amount": "Amount",
+      "currency": "Currency",
+      "expireDate": "Expire date",
+      "selectDate": "Select date"
     },
     "label": {
-        "cancel": "Cancel",
-        "okay": "Okay"
+      "coupon": "Coupon",
+      "editCoupon": "Edit coupon",
+      "newCoupon": "New coupon",
+      "showCoupon": "Show coupon"
     },
-    "sentence": {
-        "insertCard": "please insert your card."
+    "strings": {
+      "listingCoupons": "Listing coupons"
+    },
+    "table": {
+      "actions": "Actions",
+      "amount": "Amount",
+      "createdAt": "Created at",
+      "currency": "Currency",
+      "expireDate": "Expire date"
     }
+  },
+  "currency": {
+    "button": {
+      "newCurrency": "New currency"
+    },
+    "fields": {
+      "label": {
+        "code": "Code",
+        "nameEn": "Name en",
+        "nameKh": "Name kh",
+        "symbol": "Symbol"
+      },
+      "placeholder": {
+        "code": "Code",
+        "nameEn": "Name en",
+        "nameKh": "Name kh",
+        "symbol": "Symbol"
+      }
+    },
+    "label": {
+      "currency": "Currency",
+      "editCurrency": "Edit currency",
+      "listingCurrency": "Listing currency",
+      "newCurrency": "New currency",
+      "showCurrency": "Show currency"
+    },
+    "table": {
+      "actions": "Actions",
+      "code": "Code",
+      "createdAt": "Created at",
+      "nameEn": "Name en",
+      "nameKh": "Name kh",
+      "symbol": "Symbol"
+    }
+  },
+  "dirnks": {
+    "fields": {
+      "label": {
+        "inventory": "Inventory"
+      }
+    }
+  },
+  "drinks": {
+    "button": {
+      "newDrink": "New drink"
+    },
+    "fields": {
+      "label": {
+        "category": "Category",
+        "currency": "Currency",
+        "importedPrice": "Imported price",
+        "name": "Name",
+        "salePrice": "Sale price",
+        "tag": "Tag"
+      },
+      "placeholder": {
+        "category": "Category",
+        "currency": "Currency",
+        "importedPrice": "Imported price",
+        "name": "Name",
+        "tag": "Tag"
+      }
+    },
+    "label": {
+      "adjustStock": "Adjust stock",
+      "newDrink": "New drink",
+      "reduceStock": "Reduce stock",
+      "stockDetail": "Stock detail"
+    },
+    "table": {
+      "action": "Action",
+      "createdAt": "Created at",
+      "image": "Image",
+      "name": "Name",
+      "productCategory": "Product category",
+      "productStock": "Product stock",
+      "productType": "Product type"
+    }
+  },
+  "fields": {
+    "chooseUnit": {
+      "label": "Unit"
+    },
+    "label": {
+      "active": "Active",
+      "address": "Address",
+      "amount": "Amount",
+      "amountInStock": "Amount in stock",
+      "amountPercentage": "Amount percentage",
+      "category": "Category",
+      "chooseIcon": "Choose icon",
+      "code": "Code",
+      "currency": "Currency",
+      "description": "Description",
+      "end": "End",
+      "endTime": "End time",
+      "expiredDate": "Expired date",
+      "fax": "Fax",
+      "firstName": "First name",
+      "gender": "Gender",
+      "icon": "Icon",
+      "image": "Image",
+      "importedPrice": "Imported price",
+      "inactive": "Inactive",
+      "lastName": "Last name",
+      "membership": "Membership",
+      "name": "Name",
+      "nbChairs": "Nb chairs",
+      "parent": "Parent",
+      "productType": "Product type",
+      "restaurantName": "Restaurant name",
+      "salePrice": "Sale price",
+      "start": "Start",
+      "startTime": "Start time",
+      "tableCategory": "Table category",
+      "tag": "Tag",
+      "tel": "Tel",
+      "unit": "Unit",
+      "url": "Url",
+      "username": "Username",
+      "valueRiel": "Value riel",
+      "variant": "Variant",
+      "website": "Website"
+    },
+    "name": {
+      "label": "Name",
+      "placeholder": "Name"
+    },
+    "parent": {
+      "label": "Product Parent"
+    },
+    "password": {
+      "placeholder": "Placeholder"
+    },
+    "placeholder": {
+      "address": "Address",
+      "amount": "Amount",
+      "amountInStock": "Amount in stock",
+      "amountPercentage": "Amount percentage",
+      "category": "Category",
+      "chooseCurrency": "Choose currency",
+      "chooseUnit": "Choose unit",
+      "code": "Code",
+      "confirmPassword": "Confirm password",
+      "currency": "Currency",
+      "description": "Description",
+      "email": "Email",
+      "expiredDate": "Expired date",
+      "fax": "Fax",
+      "firstName": "First name",
+      "gender": "Gender",
+      "importedPrice": "Imported price",
+      "membership": "Membership",
+      "name": "Name",
+      "nbChairs": "Nb chairs",
+      "password": "Password",
+      "restaurantName": "Restaurant name",
+      "salePrice": "Sale price",
+      "search": "Search",
+      "searchOrAddATag": "Search or add a tag",
+      "tag": "Tag",
+      "tel": "Tel",
+      "unit": "Unit",
+      "url": "Url",
+      "valueRiel": "Value riel",
+      "website": "Website"
+    },
+    "productName": "Product name",
+    "table_category": {
+      "label": "Table Category"
+    },
+    "username": {
+      "placeholder": "User name"
+    }
+  },
+  "food": {
+    "button": {
+      "newFood": "New food",
+      "newProductTag": "New product tag",
+      "newProductUnit": "New product unit",
+      "newType": "New type",
+      "newWarehouse": "New warehouse",
+      "printProductBarcode": "Print product barcode"
+    },
+    "table": {
+      "action": "Action",
+      "createdAt": "Created at",
+      "description": "Description",
+      "image": "Image",
+      "name": "Name",
+      "productCategory": "Product category",
+      "productStock": "Product stock",
+      "productType": "Product type"
+    }
+  },
+  "grocery": {
+    "button": {
+      "newGrocery": "New grocery"
+    },
+    "label": {
+      "edit": "Edit",
+      "listingGrocery": "Listing grocery",
+      "show": "Show"
+    },
+    "strings": {
+      "listingGrocery": "Listing grocery"
+    },
+    "table": {
+      "action": "Action",
+      "amount": "Amount",
+      "createdAt": "Created at",
+      "name": "Name",
+      "price": "Price",
+      "productImage": "Product image"
+    }
+  },
+  "ingredient": {
+    "button": {
+      "newIngredient": "New ingredient"
+    },
+    "label": {
+      "editIngredient": "Edit ingredient",
+      "newIngredient": "New ingredient",
+      "showIngredient": "Show ingredient"
+    },
+    "strings": {
+      "listingIngredient": "Listing ingredient"
+    },
+    "table": {
+      "action": "Action",
+      "amount": "Amount",
+      "createdAt": "Created at",
+      "name": "Name",
+      "price": "Price",
+      "productImage": "Product image"
+    }
+  },
+  "inventories": {
+    "button": {
+      "category": {
+        "newCategory": "New category"
+      }
+    },
+    "category": {
+      "table": {
+        "action": "Action",
+        "createdAt": "Created at",
+        "icon": "Icon",
+        "name": "Name",
+        "productType": "Product type"
+      }
+    },
+    "strings": {
+      "category": {
+        "listingCategory": "Listing category"
+      }
+    }
+  },
+  "inventory": {
+    "label": {
+      "category": "Category",
+      "drink": "Drink",
+      "food": "Food",
+      "grocery": "Grocery",
+      "ingredient": "Ingredient",
+      "inventory": "Inventory",
+      "inventoryHistory": "Inventory history",
+      "material": "Material",
+      "noImages": "No images",
+      "tag": "Tag",
+      "type": "Type",
+      "unit": "Unit",
+      "warehouse": "Warehouse"
+    },
+    "strings": {
+      "product": "Product",
+      "productManagement": "Product management"
+    },
+    "table": {
+      "adjustedBy": "Adjusted by",
+      "adjustmentType": "Adjustment type",
+      "amount": "Amount",
+      "amountInStock": "Amount in stock",
+      "date": "Date",
+      "price": "Price"
+    }
+  },
+  "label": {
+    "menu": "Menu",
+    "table": "Table",
+    "inventory": "Inventory",
+    "UnitPrice": " unit price",
+    "addNewFood": "Add new food",
+    "all": "All",
+    "allProduct": "All product",
+    "amountDue": "Amount due",
+    "amountOwe": "Amount owe",
+    "amountTotal": "Amount total",
+    "authorizedBy": "Authorized by",
+    "by": "By",
+    "cashier": "Cashier",
+    "contactUs": "Contact us",
+    "couponCode": "Coupon code",
+    "customFood": "Custom food",
+    "customer": "Customer",
+    "customerName": "Customer name",
+    "discount": "Discount",
+    "editCustomer": "Edit customer",
+    "editExchange": "Edit exchange",
+    "editMembership": "Edit membership",
+    "editMenu": "Edit menu",
+    "editPaymentOption": "Edit payment option",
+    "editPromotion": "Edit promotion",
+    "editTable": "Edit table",
+    "editTableCategory": "Edit table category",
+    "editTax": "Edit tax",
+    "enterCustomProductName": "Enter custom product name",
+    "exchange": "Exchange",
+    "exchangeRate": "Exchange rate",
+    "failedPaymentWithCoupon": "Failed payment with coupon",
+    "gender": "Gender",
+    "inventoryTransaction": "Inventory transaction",
+    "isAvailable": "Is available",
+    "item": "Item",
+    "items": "Items",
+    "listOrder": "List order",
+    "listingTableCategories": "Listing table categories",
+    "logout": "Logout",
+    "newCustomer": "New customer",
+    "newExchange": "New exchange",
+    "newMembership": "New membership",
+    "newMenu": "New menu",
+    "newPaymentOption": "New payment option",
+    "newPromotion": "New promotion",
+    "newTable": "New table",
+    "newTableCategory": "New table category",
+    "newTax": "New tax",
+    "no": "No",
+    "noRecords": "No records",
+    "number": "Number",
+    "order": "Order",
+    "payment": "Payment",
+    "paymentAmount": "Payment amount",
+    "paymentOption": "Payment option",
+    "poweredBy": "Powered by",
+    "price": "Price",
+    "priceIsRequired": "Price is required",
+    "proceed": "Proceed",
+    "product": {
+      "category": {
+        "newCategory": "New category"
+      },
+      "label": {
+        "newWarehouse": "New warehouse"
+      },
+      "tag": {
+        "editTag": "Edit tag",
+        "newTag": "New tag",
+        "showTag": "Show tag"
+      },
+      "type": {
+        "editType": "Edit type",
+        "newType": "New type",
+        "showType": "Show type"
+      },
+      "unit": {
+        "editUnit": "Edit unit",
+        "newUnit": "New unit",
+        "showUnit": "Show unit"
+      }
+    },
+    "productAdded": "Product added",
+    "profile": "Profile",
+    "promotion": "Promotion",
+    "qty": "Qty",
+    "quantity": "Quantity",
+    "readyToCompletePayment": "Ready to complete payment",
+    "report": "Report",
+    "restaurant": "Restaurant",
+    "searchItemName": "Search item name",
+    "selectAll": "Select all",
+    "selectCustomerGender": "Select customer gender",
+    "served": "Served",
+    "setting": "Setting",
+    "settings": "Settings",
+    "showCustomer": "Show customer",
+    "showExchange": "Show exchange",
+    "showMembership": "Show membership",
+    "showMenu": "Show menu",
+    "showPaymentOption": "Show payment option",
+    "showPromotion": "Show promotion",
+    "showTable": "Show table",
+    "showTableCategory": "Show table category",
+    "showTax": "Show tax",
+    "subTotal": "Sub total",
+    "tables": "Tables",
+    "takeAway": "Take away",
+    "tax": "Tax",
+    "telephone": "Telephone"
+  },
+  "material": {
+    "button": {
+      "newMaterial": "New material"
+    },
+    "label": {
+      "edit": "Edit",
+      "newMaterial": "New material",
+      "show": "Show"
+    },
+    "strings": {
+      "listingMaterials": "Listing materials"
+    },
+    "table": {
+      "action": "Action",
+      "amount": "Amount",
+      "createdAt": "Created at",
+      "name": "Name",
+      "price": "Price",
+      "productImage": "Product image"
+    }
+  },
+  "menu": {
+    "inventories": {
+      "products": {
+        "category": "Category",
+        "drink": "Drink",
+        "food": "Food",
+        "grocery": "Grocery",
+        "ingredient": "Ingredient",
+        "material": "Material",
+        "tag": "Tag",
+        "unit": "Unit",
+        "warehouse": "Warehouse"
+      }
+    },
+    "settings": {
+      "coupon": "Coupon",
+      "currency": "Currency",
+      "exchange": "Exchange",
+      "paymentOption": "Payment option",
+      "promotion": "Promotion",
+      "restaurant": "Restaurant",
+      "tax": "Tax",
+      "user": "User"
+    }
+  },
+  "month": {
+    "label": {
+      "apr": "Apr",
+      "aug": "Aug",
+      "dec": "Dec",
+      "feb": "Feb",
+      "jan": "Jan",
+      "jul": "Jul",
+      "jun": "Jun",
+      "mar": "Mar",
+      "may": "May",
+      "nov": "Nov",
+      "oct": "Oct",
+      "sept": "Sep"
+    }
+  },
+  "order": {
+    "button": {
+      "checkout": "Checkout",
+      "open": "Open",
+      "takeAway": "Take away"
+    },
+    "form": {
+      "placeholder": {
+        "search": "Search"
+      }
+    },
+    "label": {
+      "newOrder": "New order"
+    },
+    "product": {
+      "item": "Item",
+      "name": "Name",
+      "quantity": "Quantity"
+    },
+    "table": {
+      "action": "Action",
+      "firstOrder": "First order",
+      "id": "Id",
+      "lastOrder": "Last order",
+      "orderBy": "Order By",
+      "tables": "Tables"
+    }
+  },
+  "product": {
+    "buttons": {
+      "addAnotherOption": "Add another option",
+      "addVariant": "Add variant"
+    },
+    "fields": {
+      "amount": {
+        "label": "Amount",
+        "placeholder": "Placeholder"
+      },
+      "amount_in_stock": {
+        "label": "Amount in Stock",
+        "placeholder": "Amount in Stock"
+      },
+      "expired_date": {
+        "label": "Expired Date"
+      },
+      "imported_date": {
+        "label": "Imported Price"
+      },
+      "label": {
+        "amount": "Amount",
+        "amountInStock": "Amount in stock",
+        "chooseUnit": "Choose unit",
+        "currency": "Currency",
+        "expiredDate": "Expired date",
+        "importedDate": "Imported date",
+        "importedPrice": "Imported price",
+        "name": "Name",
+        "optionName": "Option name",
+        "productCategory": "Product category",
+        "productTags": "Product tags",
+        "productType": "Product type",
+        "productUnit": "Product unit",
+        "salePrice": "Sale price",
+        "stockAlertLevel": "Stock alert level",
+        "trackInventory": "Track inventory",
+        "unit": "Unit",
+        "variant": "Variant",
+        "warehouse": "Warehouse"
+      },
+      "placeholder": {
+        "amount": "Amount",
+        "amountInStock": "Amount in stock",
+        "chooseProductVariant": "Choose product variant",
+        "chooseWarehouse": "Choose warehouse",
+        "currency": "Currency",
+        "expiredDate": "Expired date",
+        "importedPrice": "Imported price",
+        "name": "Name",
+        "productCategory": "Product category",
+        "productTags": "Product tags",
+        "productType": "Product type",
+        "productUnit": "Product unit",
+        "salePrice": "Sale price",
+        "searchOrAddATag": "Search or add a tag",
+        "stockAlertLevel": "Stock alert level",
+        "unit": "Unit",
+        "warehouse": "Warehouse"
+      },
+      "placeholderamount": "Placeholderamount",
+      "unit": {
+        "chooseUnit": "Choose unit"
+      },
+      "variant": {
+        "label": "Variant"
+      },
+      "warehouse": {
+        "choose_warehouse": "Choose_warehouse",
+        "label": "Warehouse"
+      }
+    },
+    "label": {
+      "edit": "Edit",
+      "modifyVariant": "Modify variant",
+      "optionName": "Option name",
+      "show": "Show",
+      "unit": "Unit",
+      "variants": "Variants"
+    }
+  },
+  "profile": {
+    "field": {
+      "label": {
+        "email": "Email",
+        "firstName": "First name",
+        "lastName": "Last name",
+        "newPassword": "New password",
+        "oldPassword": "Old password",
+        "confirmationPassword": "Confirmation Password"
+      },
+      "placeholder": {
+        "email": "Email",
+        "firstName": "First name",
+        "lastName": "Last name",
+        "newPassword": "New password",
+        "oldPassword": "Old password",
+        "confirmationPassword": "Confirmation Password"
+      }
+    },
+    "label": {
+      "account": "Account",
+      "resetPassword": "Reset password"
+    },
+    "sidebar": {
+      "accountSettings": "Account settings",
+      "help": "Help",
+      "overview": "Overview",
+      "tasks": "Tasks"
+    }
+  },
+  "promotion": {
+    "label": {
+      "amountCash": "Amount cash",
+      "amountPercentage": "Amount percentage",
+      "description": "Description",
+      "endDate": "End date",
+      "isPercentage": "Is percentage",
+      "item": "Item",
+      "items": "Items",
+      "promotionAmount": "Promotion amount",
+      "promotionDetail": "Promotion detail",
+      "promotionName": "Promotion name",
+      "promotionProduct": "Promotion product",
+      "startDate": "Start date"
+    }
+  },
+  "recent_sell": {
+    "btn": {
+      "listingRecentSell": "Listing recent sell"
+    },
+    "label": {
+      "amountDueDollar": "Amount due dollar",
+      "amountDueRiel": "Amount due riel",
+      "amountPaidDollar": "Amount paid dollar",
+      "amountPaidRiel": "Amount paid riel",
+      "amountTotalDollar": "Amount total dollar",
+      "amountTotalRiel": "Amount total riel",
+      "authorizer": "Authorizer",
+      "cashier": "Cashier",
+      "customer": "Customer",
+      "date": "Date",
+      "discount": "Discount",
+      "orderNumber": "Order number",
+      "status": "Status",
+      "subTotal": "Sub total",
+      "tableNumber": "Table number",
+      "tax": "Tax",
+      "tel": "Tel"
+    },
+    "listingRecentSell": "Listing recent sell",
+    "owe": {
+      "label": {
+        "amountOweDollar": "Amount owe dollar",
+        "amountOweRiel": "Amount owe riel"
+      }
+    },
+    "showRecentSell": "Show recent sell",
+    "table": {
+      "action": "Action",
+      "amount": "Amount",
+      "amountTotalDollar": "Amount total dollar",
+      "amountTotalRiel": "Amount total riel",
+      "cashier": "Cashier",
+      "date": "Date",
+      "discount": "Discount",
+      "no": "No",
+      "paymentOption": "Payment option",
+      "productName": "Product name",
+      "salePrice": "Sale price",
+      "servedQuantity": "Served quantity"
+    }
+  },
+  "report": {
+    "label": {
+      "chart": "Chart",
+      "day": "Day",
+      "income": "Income",
+      "month": "Month",
+      "productSale": "Product sale",
+      "reportMonthly": "Report monthly",
+      "table": "Table",
+      "week": "Week"
+    },
+    "menu": {
+      "income": "Income",
+      "productSale": "Product sale",
+      "reportMonthly": "Report monthly"
+    },
+    "strings": {
+      "incomeOutcomeMonthly": "Income outcome monthly",
+      "listingReportIncome": "Listing report income",
+      "listingReportMonthly": "Listing report monthly",
+      "listingReportProductSale": "Listing report product sale",
+      "listingReportProductSaleDetail": "Listing report product sale detail"
+    },
+    "table": {
+      "action": "Action",
+      "amount": "Amount",
+      "amountInStock": "Amount in stock",
+      "amountTotal": "Amount total",
+      "amountTotalDollar": "Amount total dollar",
+      "amountTotalRiel": "Amount total riel",
+      "category": "Category",
+      "createdAt": "Created at",
+      "date": "Date",
+      "discount": "Discount",
+      "importedPrice": "Imported price",
+      "name": "Name",
+      "no": "No",
+      "quantity": "Quantity",
+      "salePrice": "Sale price",
+      "transactionType": "Transaction type",
+      "type": "Type",
+      "unitPrice": "Unit price",
+      "variant": "Variant",
+      "variantType": "Variant type"
+    }
+  },
+  "restaurant": {
+    "button": {
+      "choseLogo": "Chose logo"
+    },
+    "history": {
+      "history": "History",
+      "label": {
+        "detail": "Detail"
+      },
+      "table": {
+        "action": "Action",
+        "createdAt": "Created at",
+        "user": "User"
+      }
+    },
+    "label": {
+      "info": "Info",
+      "logo": "Logo"
+    }
+  },
+  "stings": {
+    "usernameOrPasswordIsIncorrect!": "Username or password is incorrect!"
+  },
+  "string": {
+    "noProductVariants": "No product variants",
+    "selectMonth": "Select month",
+    "selectYear": "Select year"
+  },
+  "strings": {
+    "alreadyHaveAccount?": "Already have account?",
+    "configureYourApplication": "Configure your application",
+    "dashboard": {
+      "here": "Here",
+      "level": "Level",
+      "optionalDescription": "Optional description",
+      "pageHeader": "Page header",
+      "welcomeDashboard": "Welcome dashboard"
+    },
+    "drinks": {
+      "listingDrinks": "Listing drinks"
+    },
+    "forgotPassword": "Forgot password",
+    "listingCustomers": "Listing customers",
+    "listingExchanges": "Listing exchanges",
+    "listingMemberships": "Listing memberships",
+    "listingMenus": "Listing menus",
+    "listingPaymentOptions": "Listing payment options",
+    "listingPromotions": "Listing promotions",
+    "listingTables": "Listing tables",
+    "listingTaxes": "Listing taxes",
+    "noProduct": "No product",
+    "noTables": "No tables",
+    "notFound": "Not found",
+    "pleaseFillOutInformationToCreateRestaurant": "Please fill out information to create restaurant",
+    "product": {
+      "listingFood": "Listing food",
+      "tag": {
+        "listingTags": "Listing tags"
+      },
+      "type": {
+        "listingTypes": "Listing types"
+      },
+      "unit": {
+        "listingUnits": "Listing units"
+      },
+      "warehouse": {
+        "listingWarehouse": "Listing warehouse"
+      }
+    },
+    "rememberMe": "Remember me",
+    "rightReserved": "Right reserved",
+    "terms": "Terms",
+    "thankYouForComing": "Thank you for coming",
+    "toCreateAccountPleaseFillOutInformation": "To create account please fill out information",
+    "toastr": {
+      "create": {
+        "desc": "Desc",
+        "title": "Title"
+      },
+      "update": {
+        "desc": "Desc",
+        "title": "Title"
+      }
+    },
+    "welcomeBack": "Welcome back"
+  },
+  "table": {
+    "customer": {
+      "actions": "Actions",
+      "address": "Address",
+      "gender": "Gender",
+      "membership": "Membership",
+      "name": "Name",
+      "tel": "Tel"
+    },
+    "exchange": {
+      "actions": "Actions",
+      "createdAt": "Created at",
+      "currency": "Currency",
+      "name": "Name",
+      "status": "Status",
+      "valueRiel": "Value riel"
+    },
+    "membership": {
+      "actions": "Actions",
+      "amountPercentage": "Amount percentage",
+      "createdAt": "Created at",
+      "created_at": "Created_at",
+      "name": "Name",
+      "status": "Status"
+    },
+    "menu": {
+      "actions": "Actions",
+      "active": "Active",
+      "availability": "Availability",
+      "category": "Category",
+      "createdAt": "Created at",
+      "icon": "Icon",
+      "image": "Image",
+      "name": "Name",
+      "no": "No",
+      "price": "Price"
+    },
+    "payment_option": {
+      "actions": "Actions",
+      "code": "Code",
+      "createdAt": "Created at",
+      "description": "Description",
+      "name": "Name"
+    },
+    "product": {
+      "name": "Name"
+    },
+    "promotion": {
+      "actions": "Actions",
+      "amountPercentage": "Amount percentage",
+      "createdAt": "Created at",
+      "end": "End",
+      "name": "Name",
+      "start": "Start",
+      "status": "Status"
+    },
+    "table": {
+      "actions": "Actions",
+      "createdAt": "Created at",
+      "name": "Name",
+      "nbChairs": "Nb chairs"
+    },
+    "tableCategory": "Table category",
+    "table_category": {
+      "actions": "Actions",
+      "active": "Active",
+      "createdAt": "Created at",
+      "name": "Name",
+      "parent": "Parent"
+    },
+    "tax": {
+      "actions": "Actions",
+      "amountPercentage": "Amount percentage",
+      "createdAt": "Created at",
+      "name": "Name",
+      "status": "Status"
+    }
+  },
+  "user": {
+    "button": {
+      "newUser": "New user"
+    },
+    "editUser": "Edit user",
+    "field": {
+      "label": {
+        "email": "Email",
+        "firstName": "First name",
+        "lastName": "Last name",
+        "password": "Password",
+        "passwordConfirmation": "Password confirmation",
+        "roles": "Roles"
+      },
+      "placeholder": {
+        "email": "Email",
+        "firstName": "First name",
+        "lastName": "Last name",
+        "password": "Password",
+        "passwordConfirmation": "Password confirmation",
+        "roles": "Roles"
+      }
+    },
+    "listingUsers": "Listing users",
+    "newUser": "New user",
+    "resetPassword": "Reset password",
+    "showUser": "Show user",
+    "table": {
+      "actions": "Actions",
+      "createdAt": "Created at",
+      "email": "Email",
+      "name": "Name",
+      "roles": "Roles"
+    },
+    "users": "Users"
+  },
+  "orders": {
+    "button": {
+      "eatHere": "Eat Here"
+    }
+  }
 }

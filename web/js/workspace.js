@@ -192,11 +192,41 @@ Number.prototype.mod = function(n) {
     return ((this%n)+n)%n;
 };
 
-let suggestionChoice = -1
 let shouldRequestSuggest = true
-let suggestions = []
 let inputKey = ''
 let lastChoiceSuggestion = null
+
+let observableState = {
+	suggestionList: [],
+	choice: -1,
+	get suggestions() {
+		return this.suggestionList
+	},
+	set suggestions(listOfSuggestions) {
+		this.suggestionList = listOfSuggestions
+		let suggestionNode = $("#suggestion-container")
+		suggestionNode.html("")
+		this.suggestionList.forEach(suggestion => {
+			suggestionNode.append($(`<div class="badge badge-light mx-2">${suggestion}</div>`))
+		})
+	},
+	get suggestionChoice() {
+		return this.choice
+	},
+	set suggestionChoice(choiceNumber) {
+		if (choiceNumber !== -1) {
+			let suggestionNodes = $("#suggestion-container > div")
+			for (let i = 0; i < suggestionNodes.length; i++) {
+				if (i === choiceNumber) {
+					$(suggestionNodes[i]).attr("class", "badge badge-info mx-2")
+				} else {
+					$(suggestionNodes[i]).attr("class", "badge badge-light mx-2")
+				}
+			}
+		}
+		this.choice = choiceNumber
+	}
+}
 
 window.onload = () => {
 	setProjectName()
@@ -208,25 +238,25 @@ window.onload = () => {
 			try {
 				if (shouldRequestSuggest) {
 					inputKey = $(this).val()
-					suggestions = await EelPromise(eel.get_suggestions(inputKey))
+					observableState.suggestions = await EelPromise(eel.get_suggestions(inputKey))
 					shouldRequestSuggest = false
 				}
 				let inputKeyChain = inputKey.split(".")
-				if (suggestions.length > 0) {
+				if (observableState.suggestions.length > 0) {
 					if (e.shiftKey) {
-						if (suggestionChoice < 0) {
-							suggestionChoice = suggestions.length - 1
+						if (observableState.suggestionChoice < 0) {
+							observableState.suggestionChoice = observableState.suggestions.length - 1
 						} else {
-							suggestionChoice = (suggestionChoice - 1).mod(suggestions.length)
+							observableState.suggestionChoice = (observableState.suggestionChoice - 1).mod(observableState.suggestions.length)
 						}
 					} else {
-						if (suggestionChoice < 0) {
-							suggestionChoice = 0
+						if (observableState.suggestionChoice < 0) {
+							observableState.suggestionChoice = 0
 						} else {
-							suggestionChoice = (suggestionChoice + 1).mod(suggestions.length)
+							observableState.suggestionChoice = (observableState.suggestionChoice + 1).mod(observableState.suggestions.length)
 						}
 					}
-					lastChoiceSuggestion = inputKeyChain.map((key, index) => index === inputKeyChain.length - 1 ? suggestions[suggestionChoice] : key).join(".")
+					lastChoiceSuggestion = inputKeyChain.map((key, index) => index === inputKeyChain.length - 1 ? observableState.suggestions[observableState.suggestionChoice] : key).join(".")
 					$(this).val(lastChoiceSuggestion)
 					checkAvailable(lastChoiceSuggestion)
 				}
@@ -234,7 +264,8 @@ window.onload = () => {
 				alertFeedback(exception)
 			}
 		} else if (e.key !== "Shift") {
-			suggestionChoice = -1
+			observableState.suggestions = []
+			observableState.suggestionChoice = -1
 			shouldRequestSuggest = true
 			lastChoiceSuggestion = null
 		}
