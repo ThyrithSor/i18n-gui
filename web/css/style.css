@@ -48,3 +48,7 @@
   display: -webkit-box;
   -webkit-box-orient: vertical;
 }
+
+.activity-buttons {
+	white-space: nowrap;
+}

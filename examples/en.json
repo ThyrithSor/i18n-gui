@@ -4,6 +4,7 @@
     "button": {
         "addFood": "Add food",
         "addMoreProduct": "Add more product",
+        "algorithm_is_not_okay_but_i_know_you": "algorithm is not okay but i know you",
         "back": "Back",
         "backToList": "Back to list",
         "cancel": "Cancel",

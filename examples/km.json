@@ -1,7 +1,10 @@
 {
     "Hell": "",
     "alone_button": "ប៊ូតុងតែឯង",
-    "button": "",
+    "button": {
+        "algorithm_is_not_okay_but_i_know_you": "",
+        "edit": "កែប្រែ"
+    },
     "coupon": {
         "button": {
             "back": "ត្រឡប់ក្រោយ",

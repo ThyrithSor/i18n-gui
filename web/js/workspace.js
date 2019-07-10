@@ -6,6 +6,13 @@ var localeInputs = {}
 var alertHandler
 var key = ''
 
+String.prototype.capitalize = function () {
+	if (this.length > 0) {
+		return this[0].toUpperCase() + this.substring(1)
+	}
+	return this
+}
+
 async function EelPromise(task) {
     let result = await new Promise(task)
     if (result.error !== undefined) {
@@ -104,9 +111,7 @@ async function checkAvailable(value) {
 			label.innerHTML = statuses[path].symbol
 			label.setAttribute("title", statuses[path].text);
 
-			for (let i = 0; i < localeInputs[path].node.children[2].children.length; i++) {
-				localeInputs[path].node.children[2].children[i].style.display = "none"
-			}
+			$(localeInputs[path].node).find('.activity-buttons > button').css("display", "none")
 			
 			/**
 			 *  0: Invalid
@@ -115,17 +120,30 @@ async function checkAvailable(value) {
 			 *  3: Parent
 			 *  4: Invalid JSON file
 			 */
-			let textarea = localeInputs[path].node.children[1].children[0]
-			textarea.disabled = false
+			let textarea = $(localeInputs[path].node).find(".translation-text > textarea")
+			textarea.prop('disable', false)
 			switch (statuses[path].code) {
+				case 2:
+					{
+						let editButton = $(localeInputs[path].node).find('.activity-buttons > button:first-child')
+						editButton.css("display", "inline")
+						editButton.off()
+						editButton.click((path => 
+							e => {
+								let textarea = $(localeInputs[path].node).find(".translation-text > textarea")
+								textarea.val(statuses[path].data)
+								localeInputs[path].value = textarea.val()
+							}
+						)(path))
+					}
 				case 1:
 					{
-						let suggestButton = localeInputs[path].node.children[2].children[1]
-						suggestButton.style.display = "inline"
-						$(suggestButton).off()
-						$(suggestButton).click((path => 
+						let suggestButton = $(localeInputs[path].node).find('.activity-buttons > button:nth-child(2)')
+						suggestButton.css("display", "inline")
+						suggestButton.off()
+						suggestButton.click((path => 
 							async e => {
-								let textarea = localeInputs[path].node.children[1].children[0]
+								let textarea = $(localeInputs[path].node).find('.translation-text > textarea')
 
 								let baseLanguage = await EelPromise(eel.get_base_language())
 								let baseLanguageModelKey = Object.keys(localeInputs).find(modelKey => getLanguageFromPath(modelKey).toLowerCase() === baseLanguage.toLowerCase())
@@ -135,36 +153,22 @@ async function checkAvailable(value) {
 								if (getLanguageFromPath(path).toLowerCase() !== baseLanguage.toLowerCase() && baseLanguageModelKey !== undefined && localeInputs[baseLanguageModelKey].value.trim() !== "") {
 									requestSuggestTranslate = await EelPromise(eel.suggestion_translate(localeInputs[baseLanguageModelKey].value, baseLanguage, getLanguageFromPath(path).toLowerCase()))
 								} else {
-									if (baseLanguage.toLowerCase() === 'en') {
+									if (getLanguageFromPath(path).toLowerCase() === 'en') {
 										requestSuggestTranslate = generateTranslateFromKey(value)
 									} else {
 										requestSuggestTranslate = await EelPromise(eel.suggestion_translate(generateTranslateFromKey(value), 'en', getLanguageFromPath(path).toLowerCase()))
 									}
 								}
 
-								textarea.value = requestSuggestTranslate
-								localeInputs[path].value = textarea.value
-							}
-						)(path))
-						break
-					}
-				case 2:
-					{
-						let editButton = localeInputs[path].node.children[2].children[0]
-						editButton.style.display = "inline"
-						$(editButton).off()
-						$(editButton).click((path => 
-							e => {
-								let textarea = localeInputs[path].node.children[1].children[0]
-								textarea.value = statuses[path].data
-								// localeInputs[path].value = textarea.value
+								textarea.val(requestSuggestTranslate.capitalize())
+								localeInputs[path].value = textarea.val()
 							}
 						)(path))
 						break
 					}
 				case 4:
 					{
-						textarea.disabled = true
+						textarea.prop('disabled', true)
 						break
 					}
 			}
@@ -177,7 +181,7 @@ async function checkAvailable(value) {
 async function applyAll() {
 	try {
 		let paths = Object.keys(localeInputs)
-		let values = paths.map(path => localeInputs[path].node.children[1].children[0].value)
+		let values = paths.map(path => $(localeInputs[path].node).find('.translation-text > textarea').val())
 		let result = await EelPromise(eel.apply(paths, key, values))
 		checkAvailable(key)
 		alertFeedback(result, 'success')
@@ -188,12 +192,12 @@ async function applyAll() {
 
 async function applyFilled() {
 	try	{
-		let paths = Object.keys(localeInputs).filter(path => localeInputs[path].node.children[1].children[0].value)
+		let paths = Object.keys(localeInputs).filter(path => $(localeInputs[path].node).find('.translation-text > textarea').val())
 		if (paths.length === 0) {
 			alertFeedback("Nothing to apply", 'info')
 			return
 		}
-		let values = paths.map(path => localeInputs[path].node.children[1].children[0].value).filter(value => value)
+		let values = paths.map(path => $(localeInputs[path].node).find('.translation-text > textarea').val()).filter(value => value)
 		let result = await EelPromise(eel.apply(paths, key, values))
 		checkAvailable(key)
 		alertFeedback(result, 'success')
@@ -204,8 +208,8 @@ async function applyFilled() {
 
 function clearValues() {
 	Object.keys(localeInputs).forEach(path => {
-		let textarea = localeInputs[path].node.children[1].children[0]
-		textarea.value = ""
+		let textarea = $(localeInputs[path].node).find('.translation-text > textarea')
+		textarea.val("")
 		localeInputs[path].value = ""
 	})
 }
