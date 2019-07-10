@@ -83,6 +83,18 @@ function keyInputHandler(event) {
 	checkAvailable(key)
 }
 
+function generateTranslateFromKey(keyTranslate) {
+	let lastWord = keyTranslate.split('.')[keyTranslate.split('.').length - 1]
+	let suggestion = lastWord
+		.replace(/(_+.)/g, matched => {
+			return matched.replace(/_+/, ' ').toLowerCase()
+		})
+		.replace(/[A-Z]/g, matched => {
+			return ' ' + matched.toLowerCase()
+		})
+	return suggestion.trim()
+}
+
 async function checkAvailable(value) {
 	try {
 		let statuses = await EelPromise(eel.check_key_status(value))
@@ -114,20 +126,28 @@ async function checkAvailable(value) {
 						$(suggestButton).click((path => 
 							async e => {
 								let textarea = localeInputs[path].node.children[1].children[0]
-								let lastWord = value.split('.')[value.split('.').length - 1]
-								let suggestion = lastWord
-									.replace(/(_+.)/g, matched => {
-										return matched.replace(/_+/, ' ').toLowerCase()
-									})
-									.replace(/[A-Z]/g, matched => {
-										return ' ' + matched.toLowerCase()
-									})
-								generated = suggestion.trim()
-								console.log("translate", generated)
-								console.log("from", 'en')
-								console.log("to", getLanguageFromPath(path).toLowerCase())
 
-								let requestSuggestTranslate = await EelPromise(eel.suggestion_translate(generated, 'en', getLanguageFromPath(path).toLowerCase()))
+								let baseLanguage = await EelPromise(eel.get_base_language())
+
+								let requestSuggestTranslate
+								if (getLanguageFromPath(path).toLowerCase() === baseLanguage.toLowerCase()) {
+									console.log("Just use generated")
+									requestSuggestTranslate = generateTranslateFromKey(value)
+								} else {
+									let baseLanguageModelKey = Object.keys(localeInputs).find(modelKey => getLanguageFromPath(modelKey).toLowerCase() === baseLanguage.toLowerCase())
+									if (baseLanguageModelKey !== undefined) {
+										if (localeInputs[baseLanguageModelKey].value.trim() !== "") {
+											console.log("Use phrase " + localeInputs[baseLanguageModelKey].value)
+											requestSuggestTranslate = await EelPromise(eel.suggestion_translate(localeInputs[baseLanguageModelKey].value, baseLanguage, getLanguageFromPath(path).toLowerCase()))
+										} else {
+											console.log("use generated phrase")
+											requestSuggestTranslate = await EelPromise(eel.suggestion_translate(generateTranslateFromKey(value), baseLanguage, getLanguageFromPath(path).toLowerCase()))
+										}
+									} else {
+										console.log("cannot find model")
+										requestSuggestTranslate = await EelPromise(eel.suggestion_translate(generateTranslateFromKey(value), baseLanguage, getLanguageFromPath(path).toLowerCase()))
+									}
+								}
 
 								textarea.value = requestSuggestTranslate
 								localeInputs[path].value = textarea.value

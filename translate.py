@@ -7,12 +7,29 @@ from json import loads, load, dumps
 
 TRANSLATION_JSON_PATH = "./examples/*.json"
 PROJECT_NAME = "My Translate"
+BASE_LANGUAGE = "en"
+LOCALE_CODE_MAPPING = "" # format kh=km,eng=en
 
 # After build, the current directory will be root
 # It won't allow to create file, so use home instead
 CACHE_PATH = path.expanduser("~") + "/.gui-i18n-cache"
 
 translator = Translator()
+
+def get_locale_code_mapping():
+	mapper = {}
+	separate = list(map(lambda mapping: mapping.strip().split('='), LOCALE_CODE_MAPPING.split(',')))
+	filtered = list(filter(lambda mapping: len(mapping) == 2, separate))
+	for filt in filtered:
+		mapper[filt[0].lower()] = filt[1]
+	return mapper
+
+def correct_locale_code(locale_code_by_path):
+	mapping = get_locale_code_mapping()
+	if locale_code_by_path.lower() in mapping:
+		return mapping[locale_code_by_path].lower()
+	else:
+		return locale_code_by_path.lower()
 
 @eel.expose
 def suggestion_translate(word, src, dest):
@@ -211,6 +228,12 @@ def load_config(configs):
 	try:
 		global PROJECT_NAME
 		global TRANSLATION_JSON_PATH
+		global BASE_LANGUAGE
+		global LOCALE_CODE_MAPPING
+		if ("BASE_LANGUAGE" in configs):
+			BASE_LANGUAGE = configs["BASE_LANGUAGE"]
+		if ("LOCALE_CODE_MAPPING" in configs):
+			LOCALE_CODE_MAPPING = configs["LOCALE_CODE_MAPPING"]
 		if ("PROJECT_NAME" in configs):
 			PROJECT_NAME = configs["PROJECT_NAME"]
 		if ("TRANSLATION_JSON_PATH" in configs):
@@ -272,6 +295,10 @@ def get_suggestions(key):
 		return {
 			'error': 'error with ' + str(e)
 		}
+
+@eel.expose
+def get_base_language():
+	return BASE_LANGUAGE
 
 @eel.expose
 def get_project_name():
