@@ -12,6 +12,7 @@ LOCALE_CODE_MAPPING = "" # format kh=km,eng=en
 
 # After build, the current directory will be root
 # It won't allow to create file, so use home instead
+PORT = 2019
 CACHE_PATH = path.expanduser("~") + "/.gui-i18n-cache"
 
 translator = Translator()
@@ -311,4 +312,9 @@ def exit_program():
 
 eel.init('web')
 
-eel.start('main.html', size=(700, 700), options={'port': 2019})
+while True:
+	try:
+		eel.start('main.html', size=(700, 700), options={'port': PORT})
+		break
+	except Exception as e:
+		PORT = PORT + 1
