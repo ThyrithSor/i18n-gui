@@ -84,7 +84,7 @@ function submitConfigForm() {
 }
 
 function parseConfig(fileContent) {
-    let configs = fileContent.split(/\r?\n/g).filter(config => config.trim() !== '').map(config => config.split("=")).filter(config => config.length >= 2).reduce((cfg1, cfg2) => {
+    let configs = fileContent.split(/\r?\n/g).filter(config => config.trim() !== '' && !config.trim().startsWith("#")).map(config => config.split("=")).filter(config => config.length >= 2).reduce((cfg1, cfg2) => {
         if (!cfg1.config) {
             cfg1.config = {}
             cfg1.config[cfg1[0].trim()] = cfg1.slice(1).join("=").trim()

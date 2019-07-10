@@ -216,9 +216,11 @@ def load_config(configs):
 
 			try:
 				with open(CACHE_PATH, "w+") as f:
-					f.write(json.dumps(new_configs))
+					f.write(dumps(new_configs))
 			except Exception as e:
-				print(str(e))
+				return {
+					'error': str(e)
+				}
 
 			return True
 		return "Invalid config file"
