@@ -46,18 +46,18 @@
 		</div>
 		<hr>
 		<div class="row">
-			<div class="col-12 text-right">
-				<button onclick="applyAll()" class="btn btn-success">
-					Apply All
+			<div class="col-12">
+				<button onclick="backHistory()" class="btn-back btn btn-danger">
+					Back
 				</button>
-				<button onclick="applyFilled()" class="btn btn-primary">
-					Apply Filled
-				</button>
-				<button onclick="clearValues()" class="btn btn-warning">
+				<button onclick="clearValues()" class="btn-clear btn btn-warning">
 					Clear
 				</button>
-				<button onclick="backHistory()" class="btn btn-danger">
-					Back
+				<button onclick="applyAll()" class="btn-apply-all btn btn-primary">
+					Apply All
+				</button>
+				<button onclick="applyFilled()" class="btn-apply-filled float-right btn btn-success">
+					Apply Filled
 				</button>
 			</div>
 		</div>
@@ -77,9 +77,9 @@
 					<textarea class="form-control" type="text" placeholder="Your translation..."></textarea>
 				</div>
 				<div class="activity-buttons ml-2 flex-shrink-2">
-					<button style="display: none;" title="Edit" class="btn btn-outline-primary">✏️</button>
-					<button style="display: none;" title="Suggest" class="btn btn-outline-success">🤖</button>
-					<button style="display: none;" title="Correct Sentence" class="correct-sentence btn btn-outline-dark">👮</button>
+					<button style="display: none;" data-toggle="tooltip" data-placement="bottom" title="Edit" class="btn btn-outline-primary">✏️</button>
+					<button style="display: none;" data-toggle="tooltip" data-placement="bottom" title="Suggest" class="btn btn-outline-success">🤖</button>
+					<button style="display: none;" data-toggle="tooltip" data-placement="bottom" title="Correct Sentence" class="correct-sentence btn btn-outline-dark">👮</button>
 				</div>
 			</div>
 		</div>

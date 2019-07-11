@@ -138,6 +138,7 @@ function generateTranslateFromKey(keyTranslate) {
 async function checkAvailable(value) {
 	try {
 		let statuses = await EelPromise(eel.check_key_status(value))
+		$(".btn-apply-all").prop('disabled', false)
 		currentStatus = statuses
 		for (path in statuses) {
 			let status = $(localeInputs[path].node).find('.status')
@@ -204,9 +205,12 @@ async function checkAvailable(value) {
 						)(path))
 						break
 					}
+				case 0:
 				case 4:
 					{
 						textarea.prop('disabled', true)
+						$(".btn-apply-all").prop('disabled', true)
+						textarea.val("")
 						break
 					}
 			}

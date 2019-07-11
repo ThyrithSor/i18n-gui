@@ -6,10 +6,15 @@
         "algorithm_is_not_okay_but_i_know_you": "ក្បួនដោះស្រាយគឺមិនអីទេប៉ុន្តែខ្ញុំដឹងថាអ្នក",
         "edit": "កែប្រែ",
         "i_am_siyen": "ខ្ញុំជាជនជាតិ",
+        "new": {
+            "customer": "អតិថិជន",
+            "tableCategory": "ប្រភេទតារាង"
+        },
         "newMembership": "សមាជិកថ្មី",
         "resetRassword": "កំណត់ពាក្យសម្ងាត់ឡើងវិញ",
         "uploadNewPicture": "ផ្ទុករូបភាពថ្មីឡើង"
     },
+    "cant_join_lucnh_today": "មិនអាចចូលរួមអាហារថ្ងៃត្រង់បានទេនៅថ្ងៃនេះ",
     "coupon": {
         "button": {
             "back": "ត្រឡប់ក្រោយ",
