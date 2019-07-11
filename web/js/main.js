@@ -1,5 +1,4 @@
 const CONFIG_FILE_NAME = 'config.translate'
-
 async function EelPromise(task) {
     let result = await new Promise(task)
     if (result.error !== undefined) {
@@ -68,15 +67,12 @@ function saveConfig() {
         ["PROJECT_NAME", projectName],
         ["TRANSLATION_JSON_PATH", localePath]
     ]
-
     if (baseLanguage) {
         configs.push(["BASE_LANGUAGE", baseLanguage])
     }
-
     if (codeMapping) {
         configs.push(["LOCALE_CODE_MAPPING", codeMapping])
     }
-
     platform = window.navigator.platform
     windowsPlatforms = ['Win32', 'Win64', 'Windows', 'WinCE']
     let configOutput = configs.map(config => config.join("=")).join("\n")
@@ -97,14 +93,19 @@ function submitConfigForm() {
 }
 
 function parseConfig(fileContent) {
-    let configs = fileContent.split(/\r?\n/g).map(line => line.split("#")[0]).filter(config => config.trim() !== '' && !config.trim().startsWith("#")).map(config => config.split("=")).filter(config => config.length >= 2).reduce((cfg1, cfg2) => {
-        if (!cfg1.config) {
-            cfg1.config = {}
-            cfg1.config[cfg1[0].trim()] = cfg1.slice(1).join("=").trim()
-        }
-        cfg1.config[cfg2[0].trim()] = cfg2.slice(1).join("=").trim()
-        return cfg1
-    }).config
+    let configs = fileContent.split(/\r?\n/g)
+                            .map(line => line.split("#")[0])
+                            .filter(config => config.trim() !== '' && !config.trim().startsWith("#"))
+                            .map(config => config.split("="))
+                            .filter(config => config.length >= 2)
+                            .reduce((cfg1, cfg2) => {
+                                if (!cfg1.config) {
+                                    cfg1.config = {}
+                                    cfg1.config[cfg1[0].trim()] = cfg1.slice(1).join("=").trim()
+                                }
+                                cfg1.config[cfg2[0].trim()] = cfg2.slice(1).join("=").trim()
+                                return cfg1
+                            }).config
     return configs
 }
 async function loadConfig(configs) {
