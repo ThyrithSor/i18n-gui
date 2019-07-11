@@ -1,5 +1,6 @@
 import eel
 from googletrans import Translator
+from gingerit.gingerit import GingerIt
 from sys import exit 
 from os import path
 from glob import glob
@@ -16,6 +17,7 @@ PORT = 2019
 CACHE_PATH = path.expanduser("~") + "/.gui-i18n-cache"
 
 translator = Translator()
+parser = GingerIt()
 
 def get_locale_code_mapping():
 	mapper = {}
@@ -25,17 +27,26 @@ def get_locale_code_mapping():
 		mapper[filt[0].lower()] = filt[1]
 	return mapper
 
+@eel.expose
 def correct_locale_code(locale_code_by_path):
 	mapping = get_locale_code_mapping()
 	if locale_code_by_path.lower() in mapping:
-		return mapping[locale_code_by_path].lower()
+		return mapping[locale_code_by_path.lower()].lower()
 	else:
 		return locale_code_by_path.lower()
 
 @eel.expose
+def correct_sentence(sentence):
+	try:
+		parsed = parser.parse(sentence)
+		return parsed['result']
+	except Exception as e:
+		return sentence
+
+@eel.expose
 def suggestion_translate(word, src, dest):
 	try:
-		result = translator.translate(word, src=src, dest=dest)
+		result = translator.translate(word, src=correct_locale_code(src), dest=correct_locale_code(dest))
 		return result.text
 	except Exception as e:
 		return word
@@ -185,9 +196,21 @@ def check_key_status(textpath):
 					}
 					continue
 				keys = textpath.split('.')
+
+				# Check if key can container empty string or empty space
+				hasEmptyKey = len(list(filter(lambda k: k.strip() == '', keys))) > 0
+				if hasEmptyKey:
+					statuses[path] = {
+						'code': 0,
+						'text': 'Invalid Key',
+						'symbol': u'❌'
+					}
+					continue
+
 				status = key_status(keys, data)
 				statuses[path] = status
 			except Exception as e:
+				# If something went wrong
 				statuses[path] = {
 					'code': 5,
 					'text': str(e),
@@ -293,6 +316,41 @@ def get_suggestions(key):
 
 		return list(set(suggestions))
 	except Exception as e:
+		return {
+			'error': 'error with ' + str(e)
+		}
+
+def add_suffix_key_dictionary(dictionary, suffix):
+	return {**{k + suffix: dictionary[k] for k in dictionary if not isinstance(dictionary[k], dict)}, **{k: add_suffix_key_dictionary(dictionary[k], suffix) for k in dictionary if isinstance(dictionary[k], dict)}}
+
+
+def merge_dictionary(from_dict, to_dict, suffix):
+	key_from_dict = list(from_dict.keys())
+	key_to_dict = list(to_dict.keys())
+
+	intersection = [k for k in key_from_dict if k in key_to_dict and isinstance(from_dict[k], dict) and isinstance(to_dict[k], dict)]
+
+	current_resolve = {**{k: from_dict[k] for k in from_dict}, **add_suffix_key_dictionary({k: to_dict[k] for k in to_dict if k not in intersection}, suffix)}
+	for key in intersection:
+		current_resolve[key] = merge_dictionary(from_dict[key], to_dict[key], suffix)
+	return current_resolve
+
+@eel.expose
+def get_translation_keys():
+	try:
+		paths = get_locale_path()
+		keys = {}
+		for i, path in enumerate(paths):
+			with open(path, 'rb') as json_file:
+				body = json_file.read().decode('utf-8')
+				data = try_parse_json(body)
+			if data is None:
+				continue
+			else:
+				keys = merge_dictionary(keys, data, ".." + str(i))
+		return keys
+	except Exception as e:
+		raise e
 		return {
 			'error': 'error with ' + str(e)
 		}

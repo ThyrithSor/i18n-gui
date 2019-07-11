@@ -1,0 +1,11 @@
+{
+    "button": {
+        "have_a_nice_day": "祝你今天愉快",
+        "new": {
+            "customer": "表类别",
+            "tableCategory": "表类别"
+        },
+        "save": "保存"
+    },
+    "cant_join_lucnh_today": "今天不能参加午餐"
+}

@@ -1,6 +1,7 @@
 {
     "": "",
     "Hell": "",
+    "Oh_no": "No, and please beware of knock-offs in the App Store! Apple's has been selling three already.\n\nImageOptim is given for free on terms that basically say “you can do what­ever you want except taking this freedom away from others”. Apple does not allow such permissive terms. Apple requires all App Store users to accept DRM (copy protection) and legal restrictions in the iTunes EULA.\n\nYou can get ImageOptim here, DRM-free. Its license allows you to share it, modify it, use it in any country in the world — even sell it — if you don't forbid anybody else from doing the same.\n\nYou can donate to support the project.",
     "alone_button": "alone button",
     "button": {
         "addFood": "Add food",
@@ -11,12 +12,13 @@
         "backToList": "Back to list",
         "cancel": "Cancel",
         "chooseImage": "Choose image",
-        "clickMe": "click me",
+        "clickMe": "Nothing to say",
         "close": "Close",
         "complete": "Complete",
         "confirm": "Confirm",
         "delete": "Delete",
         "edit": "Edit",
+        "have_a_nice_day": "Have a nice day",
         "i_am_siyen": "I am siyen",
         "login": "Login",
         "manageTable": "Manage table",
@@ -47,6 +49,7 @@
         "update": "Update",
         "uploadNewPicture": "Upload new picture"
     },
+    "cant_join_lucnh_today": "Can't join lunch today",
     "coupon": {
         "button": {
             "back": "Back",
