@@ -77,7 +77,32 @@ async function bindUI() {
 				let inputNode = sample.cloneNode(true)
 				localeInputs[path] = {
 					node: inputNode,
-					value: ''
+					v: '',
+					get value() {
+						return this.v
+					},
+					set value(v) {
+						this.v = v
+						new Promise(async (resolve, reject) => {
+							let localeCode = await EelPromise(eel.correct_locale_code(getLanguageFromPath(path)))
+							if (localeCode === 'en') {
+								let correctButton = $(localeInputs[path].node).find('.activity-buttons > button:nth-child(3)')
+								if (v.trim() !== "") {
+									correctButton.css('display', 'inline')
+									correctButton.off()
+									correctButton.click((path => async e => {
+										$("*").css('cursor', 'wait')
+										let result = await EelPromise(eel.correct_sentence(v))
+										$("*").css('cursor', 'auto')
+										this.v = result
+										$(localeInputs[path].node).find(".translation-text > textarea").val(this.v)
+									})(path))
+								} else {
+									correctButton.css('display', 'none')
+								}
+							}
+						})
+					}
 				}
 				inputNode.children[1].addEventListener('input', e => {
 					localeInputs[path].value = e.target.value
@@ -120,7 +145,7 @@ async function checkAvailable(value) {
 			status.html(statuses[path].symbol)
 			status.prop("title", statuses[path].text);
 
-			$(localeInputs[path].node).find('.activity-buttons > button').css("display", "none")
+			$(localeInputs[path].node).find('.activity-buttons > button:not(.correct-sentence)').css("display", "none")
 			
 			/**
 			 *  0: Invalid
@@ -130,7 +155,7 @@ async function checkAvailable(value) {
 			 *  4: Invalid JSON file
 			 */
 			let textarea = $(localeInputs[path].node).find(".translation-text > textarea")
-			textarea.prop('disable', false)
+			textarea.prop('disabled', false)
 			switch (statuses[path].code) {
 				case 2:
 					{
@@ -160,12 +185,16 @@ async function checkAvailable(value) {
 								let requestSuggestTranslate
 
 								if (getLanguageFromPath(path).toLowerCase() !== baseLanguage.toLowerCase() && baseLanguageModelKey !== undefined && localeInputs[baseLanguageModelKey].value.trim() !== "") {
+									$("*").css('cursor', 'wait')
 									requestSuggestTranslate = await EelPromise(eel.suggestion_translate(localeInputs[baseLanguageModelKey].value, baseLanguage, getLanguageFromPath(path).toLowerCase()))
+									$("*").css('cursor', 'auto')
 								} else {
 									if (getLanguageFromPath(path).toLowerCase() === 'en') {
 										requestSuggestTranslate = generateTranslateFromKey(value)
 									} else {
+										$("*").css('cursor', 'wait')
 										requestSuggestTranslate = await EelPromise(eel.suggestion_translate(generateTranslateFromKey(value), 'en', getLanguageFromPath(path).toLowerCase()))
+										$("*").css('cursor', 'auto')
 									}
 								}
 

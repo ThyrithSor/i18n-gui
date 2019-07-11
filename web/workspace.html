@@ -9,6 +9,9 @@
 	<script type="text/javascript" src="js/workspace.js"></script>
 </head>
 <body>
+	<div class="spinner-grow" role="status">
+	  <span class="sr-only">Loading...</span>
+	</div>
 	<div id="alert" style="display: none;" class="alert alert-success" role="alert">
 		This is a success alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
 	</div>
@@ -24,7 +27,7 @@
 					<input id="key-input" oninput="keyInputHandler(event)" class="form-control" placeholder="button.example.confirm"></input>
 				</div>
 				<div class="flex-shrink-1 ml-2">
-					<button class="btn btn-outline-primary" onclick="copyKey()">📋</button>
+					<button class="btn btn-outline-primary" title="Copy to clipboard" onclick="copyKey()">📋</button>
 				</div>
 			</div>
 		</div>
@@ -74,8 +77,9 @@
 					<textarea class="form-control" type="text" placeholder="Your translation..."></textarea>
 				</div>
 				<div class="activity-buttons ml-2 flex-shrink-2">
-					<button style="display: none;" class="btn btn-outline-primary">✏️</button>
-					<button style="display: none;" class="btn btn-outline-success">🤖</button>
+					<button style="display: none;" title="Edit" class="btn btn-outline-primary">✏️</button>
+					<button style="display: none;" title="Suggest" class="btn btn-outline-success">🤖</button>
+					<button style="display: none;" title="Correct Sentence" class="correct-sentence btn btn-outline-dark">👮</button>
 				</div>
 			</div>
 		</div>

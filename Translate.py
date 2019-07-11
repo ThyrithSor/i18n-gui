@@ -1,5 +1,6 @@
 import eel
 from googletrans import Translator
+from gingerit.gingerit import GingerIt
 from sys import exit 
 from os import path
 from glob import glob
@@ -16,6 +17,7 @@ PORT = 2019
 CACHE_PATH = path.expanduser("~") + "/.gui-i18n-cache"
 
 translator = Translator()
+parser = GingerIt()
 
 def get_locale_code_mapping():
 	mapper = {}
@@ -25,12 +27,21 @@ def get_locale_code_mapping():
 		mapper[filt[0].lower()] = filt[1]
 	return mapper
 
+@eel.expose
 def correct_locale_code(locale_code_by_path):
 	mapping = get_locale_code_mapping()
 	if locale_code_by_path.lower() in mapping:
-		return mapping[locale_code_by_path].lower()
+		return mapping[locale_code_by_path.lower()].lower()
 	else:
 		return locale_code_by_path.lower()
+
+@eel.expose
+def correct_sentence(sentence):
+	try:
+		parsed = parser.parse(sentence)
+		return parsed['result']
+	except Exception as e:
+		return sentence
 
 @eel.expose
 def suggestion_translate(word, src, dest):
