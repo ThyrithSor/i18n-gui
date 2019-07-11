@@ -1,84 +1,119 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>Translate</title>
-	<link rel="stylesheet" type="text/css" href="vendor/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="css/style.css">
-	<script type="text/javascript" src="/eel.js"></script>
-	<script type="text/javascript" src="js/jquery.js"></script>
-	<script type="text/javascript" src="js/workspace.js"></script>
-</head>
-<body>
-	<div id="alert" style="display: none;" class="alert alert-success" role="alert">
-		This is a success alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
-	</div>
-	<h2 id="project-name" class="m-3">-</h2>
-	<hr>
-	<div class="px-3">
-		<div class="row">
-			<div class="col-3">
-				Translation Key : 
-			</div>
-			<div class="col-9 d-flex">
-				<div class="w-100">
-					<input id="key-input" oninput="keyInputHandler(event)" class="form-control" placeholder="button.example.confirm"></input>
-				</div>
-				<div class="flex-shrink-1 ml-2">
-					<button class="btn btn-outline-primary" onclick="copyKey()">📋</button>
-				</div>
-			</div>
-		</div>
-		<div class="row mt-2">
-			<div class="offset-3 col-8">
-				<div id="suggestion-container" class="d-flex">
-					<!-- suggestion append here -->
-				</div>
-			</div>
-		</div>
-		<hr>
-		<div class="row">
-			<div id="inputs" class="col-12">
-				<!-- Input will be appended here -->
-			</div>
-		</div>
-		<hr>
-		<div class="row">
-			<div class="col-12 text-right">
-				<button onclick="applyAll()" class="btn btn-success">
-					Apply All
-				</button>
-				<button onclick="applyFilled()" class="btn btn-primary">
-					Apply Filled
-				</button>
-				<button onclick="clearValues()" class="btn btn-warning">
-					Clear
-				</button>
-				<button onclick="backHistory()" class="btn btn-danger">
-					Back
-				</button>
-			</div>
-		</div>
-	</div>
-	<div id="input-sample" class="hidden">
-		<div class="row mb-3">
-			<div class="col-2">
-				<div class="font-weight-bold">
-					<strong class="language-label">Label</strong>
-					<span class="status"></span>
-					<span> : </span>
-				</div>
-				<div class="description very-small crop-text-2 text-grey"></div>
-			</div>
-			<div class="col-10 d-flex">
-				<div class="translation-text w-100">
-					<textarea class="form-control" type="text" placeholder="Your translation..."></textarea>
-				</div>
-				<div class="activity-buttons ml-2 flex-shrink-2">
-					<button style="display: none;" class="btn btn-outline-primary">✏️</button>
-					<button style="display: none;" class="btn btn-outline-success">🤖</button>
-				</div>
-			</div>
-		</div>
-	</div>
-</body>
+    <head>
+        <title>
+            Translate
+        </title>
+        <link href="vendor/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+            <link href="css/style.css" rel="stylesheet" type="text/css">
+                <script src="/eel.js" type="text/javascript">
+                </script>
+                <script src="js/jquery.js" type="text/javascript">
+                </script>
+                <script src="js/workspace.js" type="text/javascript">
+                </script>
+            </link>
+        </link>
+    </head>
+    <body>
+        <div class="spinner-grow" role="status">
+            <span class="sr-only">
+                Loading...
+            </span>
+        </div>
+        <div class="alert alert-success" id="alert" role="alert" style="display: none;">
+            This is a success alert with
+            <a class="alert-link" href="#">
+                an example link
+            </a>
+            . Give it a click if you like.
+        </div>
+        <h2 class="m-3" id="project-name">
+            -
+        </h2>
+        <hr>
+            <div class="px-3">
+                <div class="row">
+                    <div class="col-3">
+                        Translation Key :
+                    </div>
+                    <div class="col-9 d-flex">
+                        <div class="w-100">
+                            <input class="form-control" id="key-input" oninput="keyInputHandler(event)" placeholder="button.example.confirm"/>
+                        </div>
+                        <div class="flex-shrink-1 ml-2">
+                            <button class="btn btn-outline-primary" onclick="copyKey()" title="Copy to clipboard">
+                                📋
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="offset-3 col-8">
+                        <div class="d-flex" id="suggestion-container">
+                            <!-- suggestion append here -->
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                    <div class="row">
+                        <div class="col-12" id="inputs">
+                            <!-- Input will be appended here -->
+                        </div>
+                    </div>
+                    <hr>
+                        <div class="row">
+                            <div class="col-12">
+                                <button class="btn-back btn btn-danger" onclick="backHistory()">
+                                    Back
+                                </button>
+                                <button class="btn-clear btn btn-warning" onclick="clearValues()">
+                                    Clear
+                                </button>
+                                <button class="btn-apply-all btn btn-primary" onclick="applyAll()">
+                                    Apply All
+                                </button>
+                                <button class="btn-apply-filled float-right btn btn-success" onclick="applyFilled()">
+                                    Apply Filled
+                                </button>
+                            </div>
+                        </div>
+                    </hr>
+                </hr>
+            </div>
+            <div class="hidden" id="input-sample">
+                <div class="row mb-3">
+                    <div class="col-2">
+                        <div class="font-weight-bold">
+                            <strong class="language-label">
+                                Label
+                            </strong>
+                            <span class="status">
+                            </span>
+                            <span>
+                                :
+                            </span>
+                        </div>
+                        <div class="description very-small crop-text-2 text-grey">
+                        </div>
+                    </div>
+                    <div class="col-10 d-flex">
+                        <div class="translation-text w-100">
+                            <textarea class="form-control" placeholder="Your translation..." type="text">
+                            </textarea>
+                        </div>
+                        <div class="activity-buttons ml-2 flex-shrink-2">
+                            <button class="btn btn-outline-primary" data-placement="bottom" data-toggle="tooltip" style="display: none;" title="Edit">
+                                ✏️
+                            </button>
+                            <button class="btn btn-outline-success" data-placement="bottom" data-toggle="tooltip" style="display: none;" title="Suggest">
+                                🤖
+                            </button>
+                            <!-- <button style="display: none;" data-toggle="tooltip" data-placement="bottom" title="Correct Sentence" class="correct-sentence btn btn-outline-dark">👮</button> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </hr>
+    </body>
 </html>

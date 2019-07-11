@@ -20,8 +20,12 @@
         </link>
     </head>
     <body>
-        <div id="alert" style="display: none;" class="alert alert-success" role="alert">
-            This is a success alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
+        <div class="alert alert-success" id="alert" role="alert" style="display: none;">
+            This is a success alert with
+            <a class="alert-link" href="#">
+                an example link
+            </a>
+            . Give it a click if you like.
         </div>
         <h2 class="m-3" id="project-name">
             Translate
@@ -48,7 +52,7 @@
                             </code>
                             file
                         </button>
-                        <div id="cache-config" class="text-left">
+                        <div class="text-left" id="cache-config">
                         </div>
                         <button class="btn btn-danger d-inline-block w-100" onclick="exitProgram()">
                             Exit
@@ -107,7 +111,10 @@
                                         BASE_LANGUAGE :
                                     </span>
                                     <span class="d-block text-grey mb-2">
-                                        (File name for translate suggestion. <i>Eg: en.json -> en)</i>
+                                        (File name for translate suggestion.
+                                        <i>
+                                            Eg: en.json -> en)
+                                        </i>
                                     </span>
                                     <div class="input-group mb-3">
                                         <input class="form-control" id="base-language-input" placeholder="en" type="text">
@@ -126,7 +133,6 @@
                                         </input>
                                     </div>
                                 </label>
-
                             </div>
                         </div>
                         <div class="modal-footer">

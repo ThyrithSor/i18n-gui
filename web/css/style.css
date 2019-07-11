@@ -1,54 +1,44 @@
 .hidden {
-	display: none;
+    display: none;
 }
-
 .drop-zone {
-	background-color: lightgrey;
-	border-radius: 20px;
-	width: 100%;
-	height: 200px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+    background-color: lightgrey;
+    border-radius: 20px;
+    width: 100%;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-
 .drop-zone:hover {
-	cursor: pointer;
+    cursor: pointer;
 }
-
-.drop-zone > div {
-	color: gray;
-	font-size: 1.5rem;
+.drop-zone>div {
+    color: gray;
+    font-size: 1.5rem;
 }
-
 .dz-drag-hover {
-	background-color: #dee4ff;
+    background-color: #dee4ff;
 }
-
 .text-grey {
-	color: grey;
+    color: grey;
 }
-
 .text-lightgrey {
-	color: lightgrey;
+    color: lightgrey;
 }
-
 .cursor-pointer:hover {
-	cursor: pointer;
+    cursor: pointer;
 }
-
 .very-small {
-	font-size: 0.7rem;
+    font-size: 0.7rem;
 }
-
 .crop-text-2 {
-  -webkit-line-clamp: 2;
-  overflow : hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
 }
-
 .activity-buttons {
-	white-space: nowrap;
+    white-space: nowrap;
 }
