@@ -5,27 +5,23 @@
             Translate
         </title>
         <link href="vendor/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-            <link href="css/style.css" rel="stylesheet" type="text/css">
-                <script src="/eel.js" type="text/javascript">
-                </script>
-                <script src="js/jquery.js" type="text/javascript">
-                </script>
-                <script src="js/dropzone.js" type="text/javascript">
-                </script>
-                <script src="js/bootstrap.min.js" type="text/javascript">
-                </script>
-                <script src="js/main.js" type="text/javascript">
-                </script>
-            </link>
         </link>
+        <link href="css/style.css" rel="stylesheet" type="text/css">
+        </link>
+        <script src="/eel.js" type="text/javascript">
+        </script>
+        <script src="js/jquery.js" type="text/javascript">
+        </script>
+        <script src="js/dropzone.js" type="text/javascript">
+        </script>
+        <script src="js/bootstrap.min.js" type="text/javascript">
+        </script>
+        <script src="js/main.js" type="text/javascript">
+        </script>
     </head>
     <body>
         <div class="alert alert-success" id="alert" role="alert" style="display: none;">
-            This is a success alert with
-            <a class="alert-link" href="#">
-                an example link
-            </a>
-            . Give it a click if you like.
+            <!-- Alert added here -->
         </div>
         <h2 class="m-3" id="project-name">
             Translate
@@ -129,7 +125,8 @@
                                         (You might use non-standard language code)
                                     </span>
                                     <div class="input-group mb-3">
-                                        <input class="form-control" id="code-mapping-input" placeholder="kh=km,cn=zh" type="text">
+                                        <!-- Available languages: https://github.com/ssut/py-googletrans/blob/master/googletrans/constants.py -->
+                                        <input class="form-control" id="code-mapping-input" placeholder="kh=km,cn=zh-cn" type="text">
                                         </input>
                                     </div>
                                 </label>

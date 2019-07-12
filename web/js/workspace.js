@@ -6,6 +6,8 @@ var localeInputs = {}
 var alertHandler
 var key = ''
 var currentStatus = {}
+let listKeyWindow = null
+
 String.prototype.capitalize = function() {
 	if (this.length > 0) {
 		return this[0].toUpperCase() + this.substring(1)
@@ -49,8 +51,8 @@ function getLanguageFromPath(path) {
 	let localeFileName = path.split('/')
 	return localeFileName[localeFileName.length - 1].split('.')[0].toUpperCase()
 }
-eel.expose(fixJson);
 
+eel.expose(fixJson);
 function fixJson(maybeValidJson) {
 	try {
 		let result = (new Function('return JSON.stringify(' + maybeValidJson + ')'))()
@@ -144,10 +146,13 @@ async function checkAvailable(value) {
 			 *  4: Invalid JSON file
 			 */
 			let textarea = $(localeInputs[path].node).find(".translation-text > textarea")
+			textarea.attr('placeholder', 'Your translation...')
+
 			textarea.prop('disabled', false)
 			switch (statuses[path].code) {
 				case 2:
 					{
+						textarea.attr('placeholder', statuses[path].data.length > 30 ? statuses[path].data.substring(0, 27) + '...' : statuses[path].data)
 						let editButton = $(localeInputs[path].node).find('.activity-buttons > button:first-child')
 						editButton.css("display", "inline")
 						editButton.off()
@@ -168,9 +173,13 @@ async function checkAvailable(value) {
 							let baseLanguageModelKey = Object.keys(localeInputs)
 															.find(modelKey => getLanguageFromPath(modelKey).toLowerCase() === baseLanguage.toLowerCase())
 							let requestSuggestTranslate
-							if (getLanguageFromPath(path).toLowerCase() !== baseLanguage.toLowerCase() && baseLanguageModelKey !== undefined && localeInputs[baseLanguageModelKey].value.trim() !== "") {
+							if (getLanguageFromPath(path).toLowerCase() !== baseLanguage.toLowerCase() && baseLanguageModelKey !== undefined && (localeInputs[baseLanguageModelKey].value.trim() !== "" || (currentStatus[baseLanguageModelKey].code === 2 && currentStatus[baseLanguageModelKey].data.trim() !== ""))) {
 								$("*").css('cursor', 'wait')
-								requestSuggestTranslate = await EelPromise(eel.suggestion_translate(localeInputs[baseLanguageModelKey].value, baseLanguage, getLanguageFromPath(path).toLowerCase()))
+								if (localeInputs[baseLanguageModelKey].value.trim() !== "") {
+									requestSuggestTranslate = await EelPromise(eel.suggestion_translate(localeInputs[baseLanguageModelKey].value, baseLanguage, getLanguageFromPath(path).toLowerCase()))
+								} else {
+									requestSuggestTranslate = await EelPromise(eel.suggestion_translate(currentStatus[baseLanguageModelKey].data, baseLanguage, getLanguageFromPath(path).toLowerCase()))
+								}
 								$("*").css('cursor', 'auto')
 							} else {
 								if (getLanguageFromPath(path).toLowerCase() === 'en') {
@@ -256,6 +265,9 @@ function clearValues() {
 }
 
 function backHistory() {
+	if (listKeyWindow !== null) {
+		listKeyWindow.close()
+	}
 	location.replace('/main.html')
 }
 async function setProjectName() {
@@ -318,6 +330,21 @@ let observableState = {
 		}
 	}
 }
+
+function listKey(event) {
+	if (listKeyWindow === null || listKeyWindow.closed) {
+		listKeyWindow = window.open('/keylist.html', '', "width=300, height=700")
+		listKeyWindow.eel = eel
+		listKeyWindow.$ = $
+		listKeyWindow.opened = true
+		listKeyWindow.trigger = function (type, data) {
+			switch (type) {
+				case 'warn':
+					console.log(data)
+			}
+		}
+	}
+}
 window.onload = () => {
 	setProjectName()
 	bindUI()
@@ -365,3 +392,10 @@ window.onload = () => {
 		}
 	})
 }
+
+window.onbeforeunload = function () {
+	if (listKeyWindow !== null && !listKeyWindow.closed) {
+		listKeyWindow.close()
+	}
+    return null;
+};

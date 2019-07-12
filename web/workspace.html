@@ -4,16 +4,14 @@
         <title>
             Translate
         </title>
-        <link href="vendor/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-            <link href="css/style.css" rel="stylesheet" type="text/css">
-                <script src="/eel.js" type="text/javascript">
-                </script>
-                <script src="js/jquery.js" type="text/javascript">
-                </script>
-                <script src="js/workspace.js" type="text/javascript">
-                </script>
-            </link>
-        </link>
+        <link href="vendor/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="css/style.css" rel="stylesheet" type="text/css"/>
+        <script src="/eel.js" type="text/javascript">
+        </script>
+        <script src="js/jquery.js" type="text/javascript">
+        </script>
+        <script src="js/workspace.js" type="text/javascript">
+        </script>
     </head>
     <body>
         <div class="spinner-grow" role="status">
@@ -22,15 +20,16 @@
             </span>
         </div>
         <div class="alert alert-success" id="alert" role="alert" style="display: none;">
-            This is a success alert with
-            <a class="alert-link" href="#">
-                an example link
-            </a>
-            . Give it a click if you like.
+            <!-- Alert added here -->
         </div>
-        <h2 class="m-3" id="project-name">
-            -
-        </h2>
+        <div class="d-flex">
+            <h2 class="m-3 w-100 text-truncate" id="project-name">
+                -
+            </h2>
+            <button class="btn btn-light" onclick="listKey(event)" style="font-size: 1.5rem">
+                🍔
+            </button>
+        </div>
         <hr>
             <div class="px-3">
                 <div class="row">
