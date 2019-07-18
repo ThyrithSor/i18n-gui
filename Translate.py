@@ -324,15 +324,15 @@ def add_suffix_key_dictionary(dictionary, suffix):
 	return {**{k + suffix: dictionary[k] for k in dictionary if not isinstance(dictionary[k], dict)}, **{k: add_suffix_key_dictionary(dictionary[k], suffix) for k in dictionary if isinstance(dictionary[k], dict)}}
 
 
-def merge_dictionary(from_dict, to_dict, path):
+def merge_dictionary(from_dict, to_dict, suffix):
 	key_from_dict = list(from_dict.keys())
 	key_to_dict = list(to_dict.keys())
 
 	intersection = [k for k in key_from_dict if k in key_to_dict and isinstance(from_dict[k], dict) and isinstance(to_dict[k], dict)]
 
-	current_resolve = {**{k: from_dict[k] for k in from_dict}, **add_suffix_key_dictionary({k: to_dict[k] for k in to_dict if k not in intersection}, '..' + path)}
+	current_resolve = {**{k: from_dict[k] for k in from_dict}, **add_suffix_key_dictionary({k: to_dict[k] for k in to_dict if k not in intersection}, suffix)}
 	for key in intersection:
-		current_resolve[key] = merge_dictionary(from_dict[key], to_dict[key], path)
+		current_resolve[key] = merge_dictionary(from_dict[key], to_dict[key], suffix)
 	return current_resolve
 
 @eel.expose
@@ -340,14 +340,14 @@ def get_translation_keys():
 	try:
 		paths = get_locale_path()
 		keys = {}
-		for path in paths:
+		for i, path in enumerate(paths):
 			with open(path, 'rb') as json_file:
 				body = json_file.read().decode('utf-8')
 				data = try_parse_json(body)
 			if data is None:
 				continue
 			else:
-				keys = merge_dictionary(keys, data, path)
+				keys = merge_dictionary(keys, data, ".." + str(i))
 		return keys
 	except Exception as e:
 		raise e

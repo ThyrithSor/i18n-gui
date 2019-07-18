@@ -335,8 +335,6 @@ function listKey(event) {
 	if (listKeyWindow === null || listKeyWindow.closed) {
 		listKeyWindow = window.open('/keylist.html', '', "width=300, height=700")
 		listKeyWindow.eel = eel
-		listKeyWindow.$ = $
-		listKeyWindow.opened = true
 		listKeyWindow.trigger = function (type, data) {
 			switch (type) {
 				case 'warn':

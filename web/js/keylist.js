@@ -12,3 +12,7 @@ window.onload = () => {
 
 	warnBoss()
 }
+
+window.onbeforeunload = function () {
+    return "If you reload, the window will not work correctly. If you exit, it is okay.";
+};
