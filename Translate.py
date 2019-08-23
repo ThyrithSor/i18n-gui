@@ -47,7 +47,10 @@ def correct_sentence(sentence):
 def suggestion_translate(word, src, dest):
 	try:
 		result = translator.translate(word, src=correct_locale_code(src), dest=correct_locale_code(dest))
-		return result.text
+		if result.text[-1:] == '។':
+			return result.text[:-1]
+		else:
+			return result.text
 	except Exception as e:
 		return word
 
