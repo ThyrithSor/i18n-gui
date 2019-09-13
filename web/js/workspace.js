@@ -48,7 +48,7 @@ function alertFeedback(message, type) {
 }
 
 function getLanguageFromPath(path) {
-	let localeFileName = path.split('/')
+	let localeFileName = path.split(/[\\/]/g)
 	return localeFileName[localeFileName.length - 1].split('.')[0].toUpperCase()
 }
 
