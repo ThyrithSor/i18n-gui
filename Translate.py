@@ -45,9 +45,13 @@ def correct_sentence(sentence):
 
 @eel.expose
 def suggestion_translate(word, src, dest):
+	print("Word " + word)
+	print("From " + src)
+	print("To " + dest)
 	try:
 		result = translator.translate(word, src=correct_locale_code(src), dest=correct_locale_code(dest))
-		if word.text[-1:] != '.' and result.text[-1:] == '។':
+		print(result.text)
+		if word[-1:] != '.' and result.text[-1:] == '។':
 			return result.text[:-1]
 		else:
 			return result.text
