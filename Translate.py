@@ -47,7 +47,7 @@ def correct_sentence(sentence):
 def suggestion_translate(word, src, dest):
 	try:
 		result = translator.translate(word, src=correct_locale_code(src), dest=correct_locale_code(dest))
-		if result.text[-1:] == '។':
+		if word.text[-1:] != '.' and result.text[-1:] == '។':
 			return result.text[:-1]
 		else:
 			return result.text
