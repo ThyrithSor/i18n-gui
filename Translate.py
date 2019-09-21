@@ -342,12 +342,17 @@ def merge_dictionary(from_dict, to_dict, suffix):
 		current_resolve[key] = merge_dictionary(from_dict[key], to_dict[key], suffix)
 	return current_resolve
 
+def get_file_name(file_path):
+	return path.splitext(path.basename(file_path))[0]
+
 @eel.expose
 def get_translation_keys():
 	try:
 		paths = get_locale_path()
 		keys = {}
+		langs = []
 		for i, path in enumerate(paths):
+			langs = langs + [get_file_name(path)]
 			with open(path, 'rb') as json_file:
 				body = json_file.read().decode('utf-8')
 				data = try_parse_json(body)
@@ -355,9 +360,9 @@ def get_translation_keys():
 				continue
 			else:
 				keys = merge_dictionary(keys, data, ".." + str(i))
-		return keys
+		return {**{".." : langs}, **keys}
 	except Exception as e:
-		raise e
+		# raise e
 		return {
 			'error': 'error with ' + str(e)
 		}

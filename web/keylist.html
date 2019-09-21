@@ -14,8 +14,27 @@
         </script>
         <script type="text/javascript" src="vendor/js/bootstrap-treeview.min.js"></script>
         <script type="text/javascript" src="js/keylist.js"></script>
+        <style lang="css">
+            .list-group-item > .badge {
+                float: right;
+            }
+        </style>
     </head>
-    <body>
-        <div id="tree"></div>
+    <body style="height: 100vh;">
+        <div class="d-flex flex-column h-100">
+            <div class="pt-3 px-2 flex-shrink-1">
+                <div class="row">
+                    <div class="col-12">
+                        <input type="text" class="form-control" placeholder="🔎 Search" oninput="searchKey(this.value)">
+                    </div>
+                </div>
+            </div>
+            <div class="py-3 flex-fill h-100 w-100" style="overflow: scroll;">
+                <div id="tree" class="col-12 d-block">
+                </div>
+                <div id="tree-search" class="col-12 d-none">
+                </div>
+            </div>
+        </div>
     </body>
 </html>
