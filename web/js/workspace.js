@@ -61,7 +61,7 @@ function copyKey () {
 }
 async function EelPromise (task) {
   let result = await new Promise(task)
-  if (result.error !== undefined) {
+  if (result.error !== undefined && Object.keys(result).length === 1) {
     throw result.error
   }
   return result
@@ -94,7 +94,6 @@ async function deleteKey() {
     try {
       const success = await EelPromise(eel.delete_key(key.value))
       if (success) {
-        console.log("delete");
         alertFeedback(key.value + " is deleted", 'info')
         checkAvailable(key.value)
       }

@@ -40,7 +40,7 @@ def correct_sentence(sentence):
 	try:
 		parsed = parser.parse(sentence)
 		return parsed['result']
-	except Exception as e:
+	except Exception as _:
 		return sentence
 
 @eel.expose
@@ -55,7 +55,7 @@ def suggestion_translate(word, src, dest):
 			return result.text[:-1]
 		else:
 			return result.text
-	except Exception as e:
+	except Exception as _:
 		return word
 
 @eel.expose
@@ -73,7 +73,7 @@ def try_parse_json(jsonText):
 	try:
 		# Try parse json by ownself
 		return loads(jsonText)
-	except Exception as e:
+	except Exception as _:
 		# Ask for JS help
 		jsonText = eel.fixJson(jsonText)()
 		if jsonText is None:
@@ -188,7 +188,31 @@ def apply(paths, key, values):
 @eel.expose
 def delete_key(key):
 	try:
-		print("delete" + key)
+		paths = get_locale_path()
+		for path in paths:
+			with open(path, 'rb') as json_file:
+				body = json_file.read().decode('utf-8')
+				data = try_parse_json(body)
+
+				if data is None:
+					return None
+
+				keys = key.split('.')
+
+				pointer = data
+				for i in range(0, len(keys)):
+					if i == (len(keys) - 1):
+						del pointer[keys[i]]
+					else:
+						if keys[i] in pointer:
+							pointer = pointer[keys[i]]
+						else:
+							break
+				# Put the data back
+				res = dumps(data, sort_keys=True, indent=4, ensure_ascii=False)
+				f = open(path, "wb")
+				f.write(res.encode('utf-8'))
+				f.close()
 		return True
 	except Exception as e:
 		return {
@@ -256,9 +280,9 @@ def cache_config():
 		with open(CACHE_PATH, "r") as cache_json_file:
 			try:
 				return load(cache_json_file)
-			except Exception as e:
+			except Exception as _:
 				return []
-	except Exception as e:
+	except Exception as _:
 		return []
 
 @eel.expose
