@@ -9,14 +9,18 @@ var key = {
   set value(str) {
     this._ = str
     if (this._.includes('_')) {
-      console.log("is snake")
+      // console.log("is snake")
       $("#case-switcher").html("🐫")
     } else {
-      console.log("is camel")
+      // console.log("is camel")
       $("#case-switcher").html("🐍")
     }
     $('#key-input').val(this._)
-    checkAvailable(this._)
+    checkAvailable(this._).then(statuses => {
+      if (statuses) {
+        toggleKeyModificationButtons(statuses)
+      }
+    })
   },
   get value() {
     return this._
@@ -61,6 +65,59 @@ async function EelPromise (task) {
     throw result.error
   }
   return result
+}
+
+function updateKey() {
+  $('#old-key').html(key.value)
+  $('#change-key-modal').modal({
+    keyboard: true
+  })
+  setTimeout(() => {
+    const newKey = $('#new-key-modify')
+    newKey.focus()
+    newKey.off()
+    newKey.on('input', async key => {
+      let statuses = await EelPromise(eel.check_key_status(key.target.value))
+      if (Object.keys(statuses).every(path => statuses[path].code === 1)) {
+        $(key.target).removeClass('is-invalid')
+        $('#save-key-modification').attr('disabled', false)
+      } else {
+        $(key.target).addClass('is-invalid')
+        $('#save-key-modification').attr('disabled', true)
+      }
+    })
+  }, 500);
+}
+
+async function deleteKey() {
+  if (confirm("Are you sure to delete " + key.value + "?")) {
+    try {
+      const success = await EelPromise(eel.delete_key(key.value))
+      if (success) {
+        console.log("delete");
+        alertFeedback(key.value + " is deleted", 'info')
+        checkAvailable(key.value)
+      }
+    } catch (exception) {
+      alertFeedback(exception, 'danger')
+    }
+  }
+}
+
+async function modifyKey() {
+  const oldKey = key.value
+  const newKey = $('#new-key-modify').val()
+  try {
+    const success = await EelPromise(eel.modify_key(oldKey, newKey))
+    if (success) {
+      console.log("Modified");
+      $('#change-key-modal').modal('hide');
+      alertFeedback("Key is modified", 'success')
+      checkAvailable(key.value)
+    }
+  } catch (exception) {
+    alertFeedback(exception, 'danger')
+  }
 }
 
 function alertFeedback (message, type) {
@@ -274,8 +331,21 @@ async function checkAvailable (value) {
         }
       }
     }
+
+    return statuses
   } catch (exception) {
     alertFeedback(exception, 'danger')
+  }
+}
+async function toggleKeyModificationButtons(statuses) {
+  // Hide or show key modification buttons
+  const hasExistKey = Object.keys(statuses).some(path => statuses[path].code === 2 || statuses[path].code === 3)
+  const hasErrorKey = Object.keys(statuses).some(path => statuses[path].code === 0 || statuses[path].code === 4)
+  const keyModificationButton = $('#key-modification')
+  if (hasExistKey && !hasErrorKey) {
+    keyModificationButton.removeClass('hidden')
+  } else {
+    keyModificationButton.addClass('hidden')
   }
 }
 async function applyAll () {
@@ -408,7 +478,11 @@ let observableState = {
           .map((key, index) => (index === inputKeyChain.length - 1 ? this.suggestions[this.suggestionChoice] : key))
           .join('.')
         keyInput.val(lastChoiceSuggestion)
-        checkAvailable(lastChoiceSuggestion)
+        checkAvailable(lastChoiceSuggestion).then(statuses => {
+          if (statuses) {
+            toggleKeyModificationButtons(statuses)
+          }
+        })
       }
     }
   }

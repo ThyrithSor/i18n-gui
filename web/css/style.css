@@ -42,3 +42,10 @@
 .activity-buttons {
     white-space: nowrap;
 }
+.hidden {
+    visibility: hidden;
+}
+.label-invalid::after {
+    content: "Invalid";
+    color: red;
+}

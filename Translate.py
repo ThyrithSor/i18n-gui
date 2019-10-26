@@ -186,6 +186,26 @@ def apply(paths, key, values):
 		}
 
 @eel.expose
+def delete_key(key):
+	try:
+		print("delete" + key)
+		return True
+	except Exception as e:
+		return {
+			'error': str(e)
+		}
+
+@eel.expose
+def modify_key(oldKey, newKey):
+	try:
+		print("change " + oldKey + " to " + newKey)
+		return True
+	except Exception as e:
+		return {
+			'error': str(e)
+		}
+
+@eel.expose
 def check_key_status(textpath):
 	try:
 		statuses = {}
