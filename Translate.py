@@ -222,7 +222,46 @@ def delete_key(key):
 @eel.expose
 def modify_key(oldKey, newKey):
 	try:
-		print("change " + oldKey + " to " + newKey)
+		paths = get_locale_path()
+		for path in paths:
+			temp = None
+			with open(path, 'rb') as json_file:
+				body = json_file.read().decode('utf-8')
+				data = try_parse_json(body)
+
+				if data is None:
+					return None
+
+				keys = oldKey.split('.')
+
+				pointer = data
+				for i in range(0, len(keys)):
+					if i == (len(keys) - 1):
+						temp = pointer[keys[i]]
+						del pointer[keys[i]]
+					else:
+						if keys[i] in pointer:
+							pointer = pointer[keys[i]]
+						else:
+							break
+				if temp is not None:
+					keys = newKey.split('.')
+
+					pointer = data
+					for i in range(0, len(keys)):
+						if i == (len(keys) - 1):
+							pointer[keys[i]] = temp
+						else:
+							if keys[i] in pointer and pointer[keys[i]] is dict:
+								pointer = pointer[keys[i]]
+							else:
+								pointer[keys[i]] = {}
+								pointer = pointer[keys[i]]
+				# Put the data back
+				res = dumps(data, sort_keys=True, indent=4, ensure_ascii=False)
+				f = open(path, "wb")
+				f.write(res.encode('utf-8'))
+				f.close()
 		return True
 	except Exception as e:
 		return {
