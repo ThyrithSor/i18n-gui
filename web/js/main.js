@@ -1,4 +1,5 @@
 const CONFIG_FILE_NAME = 'config.translate'
+const CONFIG_FILE_EXTENSION = '.translate'
 async function EelPromise(task) {
     let result = await new Promise(task)
     if (result.error !== undefined) {
@@ -57,8 +58,7 @@ function getContent(file) {
         reader.readAsText(file);
     })
 }
-
-function saveConfig() {
+function getConfiguration() {
     let projectName = $("#project-name-input").val()
     let localePath = $("#locale-path-input").val()
     let baseLanguage = $("#base-language-input").val()
@@ -79,6 +79,10 @@ function saveConfig() {
     if (windowsPlatforms.indexOf(platform) !== -1) {
         configOutput = configs.map(config => config.join("=")).join("\r\n")
     }
+    return configOutput
+}
+function saveConfig() {
+    const configOutput = getConfiguration()
     download(CONFIG_FILE_NAME, configOutput)
     $("#project-name-input").val("")
     $("#locale-path-input").val("")
@@ -123,6 +127,11 @@ async function loadConfig(configs) {
 async function receiveFile(file) {
     let fileContent = await getContent(file)
     let configs = parseConfig(fileContent)
+    await loadConfig(configs)
+}
+async function openConfig() {
+    const config = getConfiguration()
+    const configs = parseConfig(config)
     await loadConfig(configs)
 }
 async function bindCacheUI(configCache) {
@@ -173,15 +182,25 @@ async function loadCaches() {
 window.onload = () => {
     let dropzone = $("div#dropzone").dropzone({
         autoProcessQueue: false,
-        acceptedFiles: CONFIG_FILE_NAME,
+        acceptedFiles: CONFIG_FILE_EXTENSION,
         url: "/file/post",
         init: function() {
             this.on("addedfile", function() {
+                console.log(this.files)
+                let similarFiles = []
                 for (let i = 0; i < this.files.length; i++) {
                     if (this.files[i].name === CONFIG_FILE_NAME) {
                         receiveFile(this.files[i])
+                        similarFiles = []
                         break
+                    } else {
+                        if (this.files[i].name.endsWith(CONFIG_FILE_EXTENSION) ) {
+                            similarFiles.push(this.files[i])
+                        }
                     }
+                }
+                if (similarFiles.length === 1) {
+                    receiveFile(similarFiles[0])
                 }
                 this.removeAllFiles(true)
             });
