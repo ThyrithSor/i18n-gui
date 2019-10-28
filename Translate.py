@@ -62,6 +62,9 @@ def suggestion_translate(word, src, dest):
 def get_locale_path():
 	try:
 		paths = glob(TRANSLATION_JSON_PATH)
+		for i in range(0, len(paths)):
+			if paths[i].endswith(BASE_LANGUAGE + '.json'):
+				paths = [paths[i]] + paths[:i] + paths[(i + 1):]
 		return paths
 	except Exception as e:
 		return {
