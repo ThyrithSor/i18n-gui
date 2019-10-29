@@ -134,13 +134,13 @@ async function openConfig() {
     const configs = parseConfig(config)
     await loadConfig(configs)
 }
-async function pickLocaleFolder() {
-    const pathInput = $("#locale-path-input")
-    folder = await EelPromise(eel.pick_folder())
-    if (folder) {
-        pathInput.val(folder + "/*.json" )
-    }
-}
+// async function pickLocaleFolder() {
+//     const pathInput = $("#locale-path-input")
+//     folder = await EelPromise(eel.pick_folder())
+//     if (folder) {
+//         pathInput.val(folder + "/*.json" )
+//     }
+// }
 async function bindCacheUI(configCache) {
     let cacheConfigNode = $("#cache-config")
     cacheConfigNode.html("")
