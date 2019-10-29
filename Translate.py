@@ -5,6 +5,8 @@ from sys import exit
 from os import path
 from glob import glob
 from json import loads, load, dumps
+from tkinter import Tk
+from tkinter.filedialog import askdirectory
 
 TRANSLATION_JSON_PATH = "./examples/*.json"
 PROJECT_NAME = "My Translate"
@@ -217,6 +219,19 @@ def delete_key(key):
 				f.write(res.encode('utf-8'))
 				f.close()
 		return True
+	except Exception as e:
+		return {
+			'error': str(e)
+		}
+
+@eel.expose
+def pick_folder():
+	try:
+		root = Tk()
+		root.withdraw()
+		dirname = askdirectory(
+			parent=root, initialdir="/", title='Please select a directory')
+		return dirname
 	except Exception as e:
 		return {
 			'error': str(e)
