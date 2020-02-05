@@ -5,8 +5,8 @@ from sys import exit
 from os import path
 from glob import glob
 from json import loads, load, dumps
-# from tkinter import Tk
-# from tkinter.filedialog import askdirectory
+from tkinter import Tk
+from tkinter.filedialog import askdirectory
 
 TRANSLATION_JSON_PATH = "./examples/*.json"
 PROJECT_NAME = "My Translate"
@@ -484,7 +484,7 @@ eel.init('web')
 
 while True:
 	try:
-		eel.start('main.html', size=(700, 700), options={'port': PORT})
+		eel.start('main.html', size=(700, 700), port=PORT)
 		break
 	except Exception as e:
 		PORT = PORT + 1
