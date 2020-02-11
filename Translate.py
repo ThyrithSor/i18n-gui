@@ -263,17 +263,8 @@ def modify_key(oldKey, newKey):
 							break
 				if temp is not None:
 					keys = newKey.split('.')
+					set_value(keys, data, temp)
 
-					pointer = data
-					for i in range(0, len(keys)):
-						if i == (len(keys) - 1):
-							pointer[keys[i]] = temp
-						else:
-							if keys[i] in pointer and pointer[keys[i]] is dict:
-								pointer = pointer[keys[i]]
-							else:
-								pointer[keys[i]] = {}
-								pointer = pointer[keys[i]]
 				# Put the data back
 				res = dumps(data, sort_keys=True, indent=4, ensure_ascii=False)
 				f = open(path, "wb")
@@ -484,6 +475,7 @@ eel.init('web')
 
 while True:
 	try:
+		print("Try " + str(PORT))
 		eel.start('main.html', size=(700, 700), port=PORT)
 		break
 	except Exception as e:
