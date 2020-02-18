@@ -479,4 +479,6 @@ while True:
 		eel.start('main.html', size=(700, 700), port=PORT)
 		break
 	except Exception as e:
+		if PORT == 2025:
+			break
 		PORT = PORT + 1
