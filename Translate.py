@@ -255,6 +255,7 @@ def modify_key(oldKey, newKey):
 				for i in range(0, len(keys)):
 					if i == (len(keys) - 1):
 						temp = pointer[keys[i]]
+						pointer[keys[i]] = {}
 						del pointer[keys[i]]
 					else:
 						if keys[i] in pointer:
